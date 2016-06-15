@@ -30,7 +30,7 @@ class DAOHelloWorld extends DAOEntity<HelloWorld> {
 	 * @see model.DAOEntity#create(model.Entity)
 	 */
 	@Override
-	public boolean create(final HelloWorld entity) {
+	public boolean create() {
 		// Not implemented
 		return false;
 	}

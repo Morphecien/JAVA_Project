@@ -1,84 +1,139 @@
--- phpMyAdmin SQL Dump
--- version 4.5.5.1
--- http://www.phpmyadmin.net
---
--- Client :  127.0.0.1
--- Généré le :  Jeu 02 Juin 2016 à 23:02
--- Version du serveur :  5.7.11
--- Version de PHP :  5.6.19
+CREATE DATABASE `JAVA-Project` ;
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de données :  `jpublankproject`
---
-CREATE DATABASE `jpublankproject` ;
-
-USE `jpublankproject` ;
+USE `JAVA-Project` ;
 
 DELIMITER $$
 --
 -- Procédures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `helloworldById` (IN `p_id` INT)  READS SQL DATA
-    SQL SECURITY INVOKER
-SELECT * FROM helloworld WHERE id = p_id$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ID_Level_3numbers`(IN fileLevel Varchar(25))
+BEGIN
+	SELECT left(right(fileLevel, 7), 3) ;
+END $$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `HelloworldByKey` (IN `p_key` VARCHAR(2))  READS SQL DATA
-    SQL SECURITY INVOKER
-SELECT * FROM jpublankproject.helloworld where `key`=p_key$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertLevel`(IN levelN int(3))
+BEGIN
+	INSERT INTO level (ID_level, level) VALUES (NULL, levelN);
+END $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertMap`(
+	IN levelN int(3),
+    IN posX int(2),
+    IN posY int(2),
+    IN ID_Sprite int(2))
+BEGIN
+	
+	INSERT INTO `map` (`ID_level`, `coordY`, `coordX`, `ID_sprite`) VALUES ((SELECT ID_level FROM level WHERE level.level = levelN), posY, posX, ID_sprite) ;
+END $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MapByID_X_Y`(IN level int(3), IN x int(2), IN y int(2))
+BEGIN
+	SELECT sprite FROM map NATURAL JOIN sprite WHERE (level = ID_level) && (x = coordX) && (y = coordY) ;
+END $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `select_ID_Sprite`(IN quoi varChar(25))
+BEGIN
+	SELECT ID_sprite FROM Sprite WHERE sprite = quoi ;
+END $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `selectLevel`(IN levelNumber int(3))
+BEGIN
+	SELECT ID_level FROM level WHERE levelNumber = level ;
+END $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `selectMapExist`(IN levelN int(3))
+BEGIN
+	SELECT ID_level FROM map WHERE levelN = ID_level GROUP BY ID_level ;
+END $$
 
 DELIMITER ;
 
--- --------------------------------------------------------
+#------------------------------------------------------------
+#        Script MySQL.
+#------------------------------------------------------------
 
---
--- Structure de la table `helloworld`
---
+DROP Table IF EXISTS Map;
+DROP Table IF EXISTS Score;
+DROP Table IF EXISTS Level;
+DROP Table IF EXISTS Player;
+DROP Table IF EXISTS Sprite;
 
-CREATE TABLE `helloworld` (
-  `id` int(11) NOT NULL,
-  `key` varchar(2) NOT NULL,
-  `message` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+#------------------------------------------------------------
+# Table: Level
+#------------------------------------------------------------
 
---
--- Contenu de la table `helloworld`
---
+CREATE TABLE IF NOT EXISTS Level(
+        ID_level int (11) Auto_increment  NOT NULL ,
+        level    Int NOT NULL ,
+        PRIMARY KEY (ID_level )
+)ENGINE=InnoDB;
 
-INSERT INTO `helloworld` (`id`, `key`, `message`) VALUES
-(1, 'GB', 'Hello world'),
-(2, 'FR', 'Bonjour le monde'),
-(3, 'DE', 'Hallo Welt'),
-(4, 'ID', 'Salamat pagi dunia');
 
---
--- Index pour les tables exportées
---
+#------------------------------------------------------------
+# Table: Sprite
+#------------------------------------------------------------
 
---
--- Index pour la table `helloworld`
---
-ALTER TABLE `helloworld`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `key_UNIQUE` (`key`);
+CREATE TABLE IF NOT EXISTS Sprite(
+        ID_sprite int (11) Auto_increment  NOT NULL ,
+        sprite    Varchar (25) NOT NULL ,
+        PRIMARY KEY (ID_sprite )
+)ENGINE=InnoDB;
 
---
--- AUTO_INCREMENT pour les tables exportées
---
 
---
--- AUTO_INCREMENT pour la table `helloworld`
---
-ALTER TABLE `helloworld`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+#------------------------------------------------------------
+# Table: Map
+#------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS Map(
+        coordX    Int NOT NULL ,
+        coordY    Int NOT NULL ,
+        ID_level  Int NOT NULL ,
+        ID_sprite Int NOT NULL ,
+        PRIMARY KEY (coordX ,coordY ,ID_level )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Score
+#------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS Score(
+        ID_Score  int (11) Auto_increment  NOT NULL ,
+        score     Int NOT NULL ,
+        ID_level  Int NOT NULL ,
+        ID_player Int NOT NULL ,
+        PRIMARY KEY (ID_Score ,ID_level ,ID_player )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Player
+#------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS Player(
+        ID_player int (11) Auto_increment  NOT NULL ,
+        player    Varchar (25) NOT NULL ,
+        PRIMARY KEY (ID_player )
+)ENGINE=InnoDB;
+
+ALTER TABLE Map ADD CONSTRAINT FK_Map_ID_level FOREIGN KEY (ID_level) REFERENCES Level(ID_level);
+ALTER TABLE Map ADD CONSTRAINT FK_Map_ID_sprite FOREIGN KEY (ID_sprite) REFERENCES Sprite(ID_sprite);
+ALTER TABLE Score ADD CONSTRAINT FK_Score_ID_level FOREIGN KEY (ID_level) REFERENCES Level(ID_level);
+ALTER TABLE Score ADD CONSTRAINT FK_Score_ID_player FOREIGN KEY (ID_player) REFERENCES Player(ID_player);
+
+#------------------------------------------------------------
+# INSERT VALUES
+#------------------------------------------------------------
+
+INSERT INTO sprite (sprite) VALUES 
+		("H-bone"),
+		("V-bone"),
+        ("Bone"),
+        ("Gate"),
+        ("Crystal-ball"),
+        ("Purse"),
+        ("Player"),
+        ("Monster-1"),
+        ("Monster-2"),
+        ("Monster-3"),
+        ("Monster-4");

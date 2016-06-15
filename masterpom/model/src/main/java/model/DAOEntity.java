@@ -44,7 +44,7 @@ abstract class DAOEntity<E extends Entity> {
 	 *          the entity
 	 * @return true, if successful
 	 */
-	public abstract boolean create(E entity);
+	public abstract boolean create();
 
 	/**
 	 * Delete.
