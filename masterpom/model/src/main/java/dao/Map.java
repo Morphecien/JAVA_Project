@@ -1,4 +1,4 @@
-package model;
+package dao;
 
 public class Map extends Entity{
 	private String[][] map ;
@@ -13,5 +13,5 @@ public class Map extends Entity{
 	public void setMap(String[][] map){
 		this.map = map ;
 	}
-	
+
 }
