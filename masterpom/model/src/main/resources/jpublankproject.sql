@@ -126,14 +126,14 @@ ALTER TABLE Score ADD CONSTRAINT FK_Score_ID_player FOREIGN KEY (ID_player) REFE
 #------------------------------------------------------------
 
 INSERT INTO sprite (sprite) VALUES 
-		("H-bone"),
-		("V-bone"),
+		("Hbone"),
+		("Vbone"),
         ("Bone"),
         ("Gate"),
-        ("Crystal-ball"),
+        ("CrystalBall"),
         ("Purse"),
         ("Player"),
-        ("Monster-1"),
-        ("Monster-2"),
-        ("Monster-3"),
-        ("Monster-4");
+        ("Monster1"),
+        ("Monster2"),
+        ("Monster3"),
+        ("Monster4");
