@@ -80,4 +80,12 @@ public class World extends Observable implements Iworld{
 		this.setChanged() ;
 	}
 	
+	public void setMobileHasChanged() {
+		this.setChanged();
+		this.notifyObservers();
+	}
+	
+	public void notifyObservers() {
+		super.notifyObservers();
+	}
 }

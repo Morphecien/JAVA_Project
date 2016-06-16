@@ -14,4 +14,6 @@ public interface Iworld {
 	public ArrayList<Mobile> getMobiles() ;
 	public MotionlessElement getElementXY(final int x, final int y) ;
 	public Lorann getLorann() ;
+	public void setMobileHasChanged() ;
+	public void notifyObservers() ;
 }
