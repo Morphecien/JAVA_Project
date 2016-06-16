@@ -60,6 +60,7 @@ public class World extends Observable implements Iworld{
 	
 	private void addElement(final MotionlessElement element, final int x, final int y){
 		this.elements[x][y] = element ;
+		
 		if (element != null){
 			element.setWorld(this) ;
 		}
@@ -80,10 +81,17 @@ public class World extends Observable implements Iworld{
 	
 	private void loadFile(final int fileNumber){
 		Map mappe = mainDAO.loadMap(fileNumber);
-		for (int loop = 0 ; loop<this.getHeight() ; loop++){
-			for (int liip = 0 ; liip<this.getWidth() ; liip++){
-				this.addElement(MotionlessDetermineElement.getFromFileSymbol(mappe.getMap()[loop][liip]), liip, loop);
-				System.out.print(mappe.getMap()[loop][liip] + "    \t- ");
+		for (int y = 0 ; y<this.getHeight() ; y++){
+			for (int x = 0 ; x<this.getWidth() ; x++){
+		//		System.out.print("y : " + y + " - x : " + x + " | case : " + mappe.getMap()[y][x] + "\t BDDSymbol : \t") ;
+		//		System.out.println(MotionlessDetermineElement.getFromFileSymbol(mappe.getMap()[y][x]));
+				this.addElement(MotionlessDetermineElement.getFromFileSymbol(mappe.getMap()[y][x]), x, y);
+				if (this.getElementXY(x, y) != null){
+					System.out.print(this.getElementXY(x, y).getSprite());
+				}
+				else{
+					System.out.print(" ") ;
+				}
 			}
 			System.out.println();
 		}

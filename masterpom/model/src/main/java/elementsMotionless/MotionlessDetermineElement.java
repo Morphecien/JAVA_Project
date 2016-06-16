@@ -14,8 +14,10 @@ public abstract class MotionlessDetermineElement {
 
 	
 	public static MotionlessElement getFromFileSymbol(final String fileSymbol) {
+	//	System.out.print("\t" + fileSymbol);
 		for (MotionlessElement motionlessElement  : motionlessElements) {
-			if (motionlessElement.getFileSymbol() == fileSymbol) {
+	//		System.out.print("\t" + motionlessElement.getFileSymbol());
+			if (motionlessElement.getFileSymbol().equals(fileSymbol)) {
 				return motionlessElement;
 			}
 		}

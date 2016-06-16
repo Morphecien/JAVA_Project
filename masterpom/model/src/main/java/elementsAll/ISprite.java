@@ -3,5 +3,6 @@ package elementsAll;
 import java.awt.Image;
 
 public interface ISprite {
-	Image getImage();
+	public Image getImage();
+	public void getSymbol() ;
 }
