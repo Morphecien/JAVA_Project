@@ -10,8 +10,8 @@ import world.Iworld;
 public class Mobile extends Element{
 	private final Point position ;
 
-	public Mobile(ISprite sprite, Permeability permeability) {
-		super(sprite, permeability);
+	public Mobile(ISprite sprite) {
+		super(sprite, Permeability.BLOCKING);
 		this.position = new Point() ;
 	}
 	
@@ -45,6 +45,34 @@ public class Mobile extends Element{
 		super.setWorld(world);
 		this.setX(x);
 		this.setY(y);
+	}
+	
+	private boolean movePossible(final int x, final int y){
+		return (this.getWorld().getElementXY(x, y).getPermeability() != Permeability.BLOCKING) ;
+	}
+	
+	public void moveUp() {
+		if (this.movePossible(this.getX(), this.getY() - 1)) {
+			this.setY(this.getY() - 1);
+		}
+	}
+
+	public void moveLeft() {
+		if (this.movePossible(this.getX() - 1, this.getY())) {
+			this.setX(this.getX() - 1);
+		}
+	}
+
+	public void moveDown() {
+		if (this.movePossible(this.getX(), this.getY() + 1)) {
+			this.setY(this.getY() + 1);
+		}
+	}
+
+	public void moveRight() {
+		if (this.movePossible(this.getX() + 1, this.getY())) {
+			this.setX(this.getX() + 1);
+		}
 	}
 	
 	

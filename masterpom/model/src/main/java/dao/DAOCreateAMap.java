@@ -56,7 +56,7 @@ class DAOCreateAMap{
 		}
 
 		public boolean createMap(String file){
-			InputStream fr = this.getClass().getResourceAsStream(file) ;
+			InputStream fr = null ;
 			boolean mapExist = false ;
 			try {
 				fr = this.getClass().getResourceAsStream(file) ;

@@ -21,8 +21,9 @@ public class World extends Observable implements Iworld{
 	
 	public World(final int fileNumber){
 		this.mobiles = new ArrayList<Mobile>() ;
-		this.loadFile(fileNumber) ;
 		this.mainDAO = new MainDAO() ;
+		this.elements = new MotionlessElement[this.getWidth()][this.getHeight()];
+		this.loadFile(fileNumber) ;
 	}
 
 	public int getWidth() {
@@ -52,8 +53,13 @@ public class World extends Observable implements Iworld{
 		return this.lorann ;
 	}
 	
+	public void setHero(final Lorann lorann){
+		this.lorann = lorann;
+		this.setChanged();
+	}
+	
 	private void addElement(final MotionlessElement element, final int x, final int y){
-		this.elements[y][x] = element ;
+		this.elements[x][y] = element ;
 		if (element != null){
 			element.setWorld(this) ;
 		}
@@ -65,6 +71,11 @@ public class World extends Observable implements Iworld{
 		mobile.setWorld(this, x, y);
 		this.setChanged();
 		this.notifyObservers();
+	}
+	
+	public void addMobile(Lorann lorann, int x, int y) {
+		this.lorann = lorann ;
+		this.addMobile((Mobile) lorann, x, y);
 	}
 	
 	private void loadFile(final int fileNumber){
@@ -88,4 +99,5 @@ public class World extends Observable implements Iworld{
 	public void notifyObservers() {
 		super.notifyObservers();
 	}
+
 }

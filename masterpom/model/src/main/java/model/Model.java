@@ -3,39 +3,43 @@ package model;
 import java.util.Observable;
 
 import contract.IModel;
-import dao.MainDAO;
+import world.Iworld;
+import world.World;
 
 public class Model extends Observable implements IModel {
-	private String message;
-	private MainDAO mainDAO;
+	private int level;
+	private Iworld world ;
 
 	public Model() {
-		this.message = "";
-		this.mainDAO = new MainDAO() ;
+		startLevel(1) ;
 	}
 
-	public String getMessage() {
-		return this.message;
+	public int getLevel() {
+		return this.level;
+	}
+
+	private void setLevel(final int level) {
+		this.level = level ;
 	}
 	
-	public MainDAO getMainDAO() {
-		return this.mainDAO;
-	}
-
-	private void setMessage(final String message) {
-		this.message = message;
-		this.setChanged();
-		this.notifyObservers();
+	private Iworld startLevel(final int level){
+		setLevel(level) ;
+		this.world = new World(getLevel()) ;
+		return this.world ;
+		
 	}
 
 	public void loadMessage(final String key) {
 	//	final DAOHelloWorld daoHelloWorld = new DAOHelloWorld(DBConnection.getInstance().getConnection());
 	//	this.setMessage(daoHelloWorld.find(key).getMessage());
-		this.setMessage("ceci est un test (:") ;
-		mainDAO.loadMap(1) ;
 	}
 
 	public Observable getObservable() {
 		return this;
+	}
+
+	public String getMessage() {
+		// TODO Auto-generated method stub
+		return "Oili oilà (:";
 	}
 }

@@ -1,6 +1,7 @@
 package world;
 
 import java.util.ArrayList;
+import java.util.Observer;
 
 import elementsAll.Element;
 import elementsMobile.Lorann;
@@ -15,5 +16,7 @@ public interface Iworld {
 	public MotionlessElement getElementXY(final int x, final int y) ;
 	public Lorann getLorann() ;
 	public void setMobileHasChanged() ;
-	public void notifyObservers() ;
+	public void addMobile(Mobile mobile, int x, int y) ;
+	public void addMobile(Lorann lorann, int x, int y) ;
+	public void addObserver(Observer o) ;
 }
