@@ -4,7 +4,7 @@ import elementsAll.*;
 
 public class Purse extends MotionlessElement implements Itreasures{
 	public Purse() {
-		super(new Sprite("Purse", "purse.png"), Permeability.PENETRABLE, '1');
+		super(new Sprite("1", "purse.png"), Permeability.PENETRABLE, "Purse");
 	}
 	
 	@Override

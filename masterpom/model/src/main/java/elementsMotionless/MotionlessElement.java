@@ -3,14 +3,14 @@ package elementsMotionless;
 import elementsAll.*;
 
 public abstract class MotionlessElement extends Element implements IElementsActionOnHeroes{
-	private final char fileSymbol;
+	private final String fileSymbol;
 	
-	public MotionlessElement(final ISprite sprite, final Permeability permeability, final char fileSymbol) {
+	public MotionlessElement(final ISprite sprite, final Permeability permeability, final String fileSymbol) {
 		super(sprite, permeability);
 		this.fileSymbol = fileSymbol ;
 	}
 	
-	public char getFileSymbol() {
+	public String getFileSymbol() {
 		return this.fileSymbol;
 	}
 

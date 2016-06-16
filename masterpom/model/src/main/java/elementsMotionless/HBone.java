@@ -4,6 +4,6 @@ import elementsAll.*;
 
 public class HBone extends MotionlessElement {
 	public HBone() {
-		super(new Sprite("H-Bone", "horizontal_bone.png"), Permeability.BLOCKING, '-');
+		super(new Sprite("-", "horizontal_bone.png"), Permeability.BLOCKING, "H-Bone");
 	}
 }

@@ -4,6 +4,6 @@ import elementsAll.*;
 
 public class VBone extends MotionlessElement {
 	public VBone() {
-		super(new Sprite("V-Bone", "vertical_bone.png"), Permeability.BLOCKING, 'I');
+		super(new Sprite("I", "vertical_bone.png"), Permeability.BLOCKING, "V-Bone");
 	}
 }

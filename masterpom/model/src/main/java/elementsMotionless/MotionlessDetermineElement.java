@@ -13,7 +13,7 @@ public abstract class MotionlessDetermineElement {
 	private static MotionlessElement motionlessElements[] = {VBONE, HBONE, BONE, GATECLOSE, GATEOPEN, CRYSTALBALL, PURSE};
 
 	
-	public static MotionlessElement getFromFileSymbol(final char fileSymbol) {
+	public static MotionlessElement getFromFileSymbol(final String fileSymbol) {
 		for (MotionlessElement motionlessElement  : motionlessElements) {
 			if (motionlessElement.getFileSymbol() == fileSymbol) {
 				return motionlessElement;
