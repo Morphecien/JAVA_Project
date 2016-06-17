@@ -4,11 +4,11 @@ import java.awt.Point;
 
 import elementsAll.Sprite;
 
-public class Lorann extends Mobile {
+public class Lorann extends MobileElement {
 	private final Point lastPosition ;
 	
 	public Lorann() {
-		super(new Sprite("@", "lorann_ur.png"));
+		super(new Sprite("@", "lorann_ur.png"), "Player");
 		this.lastPosition = new Point() ;
 		this.lastPosition.setLocation(this.getPosition().x, this.getPosition().y);
 	}

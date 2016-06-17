@@ -65,6 +65,7 @@ class DAOCreateAMap{
 				mapExist = searchMap(level) ;
 				if (mapExist == false){
 					System.out.print("Missing... ");
+					
 					generateMap(fr, level) ;
 					mapExist = searchMap(level) ;
 				}

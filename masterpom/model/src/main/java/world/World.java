@@ -7,20 +7,20 @@ import dao.MainDAO;
 import dao.Map;
 import elementsAll.Element;
 import elementsMobile.Lorann;
-import elementsMobile.Mobile;
+import elementsMobile.MobileElement;
 import elementsMotionless.MotionlessDetermineElement;
 import elementsMotionless.MotionlessElement;
 
 public class World extends Observable implements Iworld{
 	private MotionlessElement[][] elements ;
-	private final ArrayList<Mobile> mobiles ;
+	private final ArrayList<MobileElement> mobiles ;
 	private final int width = 20;
 	private final int height = 12;
 	private Lorann lorann ;
 	private MainDAO mainDAO ;
 	
 	public World(final int fileNumber){
-		this.mobiles = new ArrayList<Mobile>() ;
+		this.mobiles = new ArrayList<MobileElement>() ;
 		this.mainDAO = new MainDAO() ;
 		this.elements = new MotionlessElement[this.getWidth()][this.getHeight()];
 		this.loadFile(fileNumber) ;
@@ -38,7 +38,7 @@ public class World extends Observable implements Iworld{
 		return this.elements ;
 	}
 	
-	public ArrayList<Mobile> getMobiles(){
+	public ArrayList<MobileElement> getMobiles(){
 		return this.mobiles ;
 	}
 	
@@ -67,7 +67,7 @@ public class World extends Observable implements Iworld{
 		this.setChanged();
 	}
 	
-	public void addMobile(final Mobile mobile, final int x, final int y) {
+	public void addMobile(final MobileElement mobile, final int x, final int y) {
 		this.mobiles.add(mobile);
 		mobile.setWorld(this, x, y);
 		this.setChanged();
@@ -76,7 +76,7 @@ public class World extends Observable implements Iworld{
 	
 	public void addMobile(Lorann lorann, int x, int y) {
 		this.lorann = lorann ;
-		this.addMobile((Mobile) lorann, x, y);
+		this.addMobile((MobileElement) lorann, x, y);
 	}
 	
 	private void loadFile(final int fileNumber){
@@ -93,9 +93,8 @@ public class World extends Observable implements Iworld{
 			}
 			System.out.println();
 		}
-		System.out.println();
+	//	System.out.println();
 		this.setChanged() ;
-		this.notifyObservers();
 	}
 	
 	public void setMobileHasChanged() {
