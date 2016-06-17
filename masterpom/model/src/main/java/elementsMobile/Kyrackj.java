@@ -5,7 +5,7 @@ import elementsAll.Sprite;
 public class Kyrackj extends Monster{
 
 	public Kyrackj() {
-		super(new Sprite("M", "monster_1.png"));
+		super(new Sprite("A", "monster_1.png"), "Monster-1");
 		
 	}
 

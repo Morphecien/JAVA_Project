@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
@@ -16,6 +17,7 @@ class ViewFrame extends JFrame implements KeyListener {
 	private IModel						model;
 	private IController				controller;
 	private static final long	serialVersionUID	= -697358409737458175L;
+	private static Dimension MAPDIMENSION = new Dimension(660, 396);
 
 	public ViewFrame(final IModel model) throws HeadlessException {
 		this.buildViewFrame(model);
@@ -58,7 +60,8 @@ class ViewFrame extends JFrame implements KeyListener {
 		this.setResizable(true);
 		this.addKeyListener(this);
 		this.setContentPane(new ViewPanel(this));
-		this.setSize(660 + this.getInsets().left + this.getInsets().right, 422 + this.getInsets().top + this.getInsets().bottom);
+		this.setSize(640 + this.getInsets().left + this.getInsets().right, 384 + this.getInsets().top + this.getInsets().bottom);
+		this.setPreferredSize(MAPDIMENSION);
 		this.setBackground(Color.BLACK);
 		this.setLocationRelativeTo(null);
 	}

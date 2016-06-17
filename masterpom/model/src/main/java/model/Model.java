@@ -5,6 +5,7 @@ import java.util.Observable;
 
 import contract.IModel;
 import elementsAll.Element;
+import elementsMobile.MobileElement;
 import world.Iworld;
 import world.World;
 
@@ -39,6 +40,20 @@ public class Model extends Observable implements IModel {
 					sprites[y][x] = element.getImage() ;
 				}
 			}
+		}
+		return sprites ;
+	}
+	
+	public Image[][] getMobileSprites(){
+		Image[][] sprites = new Image[getHeight()][getWidth()];
+		int size = this.getWorld().getMobiles().size() ;
+		int x = 0 ;
+		int y = 0 ;
+		for (int i = 0 ; i < size ; i++){
+			MobileElement mobile = this.getWorld().getMobiles().get(i) ;
+			x = mobile.getX() ;
+			y = mobile.getY() ;
+			sprites[y][x] = mobile.getImage();
 		}
 		return sprites ;
 	}

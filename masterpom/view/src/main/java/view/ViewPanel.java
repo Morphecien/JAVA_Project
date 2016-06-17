@@ -16,11 +16,11 @@ class ViewPanel extends JPanel implements Observer {
 	private ViewFrame					viewFrame;
 	private static final long	serialVersionUID	= -998294702363713521L;
 	private Image[][] mapSprites ;
+	private Image[][] mobileSprites ;
 	private int mapHeight;
 	private int mapWidth;
 	private GridBagConstraints gbc ;
 	private GridBagLayout gbl;
-	private int i = 0 ;
 	JLabel[][] allLabels = new JLabel[12][20] ;
 	private final static Dimension DIMENSION = new Dimension(32, 32) ;
 	private static Dimension MAPDIMENSION = new Dimension(640, 384);
@@ -37,6 +37,7 @@ class ViewPanel extends JPanel implements Observer {
 		this.setPreferredSize(MAPDIMENSION);;
 		initGBC() ;
 		this.mapSprites = this.getViewFrame().getModel().getWorldSprites() ;
+		prepareAllJLabels() ;
 	}
 
 	private void initGBC(){
@@ -55,27 +56,36 @@ class ViewPanel extends JPanel implements Observer {
 	}
 
 	public void update(final Observable arg0, final Object arg1) {
-		this.mapSprites = this.getViewFrame().getModel().getWorldSprites() ;
-		prepareAllJLabels(this.mapSprites) ;
+	//	this.mapSprites = this.getViewFrame().getModel().getWorldSprites() ;
+		this.removeAll();
+		prepareAllJLabels() ;
 		System.out.println("coucou (: 2e edition");
 		this.repaint();
 	}
 	
-	private void prepareAllJLabels(Image[][] sprites){
+	private void prepareAllJLabels(){
 		JLabel[][] allLabels = new JLabel[mapHeight][mapWidth] ;
 		this.mapSprites = this.getViewFrame().getModel().getWorldSprites() ;
+		this.mobileSprites = this.getViewFrame().getModel().getMobileSprites() ;
 		for (int y=0 ; y<mapHeight ; y++){
 			gbc.gridy = y ;
 			for (int x=0 ; x<mapWidth ; x++){
 				gbc.gridx = x ;
 				allLabels[y][x] = new JLabel() ;
+				allLabels[y][x].setSize(DIMENSION) ;
 				allLabels[y][x].setPreferredSize(DIMENSION);
-				if (sprites[y][x] != null){
-					allLabels[y][x].setIcon(new ImageIcon(sprites[y][x]));
+				if (mapSprites[y][x] != null){
+					allLabels[y][x].setIcon(new ImageIcon(mapSprites[y][x]));
 	//				System.out.print("1");
 				}
 				else{
+					if (mobileSprites[y][x] != null){
+						allLabels[y][x].setIcon(new ImageIcon(mobileSprites[y][x])) ;
+	//					System.out.print("1");
+					}
+					else{
 	//				System.out.print(" ") ;
+					}
 				}
 				gbl.setConstraints(allLabels[y][x], gbc);
 				this.add(allLabels[y][x]) ;
@@ -83,20 +93,13 @@ class ViewPanel extends JPanel implements Observer {
 	//		System.out.println();
 		}
 		this.setLayout(gbl);
+		this.getViewFrame().pack();
 	//	System.out.println("coucou (:");
 	}
 	
 	@Override
 	protected void paintComponent(final Graphics graphics) {
-		executeOne() ;
-	//	prepareAllJLabels(this.mapSprites) ;
 		
 	}
 	
-	private void executeOne(){
-		i++ ;
-		if (i <= 1){
-			prepareAllJLabels(this.mapSprites) ;
-		}
-	}
 }

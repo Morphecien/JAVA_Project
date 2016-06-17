@@ -5,7 +5,7 @@ import elementsAll.Sprite;
 public class Maarcg extends Monster {
 	
 	public Maarcg() {
-		super(new Sprite("P", "monster_4.png"));
+		super(new Sprite("D", "monster_4.png"), "Monster-4");
 		
 	}
 

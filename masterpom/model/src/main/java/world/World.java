@@ -7,6 +7,7 @@ import dao.MainDAO;
 import dao.Map;
 import elementsAll.Element;
 import elementsMobile.Lorann;
+import elementsMobile.MobileDetermineElement;
 import elementsMobile.MobileElement;
 import elementsMotionless.MotionlessDetermineElement;
 import elementsMotionless.MotionlessElement;
@@ -80,15 +81,25 @@ public class World extends Observable implements Iworld{
 	}
 	
 	private void loadFile(final int fileNumber){
+		int z = 0 ;
 		Map mappe = mainDAO.loadMap(fileNumber);
 		for (int y = 0 ; y<this.getHeight() ; y++){
 			for (int x = 0 ; x<this.getWidth() ; x++){
 				this.addElement(MotionlessDetermineElement.getFromFileSymbol(mappe.getMap()[y][x]), x, y);
-				if (this.getElementXY(x, y) != null){
-					System.out.print(this.getElementXY(x, y).getSprite());
+				
+				if (this.getElementXY(x, y) == null){
+					MobileElement mobile = MobileDetermineElement.getFromFileSymbol(mappe.getMap()[y][x]) ;
+					if (mobile != null){
+						this.addMobile(mobile, x, y);
+						z++ ;
+						System.out.print(this.mobiles.get(z - 1).getSprite()) ;
+					}
+					else{
+						System.out.print(" ") ;
+					}
 				}
 				else{
-					System.out.print(" ") ;
+					System.out.print(this.getElementXY(x, y).getSprite()) ;
 				}
 			}
 			System.out.println();

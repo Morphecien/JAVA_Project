@@ -11,4 +11,5 @@ public interface IModel {
 	int getWidth();
 	int getHeight() ;
 	Image[][] getWorldSprites() ;
+	Image[][] getMobileSprites() ;
 }

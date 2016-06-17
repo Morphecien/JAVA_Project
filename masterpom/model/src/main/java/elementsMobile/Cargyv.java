@@ -5,7 +5,7 @@ import elementsAll.Sprite;
 public class Cargyv extends Monster {
 	
 	public Cargyv() {
-		super(new Sprite("N", "monster_2.png"));
+		super(new Sprite("B", "monster_2.png"), "Monster-2");
 		
 	}
 
