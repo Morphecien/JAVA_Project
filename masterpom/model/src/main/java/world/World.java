@@ -83,8 +83,6 @@ public class World extends Observable implements Iworld{
 		Map mappe = mainDAO.loadMap(fileNumber);
 		for (int y = 0 ; y<this.getHeight() ; y++){
 			for (int x = 0 ; x<this.getWidth() ; x++){
-		//		System.out.print("y : " + y + " - x : " + x + " | case : " + mappe.getMap()[y][x] + "\t BDDSymbol : \t") ;
-		//		System.out.println(MotionlessDetermineElement.getFromFileSymbol(mappe.getMap()[y][x]));
 				this.addElement(MotionlessDetermineElement.getFromFileSymbol(mappe.getMap()[y][x]), x, y);
 				if (this.getElementXY(x, y) != null){
 					System.out.print(this.getElementXY(x, y).getSprite());
@@ -97,6 +95,7 @@ public class World extends Observable implements Iworld{
 		}
 		System.out.println();
 		this.setChanged() ;
+		this.notifyObservers();
 	}
 	
 	public void setMobileHasChanged() {

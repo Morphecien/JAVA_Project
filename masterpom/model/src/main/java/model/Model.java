@@ -1,8 +1,10 @@
 package model;
 
+import java.awt.Image;
 import java.util.Observable;
 
 import contract.IModel;
+import elementsAll.Element;
 import world.Iworld;
 import world.World;
 
@@ -11,7 +13,7 @@ public class Model extends Observable implements IModel {
 	private Iworld world ;
 
 	public Model() {
-		startLevel(1) ;
+		this.world = startLevel(1) ;
 	}
 
 	public int getLevel() {
@@ -26,7 +28,23 @@ public class Model extends Observable implements IModel {
 		setLevel(level) ;
 		this.world = new World(getLevel()) ;
 		return this.world ;
-		
+	}
+	
+	public Image[][] getWorldSprites(){
+		Image[][] sprites = new Image[getHeight()][getWidth()];
+		for (int y=0 ; y<getHeight() ; y++){
+			for (int x=0 ; x<getWidth() ; x++){
+				Element element = this.getWorld().getElementXY(x,y) ;
+				if (element != null){
+					sprites[y][x] = element.getImage() ;
+				}
+			}
+		}
+		return sprites ;
+	}
+	
+	private Iworld getWorld(){
+		return this.world ;
 	}
 
 	public void loadMessage(final String key) {
@@ -39,7 +57,14 @@ public class Model extends Observable implements IModel {
 	}
 
 	public String getMessage() {
-		// TODO Auto-generated method stub
 		return "Oili oilà (:";
+	}
+
+	public int getWidth() {
+		return this.getWorld().getWidth() ;
+	}
+
+	public int getHeight() {
+		return this.getWorld().getHeight() ;
 	}
 }

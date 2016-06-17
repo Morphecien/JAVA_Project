@@ -139,19 +139,19 @@ class DAOCreateAMap{
 				case '-' : return "H-bone";				// Bone
 				case 'O' : return "Bone";				// Bone
 				case '1' : return "Purse";					// Purse
-				case '2' : return "Purse";					// Purse ()
-				case '3' : return "Purse";					// Purse (candlestick)
-				case '4' : return "Purse";					// Purse (chalice)
-				case 'W' : return "Purse";					// Purse (idol)
+				case '2' : return "Flacon";					// Flacon
+				case '3' : return "Candlestick";			// Candlestick
+				case '4' : return "Purse";					// Chalice
+				case 'W' : return "Idol";					// Idol
 				case '@' : return "Player";				// Lorann
 				case 'A' : return "Monster-1";				// Monster
 				case 'B' : return "Monster-2";				// Monster
 				case 'C' : return "Monster-3";				// Monster
 				case 'D' : return "Monster-4";				// Monster
 				case 'Q' : return "Crystal-ball";		// End (Crystal-ball)
-				case 'Y' : return "Gate";					// Exit (Gate)
-				case '#' : 								// Bloc which are activate (disparition of the bloc) when Lorann touch de Crystall-ball
-				case '+' : return "Bone";					// Grave (= Tombe)
+				case 'Y' : return "Gate-Close";					// Exit (Gate)
+				case '#' : return "Bloc";				// Bloc which are activate (disparition of the bloc) when Lorann touch de Crystall-ball
+				case '+' : return "Grave";					// Grave (= Tombe)
 				default : System.out.println("A sprite was detected, but she hasn't got a reference in the Database");	break ;
 			}
 			return null ;

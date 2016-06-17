@@ -1,4 +1,5 @@
-CREATE DATABASE `JAVA-Project` ;
+DROP DATABASE IF EXISTS `JAVA-Project` ;
+CREATE DATABASE IF NOT EXISTS `JAVA-Project` ;
 
 USE `JAVA-Project` ;
 
@@ -126,14 +127,20 @@ ALTER TABLE Score ADD CONSTRAINT FK_Score_ID_player FOREIGN KEY (ID_player) REFE
 #------------------------------------------------------------
 
 INSERT INTO sprite (sprite) VALUES 
-		("Hbone"),
-		("Vbone"),
+		("H-Bone"),
+		("V-Bone"),
         ("Bone"),
-        ("Gate"),
-        ("CrystalBall"),
+        ("Gate-Close"),
+        ("Crystal-Ball"),
+        ("Bloc"),
+        ("Grave"),
         ("Purse"),
+        ("Flacon"),
+        ("Candlestick"),
+        ("Chalice"),
+        ("Idol"),
         ("Player"),
-        ("Monster1"),
-        ("Monster2"),
-        ("Monster3"),
-        ("Monster4");
+        ("Monster-1"),
+        ("Monster-2"),
+        ("Monster-3"),
+        ("Monster-4");

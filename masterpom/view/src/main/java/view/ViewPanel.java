@@ -1,70 +1,102 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-/**
- * The Class ViewPanel.
- *
- * @author Jean-Aymeric Diet
- */
 class ViewPanel extends JPanel implements Observer {
-
-	/** The view frame. */
 	private ViewFrame					viewFrame;
-	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -998294702363713521L;
+	private Image[][] mapSprites ;
+	private int mapHeight;
+	private int mapWidth;
+	private GridBagConstraints gbc ;
+	private GridBagLayout gbl;
+	private int i = 0 ;
+	JLabel[][] allLabels = new JLabel[12][20] ;
+	private final static Dimension DIMENSION = new Dimension(32, 32) ;
+	private static Dimension MAPDIMENSION = new Dimension(640, 384);
 
-	/**
-	 * Instantiates a new view panel.
-	 *
-	 * @param viewFrame
-	 *          the view frame
-	 */
 	public ViewPanel(final ViewFrame viewFrame) {
 		this.setViewFrame(viewFrame);
 		viewFrame.getModel().getObservable().addObserver(this);
+		mapSprites = new Image[12][20] ;
+		mapHeight = this.getViewFrame().getModel().getHeight() ;
+		mapWidth = this.getViewFrame().getModel().getWidth() ;
+		gbc = new GridBagConstraints();
+		gbl = new GridBagLayout() ;
+		this.setSize(640, 384);
+		this.setPreferredSize(MAPDIMENSION);;
+		initGBC() ;
+		this.mapSprites = this.getViewFrame().getModel().getWorldSprites() ;
 	}
 
-	/**
-	 * Gets the view frame.
-	 *
-	 * @return the view frame
-	 */
+	private void initGBC(){
+		gbc.gridx = 0 ;
+		gbc.gridy = 0 ;
+		gbc.gridheight = 1 ;
+		gbc.gridwidth = 1 ;
+	}
+
 	private ViewFrame getViewFrame() {
 		return this.viewFrame;
 	}
 
-	/**
-	 * Sets the view frame.
-	 *
-	 * @param viewFrame
-	 *          the new view frame
-	 */
 	private void setViewFrame(final ViewFrame viewFrame) {
 		this.viewFrame = viewFrame;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
-	 */
 	public void update(final Observable arg0, final Object arg1) {
+		this.mapSprites = this.getViewFrame().getModel().getWorldSprites() ;
+		prepareAllJLabels(this.mapSprites) ;
+		System.out.println("coucou (: 2e edition");
 		this.repaint();
 	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
-	 */
+	
+	private void prepareAllJLabels(Image[][] sprites){
+		JLabel[][] allLabels = new JLabel[mapHeight][mapWidth] ;
+		this.mapSprites = this.getViewFrame().getModel().getWorldSprites() ;
+		for (int y=0 ; y<mapHeight ; y++){
+			gbc.gridy = y ;
+			for (int x=0 ; x<mapWidth ; x++){
+				gbc.gridx = x ;
+				allLabels[y][x] = new JLabel() ;
+				allLabels[y][x].setPreferredSize(DIMENSION);
+				if (sprites[y][x] != null){
+					allLabels[y][x].setIcon(new ImageIcon(sprites[y][x]));
+	//				System.out.print("1");
+				}
+				else{
+	//				System.out.print(" ") ;
+				}
+				gbl.setConstraints(allLabels[y][x], gbc);
+				this.add(allLabels[y][x]) ;
+			}
+	//		System.out.println();
+		}
+		this.setLayout(gbl);
+	//	System.out.println("coucou (:");
+	}
+	
 	@Override
 	protected void paintComponent(final Graphics graphics) {
-	//	graphics.clearRect(0, 0, this.getWidth(), this.getHeight());
-		graphics.drawString(this.getViewFrame().getModel().getMessage(), 10, 20);
+		executeOne() ;
+	//	prepareAllJLabels(this.mapSprites) ;
+		
+	}
+	
+	private void executeOne(){
+		i++ ;
+		if (i <= 1){
+			prepareAllJLabels(this.mapSprites) ;
+		}
 	}
 }
