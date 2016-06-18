@@ -36,14 +36,12 @@ public abstract class MobileElement extends Element{
 	protected void setX(final int x){
 		if ((x>=0) && (x < this.getWorld().getWidth())){
 			this.getPosition().x = x ;
-			this.getWorld().setMobileHasChanged() ;
 		}
 	}
 	
 	protected void setY(final int y){
 		if ((y>=0) && (y < this.getWorld().getHeight())){
 			this.getPosition().y = y ;
-			this.getWorld().setMobileHasChanged() ;
 		}
 	}
 	

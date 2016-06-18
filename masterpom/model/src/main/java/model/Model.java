@@ -19,7 +19,7 @@ public class Model extends Observable implements IModel {
 	
 	public Model() {
 		this.message = "" ;
-		this.world = startLevel(1) ;
+		startLevel(1) ;
 		worldAnswer = new WorldAnswer(world) ;
 	}
 
@@ -40,10 +40,9 @@ public class Model extends Observable implements IModel {
 		this.world = new World(getLevel()) ;
 		return this.world ;
 	}*/
-	private World startLevel(final int level){
+	private void startLevel(final int level){
 		setLevel(level) ;
 		this.world = new World(getLevel()) ;
-		return this.world ;
 	}
 	
 	public Image[][] getWorldSprites(){
@@ -87,7 +86,7 @@ public class Model extends Observable implements IModel {
 	}
 
 	public Observable getObservable() {
-		return this;
+		return this.world;
 	}
 
 	public String getMessage() {
@@ -104,31 +103,23 @@ public class Model extends Observable implements IModel {
 
 	public void LorannMoveUP() {
 		this.getWorld().getLorann().moveUp();
-		this.modifWorld();
 	}
 
 	public void LorannMoveDOWN() {
 		this.getWorld().getLorann().moveDown() ;
-		this.modifWorld();
 	}
 
 	public void LorannMoveLEFT() {
 		this.getWorld().getLorann().moveLeft() ;
-		this.modifWorld();
 	}
 
 	public void LorannMoveRIGHT() {
 		this.getWorld().getLorann().moveRight() ;
-		this.modifWorld();
-	}
-	
-	public void modifWorld(){
-		this.setChanged() ;
-		this.notifyObservers();
 	}
 
 	public void getWorldAnswer() {
-		this.world.getWorldAnswer();
+	//	this.world.getWorldAnswer();
+		this.getTheWorldAnswer().getWorldAnswer();
 	}
 	
 	

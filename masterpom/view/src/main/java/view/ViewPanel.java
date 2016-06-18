@@ -55,16 +55,17 @@ class ViewPanel extends JPanel implements Observer {
 	}
 
 	public void update(final Observable arg0, final Object arg1) {
+		System.out.print("Tu fais chier !! Bon, j'enlève tout... ") ;
 		this.removeAll();
 		prepareAllJLabels() ;
-		prepareALabel() ;
+	//	prepareALabel() ;
 	//	this.repaint();
 	}
 	
-	private void prepareALabel(){
+/*	private void prepareALabel(){
 		JLabel lab = new JLabel() ;
 		System.out.println(mapSprites[3][2]);
-	}
+	}*/
 	
 	private void prepareAllJLabels(){
 		JLabel[][] allLabels = new JLabel[mapHeight][mapWidth] ;
@@ -96,7 +97,7 @@ class ViewPanel extends JPanel implements Observer {
 		this.getViewFrame().pack();
 		this.setVisible(true);
 		this.repaint();
-		System.out.println("coucou (:");
+		System.out.println("Et je repaint ;)");
 	}
 	
 	@Override

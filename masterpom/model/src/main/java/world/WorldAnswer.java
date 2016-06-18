@@ -36,6 +36,7 @@ public class WorldAnswer {
 			default:
 				break;
 		}
+		this.getWorld().worldHasChanged() ;
 	}
 	private void resolveCollectTreasure(Itreasures element){
 	//	System.out.print("score : " + this.getWorld().getLorann().getScore() + " | new ");
@@ -59,14 +60,10 @@ public class WorldAnswer {
 	
 	private void resolveUnlocksGate(){
 		this.getWorld().dropElement(this.getWorld().getLorann().getX(), this.getWorld().getLorann().getY());
-	//	this.getWorld().dropElement(MotionlessDetermineElement.GATEOPEN, this.getWorld().searchGate().x, this.getWorld().searchGate().y);
-	//	afficherWorld() ;
-		System.out.println(this.getWorld().getElementXY(2, 3).getSprite().getImage());
-	//	this.getWorld().setMobileHasChanged();
-		this.getWorld().notifyObservers();
+		this.getWorld().searchGate() ;
 	}
 		
-	private void afficherWorld(){
+/*	private void afficherWorld(){
 		for (int y=0 ; y<12 ; y++){
 			for (int x=0 ; x<20 ; x++){
 				System.out.print(this.getWorld().getElementXY(x, y).getSprite()) ;
@@ -74,5 +71,5 @@ public class WorldAnswer {
 			System.out.println() ;
 		}
 		System.out.println(this.getWorld().getElementXY(2, 3).getSprite().getTest());
-	}
+	}*/
 }

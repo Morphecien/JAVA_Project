@@ -1,6 +1,5 @@
 package world;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -61,13 +60,18 @@ public class World extends Observable implements Iworld{
 		this.lorann = lorann;
 		this.setChanged();
 	}
+	public Observable getObservable() {
+		return this;
+	}
 	
 	public void dropElement(final int x, final int y){
 		this.addElement(MotionlessDetermineElement.getFromFileSymbol(" "), x, y);
+		this.setChanged();
 	}
 	
 	public void dropElement(final MotionlessElement element, final int x, final int y){
 		this.addElement(element, x, y);
+		this.setChanged();
 	}
 	
 	private void addElement(final MotionlessElement element, final int x, final int y){
@@ -91,7 +95,7 @@ public class World extends Observable implements Iworld{
 			}
 		}
 		this.setChanged();
-		this.notifyObservers();
+	//	this.notifyObservers();
 	}
 
 	public void addMobile(final MobileElement mobile, final int x, final int y) {
@@ -101,7 +105,7 @@ public class World extends Observable implements Iworld{
 			this.lorann = (Lorann) mobile ;
 		}
 		this.setChanged();
-		this.notifyObservers();
+	//	this.notifyObservers();
 	}
 	
 	public void addMobile(Lorann lorann, int x, int y) {
@@ -137,12 +141,13 @@ public class World extends Observable implements Iworld{
 		this.setChanged() ;
 	}
 	
-	public void setMobileHasChanged() {
+	public void worldHasChanged() {
 		this.setChanged();
 		this.notifyObservers();
 	}
 	
 	public void notifyObservers() {
+		System.out.println("Coucou, je notifie ;)");
 		super.notifyObservers();
 	}
 	
@@ -170,6 +175,7 @@ public class World extends Observable implements Iworld{
 			default:
 				break;
 		}
+		worldHasChanged() ;
 	}
 	private void resolveCollectTreasure(Itreasures element){
 	//	System.out.print("score : " + this.getWorld().getLorann().getScore() + " | new ");
@@ -193,12 +199,10 @@ public class World extends Observable implements Iworld{
 	
 	private void resolveUnlocksGate(){
 		this.dropElement(this.getLorann().getX(), this.getLorann().getY());
-	//	this.dropElement(MotionlessDetermineElement.GATEOPEN, this.searchGate().x, this.searchGate().y);
 		searchGate() ;
 	//	afficherWorld() ;
 		System.out.println(this.getElementXY(2, 3).getSprite().getImage());
-	//	this.setMobileHasChanged();
-		this.notifyObservers();
+		this.worldHasChanged();
 	}
 		
 	private void afficherWorld(){
