@@ -6,9 +6,13 @@ import elementsAll.Sprite;
 
 public class Lorann extends MobileElement {
 	private final Point lastPosition ;
+	private int score ;
+	private int life ;
 	
 	public Lorann() {
 		super(new Sprite("@", "lorann_ur.png"), "Player");
+		this.score = 0 ;
+		this.life = 11 ;
 		this.lastPosition = new Point() ;
 		this.lastPosition.setLocation(this.getPosition().x, this.getPosition().y);
 	}
@@ -19,6 +23,22 @@ public class Lorann extends MobileElement {
 		}
 	}
 	
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	public int getLife() {
+		return life;
+	}
+
+	public void setLife(int life) {
+		this.life = life;
+	}
+
 	@Override
 	public void moveUp() {
 		this.saveLastPosition();

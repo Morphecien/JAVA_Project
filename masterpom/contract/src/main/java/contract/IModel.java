@@ -5,11 +5,16 @@ import java.util.Observable;
 
 public interface IModel {
 
-	String getMessage();
-	void loadMessage(String key);
-	Observable getObservable();
-	int getWidth();
-	int getHeight() ;
-	Image[][] getWorldSprites() ;
-	Image[][] getMobileSprites() ;
+	public String getMessage();
+	public void loadMessage(String key);
+	public Observable getObservable();
+	public int getWidth();
+	public int getHeight() ;
+	public Image[][] getWorldSprites() ;
+	public Image[][] getMobileSprites() ;
+	public void LorannMoveUP() ;
+	public void LorannMoveDOWN() ;
+	public void LorannMoveLEFT() ;
+	public void LorannMoveRIGHT() ;
+	public void getWorldAnswer() ;
 }

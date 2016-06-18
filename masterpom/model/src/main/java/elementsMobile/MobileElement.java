@@ -7,7 +7,7 @@ import elementsAll.ISprite;
 import elementsAll.Permeability;
 import world.Iworld;
 
-public class MobileElement extends Element{
+public abstract class MobileElement extends Element{
 	private final Point position ;
 	private final String fileSymbol ;
 
@@ -54,7 +54,14 @@ public class MobileElement extends Element{
 	}
 	
 	private boolean movePossible(final int x, final int y){
-		return (this.getWorld().getElementXY(x, y).getPermeability() != Permeability.BLOCKING) ;
+		Permeability permeability ;
+		if (this.getWorld().getElementXY(x, y) == null){
+			permeability = Permeability.PENETRABLE ;
+		}
+		else{
+			permeability = this.getWorld().getElementXY(x, y).getPermeability() ;
+		}
+		return (permeability != Permeability.BLOCKING) ;
 	}
 	
 	public void moveUp() {

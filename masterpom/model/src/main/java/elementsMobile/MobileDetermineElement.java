@@ -13,6 +13,7 @@ public class MobileDetermineElement {
 	public static MobileElement getFromFileSymbol(final String fileSymbol) {
 		for (MobileElement mobileElement  : mobileElements) {
 			if (mobileElement.getFileSymbol().equals(fileSymbol)) {
+		//		System.out.println("Coucou : " + fileSymbol);
 				return mobileElement;
 			}
 		}

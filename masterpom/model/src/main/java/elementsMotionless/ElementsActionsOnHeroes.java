@@ -1,6 +1,6 @@
 package elementsMotionless;
 
-enum ElementsActionsOnHeroes {
+public enum ElementsActionsOnHeroes {
 	NOPE,
 	COLLECT,
 	NEWLIFE,

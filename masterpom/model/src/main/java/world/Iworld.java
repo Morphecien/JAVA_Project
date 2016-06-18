@@ -1,5 +1,6 @@
 package world;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Observer;
 
@@ -19,4 +20,8 @@ public interface Iworld {
 	public void addMobile(MobileElement mobile, int x, int y) ;
 	public void addMobile(Lorann lorann, int x, int y) ;
 	public void addObserver(Observer o) ;
+	public void dropElement(final int x, final int y);
+	public void dropElement(final MotionlessElement element, final int x, final int y);
+	public void searchGate();
+	public void notifyObservers();
 }

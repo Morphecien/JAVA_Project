@@ -1,5 +1,5 @@
 package elementsMotionless;
 
-interface IElementsActionOnHeroes {
+public interface IElementsActionOnHeroes {
 	public ElementsActionsOnHeroes getElementActionOnHeroes() ;
 }

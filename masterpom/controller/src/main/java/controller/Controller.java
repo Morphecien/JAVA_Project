@@ -1,9 +1,9 @@
 package controller;
 
-import contract.ControllerOrder;
 import contract.IController;
 import contract.IModel;
 import contract.IView;
+import contract.MovementLorann;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -64,24 +64,25 @@ public class Controller implements IController {
 	 *
 	 * @see contract.IController#orderPerform(contract.ControllerOrder)
 	 */
-	public void orderPerform(final ControllerOrder controllerOrder) {
+	public void movementLorann(final MovementLorann controllerOrder) {
 		switch (controllerOrder) {
-			case English:
-				this.model.loadMessage("GB");
+			case UP:
+				this.model.LorannMoveUP();
 				break;
-			case Francais:
-				this.model.loadMessage("FR");
+			case DOWN:
+				this.model.LorannMoveDOWN();
 				break;
-			case Deutsch:
-				this.model.loadMessage("DE");
+			case LEFT:
+				this.model.LorannMoveLEFT();
 				break;
-			case Indonesia:
-				this.model.loadMessage("ID");
+			case RIGHT:
+				this.model.LorannMoveRIGHT();
 				break;
 
 			default:
 				break;
 		}
+		model.getWorldAnswer();
 	}
 
 }

@@ -17,7 +17,7 @@ class ViewFrame extends JFrame implements KeyListener {
 	private IModel						model;
 	private IController				controller;
 	private static final long	serialVersionUID	= -697358409737458175L;
-	private static Dimension MAPDIMENSION = new Dimension(660, 396);
+	private static Dimension MAPDIMENSION = new Dimension(692, 428);
 
 	public ViewFrame(final IModel model) throws HeadlessException {
 		this.buildViewFrame(model);
@@ -57,10 +57,11 @@ class ViewFrame extends JFrame implements KeyListener {
 	private void buildViewFrame(final IModel model) {
 		this.setModel(model);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setResizable(true);
+		this.setResizable(false);
 		this.addKeyListener(this);
 		this.setContentPane(new ViewPanel(this));
-		this.setSize(640 + this.getInsets().left + this.getInsets().right, 384 + this.getInsets().top + this.getInsets().bottom);
+		//this.setSize(640 + this.getInsets().left + this.getInsets().right, 384 + this.getInsets().top + this.getInsets().bottom);
+		this.setSize(MAPDIMENSION) ;
 		this.setPreferredSize(MAPDIMENSION);
 		this.setBackground(Color.BLACK);
 		this.setLocationRelativeTo(null);
@@ -75,7 +76,7 @@ class ViewFrame extends JFrame implements KeyListener {
 	}
 
 	public void keyPressed(final KeyEvent e) {
-		this.getController().orderPerform(View.keyCodeToControllerOrder(e.getKeyCode()));
+		this.getController().movementLorann(View.keyCodeToControllerOrder(e.getKeyCode()));
 	}
 
 	public void keyReleased(final KeyEvent e) {

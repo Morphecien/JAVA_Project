@@ -15,7 +15,8 @@ public abstract class MotionlessDetermineElement {
 	public static final MotionlessElement	CANDLESTICK		= new Candlestick() ;
 	public static final MotionlessElement	CHALICE			= new Chalice() ;
 	public static final MotionlessElement	IDOL			= new Idol() ;
-	
+	public static final MotionlessElement	NOTHING			= new Nothing() ;
+		
 	private static MotionlessElement motionlessElements[] = {VBONE, HBONE, BONE, GATECLOSE, GATEOPEN, CRYSTALBALL, BLOC, GRAVE, PURSE, FLACON, CANDLESTICK, CHALICE, IDOL};
 
 	
@@ -25,6 +26,6 @@ public abstract class MotionlessDetermineElement {
 				return motionlessElement;
 			}
 		}
-		return null;
+		return NOTHING;
 	}
 }

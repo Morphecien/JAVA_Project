@@ -22,8 +22,7 @@ class ViewPanel extends JPanel implements Observer {
 	private GridBagConstraints gbc ;
 	private GridBagLayout gbl;
 	JLabel[][] allLabels = new JLabel[12][20] ;
-	private final static Dimension DIMENSION = new Dimension(32, 32) ;
-	private static Dimension MAPDIMENSION = new Dimension(640, 384);
+	private static Dimension MAPDIMENSION = new Dimension(692, 428);
 
 	public ViewPanel(final ViewFrame viewFrame) {
 		this.setViewFrame(viewFrame);
@@ -56,11 +55,15 @@ class ViewPanel extends JPanel implements Observer {
 	}
 
 	public void update(final Observable arg0, final Object arg1) {
-	//	this.mapSprites = this.getViewFrame().getModel().getWorldSprites() ;
 		this.removeAll();
 		prepareAllJLabels() ;
-		System.out.println("coucou (: 2e edition");
-		this.repaint();
+		prepareALabel() ;
+	//	this.repaint();
+	}
+	
+	private void prepareALabel(){
+		JLabel lab = new JLabel() ;
+		System.out.println(mapSprites[3][2]);
 	}
 	
 	private void prepareAllJLabels(){
@@ -72,29 +75,28 @@ class ViewPanel extends JPanel implements Observer {
 			for (int x=0 ; x<mapWidth ; x++){
 				gbc.gridx = x ;
 				allLabels[y][x] = new JLabel() ;
-				allLabels[y][x].setSize(DIMENSION) ;
-				allLabels[y][x].setPreferredSize(DIMENSION);
-				if (mapSprites[y][x] != null){
-					allLabels[y][x].setIcon(new ImageIcon(mapSprites[y][x]));
-	//				System.out.print("1");
+				allLabels[y][x].setIcon(new ImageIcon(mapSprites[y][x]));
+		//		System.out.print("1");
+				if (mobileSprites[y][x] != null){
+					allLabels[y][x].setIcon(new ImageIcon(mobileSprites[y][x])) ;
+		//			System.out.print("8");
+				}
+				if(mapSprites[y][x] == mapSprites[0][0] ){
+					
 				}
 				else{
-					if (mobileSprites[y][x] != null){
-						allLabels[y][x].setIcon(new ImageIcon(mobileSprites[y][x])) ;
-	//					System.out.print("1");
-					}
-					else{
-	//				System.out.print(" ") ;
-					}
+		//			System.out.print(" ") ;
 				}
 				gbl.setConstraints(allLabels[y][x], gbc);
 				this.add(allLabels[y][x]) ;
 			}
-	//		System.out.println();
+		//	System.out.println();
 		}
 		this.setLayout(gbl);
 		this.getViewFrame().pack();
-	//	System.out.println("coucou (:");
+		this.setVisible(true);
+		this.repaint();
+		System.out.println("coucou (:");
 	}
 	
 	@Override

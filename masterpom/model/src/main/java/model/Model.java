@@ -8,24 +8,39 @@ import elementsAll.Element;
 import elementsMobile.MobileElement;
 import world.Iworld;
 import world.World;
+import world.WorldAnswer;
 
 public class Model extends Observable implements IModel {
+	private final WorldAnswer worldAnswer ;
 	private int level;
-	private Iworld world ;
-
+//	private Iworld world ;
+	private World world ;
+	private String message ;
+	
 	public Model() {
+		this.message = "" ;
 		this.world = startLevel(1) ;
+		worldAnswer = new WorldAnswer(world) ;
 	}
 
 	public int getLevel() {
 		return this.level;
+	}
+	
+	public WorldAnswer getTheWorldAnswer(){
+		return this.worldAnswer ;
 	}
 
 	private void setLevel(final int level) {
 		this.level = level ;
 	}
 	
-	private Iworld startLevel(final int level){
+/*	private Iworld startLevel(final int level){
+		setLevel(level) ;
+		this.world = new World(getLevel()) ;
+		return this.world ;
+	}*/
+	private World startLevel(final int level){
 		setLevel(level) ;
 		this.world = new World(getLevel()) ;
 		return this.world ;
@@ -61,10 +76,14 @@ public class Model extends Observable implements IModel {
 	private Iworld getWorld(){
 		return this.world ;
 	}
+	
+	public void setMessage(final String txt){
+		this.message = txt ;
+	}
 
 	public void loadMessage(final String key) {
 	//	final DAOHelloWorld daoHelloWorld = new DAOHelloWorld(DBConnection.getInstance().getConnection());
-	//	this.setMessage(daoHelloWorld.find(key).getMessage());
+		this.setMessage(key);
 	}
 
 	public Observable getObservable() {
@@ -72,7 +91,7 @@ public class Model extends Observable implements IModel {
 	}
 
 	public String getMessage() {
-		return "Oili oilà (:";
+		return this.message;
 	}
 
 	public int getWidth() {
@@ -82,4 +101,36 @@ public class Model extends Observable implements IModel {
 	public int getHeight() {
 		return this.getWorld().getHeight() ;
 	}
+
+	public void LorannMoveUP() {
+		this.getWorld().getLorann().moveUp();
+		this.modifWorld();
+	}
+
+	public void LorannMoveDOWN() {
+		this.getWorld().getLorann().moveDown() ;
+		this.modifWorld();
+	}
+
+	public void LorannMoveLEFT() {
+		this.getWorld().getLorann().moveLeft() ;
+		this.modifWorld();
+	}
+
+	public void LorannMoveRIGHT() {
+		this.getWorld().getLorann().moveRight() ;
+		this.modifWorld();
+	}
+	
+	public void modifWorld(){
+		this.setChanged() ;
+		this.notifyObservers();
+	}
+
+	public void getWorldAnswer() {
+		this.world.getWorldAnswer();
+	}
+	
+	
+
 }

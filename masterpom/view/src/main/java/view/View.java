@@ -4,10 +4,10 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.SwingUtilities;
 
-import contract.ControllerOrder;
 import contract.IController;
 import contract.IModel;
 import contract.IView;
+import contract.MovementLorann;
 
 public class View implements IView, Runnable {
 
@@ -18,18 +18,18 @@ public class View implements IView, Runnable {
 		SwingUtilities.invokeLater(this);
 	}
 
-	protected static ControllerOrder keyCodeToControllerOrder(final int keyCode) {
+	protected static MovementLorann keyCodeToControllerOrder(final int keyCode) {
 		switch (keyCode) {
 			case KeyEvent.VK_UP:
-				return ControllerOrder.English;
+				return MovementLorann.UP;
 			case KeyEvent.VK_DOWN:
-				return ControllerOrder.Francais;
+				return MovementLorann.DOWN;
 			case KeyEvent.VK_LEFT:
-				return ControllerOrder.Deutsch;
+				return MovementLorann.LEFT;
 			case KeyEvent.VK_RIGHT:
-				return ControllerOrder.Indonesia;
+				return MovementLorann.RIGHT;
 			default:
-				return ControllerOrder.English;
+				return MovementLorann.NOPE;
 		}
 	}
 

@@ -13,6 +13,6 @@ public class Purse extends MotionlessElement implements Itreasures{
 	}
 
 	public int collectTreasure() {
-		return 500;
+		return 530;
 	}
 }
