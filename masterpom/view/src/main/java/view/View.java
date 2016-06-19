@@ -7,7 +7,7 @@ import javax.swing.SwingUtilities;
 import contract.IController;
 import contract.IModel;
 import contract.IView;
-import contract.MovementLorann;
+import contract.Movement;
 
 public class View implements IView, Runnable {
 
@@ -18,18 +18,20 @@ public class View implements IView, Runnable {
 		SwingUtilities.invokeLater(this);
 	}
 
-	protected static MovementLorann keyCodeToControllerOrder(final int keyCode) {
+	protected static Movement keyCodeToControllerOrder(final int keyCode) {
 		switch (keyCode) {
 			case KeyEvent.VK_UP:
-				return MovementLorann.UP;
+				return Movement.UP;
 			case KeyEvent.VK_DOWN:
-				return MovementLorann.DOWN;
+				return Movement.DOWN;
 			case KeyEvent.VK_LEFT:
-				return MovementLorann.LEFT;
+				return Movement.LEFT;
 			case KeyEvent.VK_RIGHT:
-				return MovementLorann.RIGHT;
+				return Movement.RIGHT;
+			case KeyEvent.VK_SPACE:
+				return Movement.SPACE ;
 			default:
-				return MovementLorann.NOPE;
+				return Movement.NOPE;
 		}
 	}
 

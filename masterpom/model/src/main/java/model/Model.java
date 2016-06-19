@@ -19,7 +19,7 @@ public class Model extends Observable implements IModel {
 	
 	public Model() {
 		this.message = "" ;
-		startLevel(1) ;
+		startLevel(38) ;
 		worldAnswer = new WorldAnswer(world) ;
 	}
 
@@ -104,22 +104,43 @@ public class Model extends Observable implements IModel {
 	public void LorannMoveUP() {
 		this.getWorld().getLorann().moveUp();
 	}
+	
+	public void LorannMoveUP_LEFT() {
+		this.getWorld().getLorann().moveUpLeft();;
+	}
+	
+	public void LorannMoveLEFT() {
+		this.getWorld().getLorann().moveLeft() ;
+	}
+	
+	public void LorannMoveDOWN_LEFT() {
+		this.getWorld().getLorann().moveDownLeft() ;
+	}
 
 	public void LorannMoveDOWN() {
 		this.getWorld().getLorann().moveDown() ;
 	}
-
-	public void LorannMoveLEFT() {
-		this.getWorld().getLorann().moveLeft() ;
+	
+	public void LorannMoveDOWN_RIGHT() {
+		this.getWorld().getLorann().moveDownRight() ;
 	}
 
 	public void LorannMoveRIGHT() {
 		this.getWorld().getLorann().moveRight() ;
 	}
+	
+	public void LorannMoveUP_RIGHT() {
+		this.getWorld().getLorann().moveUpRight();
+	}
 
 	public void getWorldAnswer() {
 	//	this.world.getWorldAnswer();
 		this.getTheWorldAnswer().getWorldAnswer();
+	}
+
+	public void LorannMagicBall() {
+		this.getWorld().getLorann().shootBall();
+		
 	}
 	
 	

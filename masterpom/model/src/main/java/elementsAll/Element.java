@@ -17,9 +17,10 @@ public class Element {
 		return this.sprite ;
 	}
 
-	private void setSprite(final ISprite sprite) {
+	public void setSprite(final ISprite sprite) {
 		this.sprite = sprite;
 	}
+
 
 	public Permeability getPermeability() {
 		return this.permeability;

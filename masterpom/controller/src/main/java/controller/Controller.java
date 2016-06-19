@@ -3,16 +3,16 @@ package controller;
 import contract.IController;
 import contract.IModel;
 import contract.IView;
-import contract.MovementLorann;
+import contract.Movement;
 
 public class Controller implements IController {
 
-	private IView		view;
+//	private IView		view;
 
 	private IModel	model;
 
 	public Controller(final IView view, final IModel model) {
-		this.setView(view);
+//		this.setView(view);
 		this.setModel(model);
 	}
 
@@ -20,31 +20,35 @@ public class Controller implements IController {
 	//	this.view.printMessage("Appuyer sur les touches 'E', 'F', 'D' ou 'I', pour afficher Hello world dans la langue d votre choix.");
 	}
 
-	private void setView(final IView view) {
+/*	private void setView(final IView view) {
 		this.view = view;
-	}
+	}*/
 
 	private void setModel(final IModel model) {
 		this.model = model;
 	}
 
-	public void movementLorann(final MovementLorann controllerOrder) {
-		switch (controllerOrder) {
+	public void movementLorann(final Movement movementOrder) {
+		switch (movementOrder) {
 			case UP:
-				this.model.LorannMoveUP();
-				break;
-			case DOWN:
-				this.model.LorannMoveDOWN();
-				break;
+				this.model.LorannMoveUP();				break;
+			case UP_LEFT:
+				this.model.LorannMoveUP_LEFT();			break;
 			case LEFT:
-				this.model.LorannMoveLEFT();
-				break;
+				this.model.LorannMoveLEFT();			break;
+			case DOWN_LEFT:
+				this.model.LorannMoveDOWN_LEFT();		break;
+			case DOWN:
+				this.model.LorannMoveDOWN();			break;
+			case DOWN_RIGHT:
+				this.model.LorannMoveDOWN_RIGHT();		break;
 			case RIGHT:
-				this.model.LorannMoveRIGHT();
-				break;
-
-			default:
-				break;
+				this.model.LorannMoveRIGHT();			break;
+			case UP_RIGHT:
+				this.model.LorannMoveUP_RIGHT();		break;
+			case SPACE:
+				this.model.LorannMagicBall() ;			break;
+			default:									break;
 		}
 		model.getWorldAnswer();
 	}

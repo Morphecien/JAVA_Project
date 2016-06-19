@@ -13,8 +13,13 @@ public interface IModel {
 	public Image[][] getWorldSprites() ;
 	public Image[][] getMobileSprites() ;
 	public void LorannMoveUP() ;
-	public void LorannMoveDOWN() ;
+	public void LorannMoveUP_LEFT() ;
 	public void LorannMoveLEFT() ;
+	public void LorannMoveDOWN_LEFT();
+	public void LorannMoveDOWN() ;
+	public void LorannMoveDOWN_RIGHT() ;
 	public void LorannMoveRIGHT() ;
+	public void LorannMoveUP_RIGHT() ;
 	public void getWorldAnswer() ;
+	public void LorannMagicBall() ;
 }

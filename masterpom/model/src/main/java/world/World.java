@@ -9,8 +9,6 @@ import elementsAll.Element;
 import elementsMobile.Lorann;
 import elementsMobile.MobileDetermineElement;
 import elementsMobile.MobileElement;
-import elementsMotionless.IElementsActionOnHeroes;
-import elementsMotionless.Itreasures;
 import elementsMotionless.MotionlessDetermineElement;
 import elementsMotionless.MotionlessElement;
 
@@ -56,7 +54,7 @@ public class World extends Observable implements Iworld{
 		return this.lorann ;
 	}
 	
-	public void setHero(final Lorann lorann){
+	public void setLorann(final Lorann lorann){
 		this.lorann = lorann;
 		this.setChanged();
 	}
@@ -99,18 +97,17 @@ public class World extends Observable implements Iworld{
 	}
 
 	public void addMobile(final MobileElement mobile, final int x, final int y) {
-		this.mobiles.add(mobile);
+		this.getMobiles().add(mobile);
 		mobile.setWorld(this, x, y);
 		if (mobile.getFileSymbol() == "Player"){
-			this.lorann = (Lorann) mobile ;
+			this.setLorann((Lorann) mobile ) ;
 		}
 		this.setChanged();
 	//	this.notifyObservers();
 	}
 	
-	public void addMobile(Lorann lorann, int x, int y) {
-		this.lorann = lorann ;
-		this.addMobile((MobileElement) lorann, x, y);
+	public void delMobile(final int indexArrayList){
+		this.getMobiles().remove(indexArrayList) ;
 	}
 	
 	private void loadFile(final int fileNumber){
@@ -137,7 +134,7 @@ public class World extends Observable implements Iworld{
 			}
 			System.out.println();
 		}
-	//	System.out.println();
+		System.out.println();
 		this.setChanged() ;
 	}
 	
@@ -147,71 +144,7 @@ public class World extends Observable implements Iworld{
 	}
 	
 	public void notifyObservers() {
-		System.out.println("Coucou, je notifie ;)");
+		System.out.println("\t\t\t\t\t\t\t\t\t\t\t\tCoucou, je notifie ;)");
 		super.notifyObservers();
-	}
-	
-	public void getWorldAnswer(){
-		final IElementsActionOnHeroes element = this.getElementXY(this.getLorann().getX(), this.getLorann().getY());
-
-		switch (element.getElementActionOnHeroes()) {
-			case COLLECT:
-				System.out.println("COLLECT !!!! (:");
-				this.resolveCollectTreasure((Itreasures) element);
-				break;
-			case NEWLIFE:
-				System.out.println("NEW LIFE !!!! (:");
-				this.resolveObtainNewLife();
-				break;
-			case DIE:
-				System.out.println("DIE !!!! ):");
-				this.resolveLorannDie();
-				break;
-			case UNLOCKS_GATE:
-				System.out.println("GATE --> OPEN !!!! (:");
-				this.resolveUnlocksGate();
-				break;
-			case NOPE:
-			default:
-				break;
-		}
-		worldHasChanged() ;
-	}
-	private void resolveCollectTreasure(Itreasures element){
-	//	System.out.print("score : " + this.getWorld().getLorann().getScore() + " | new ");
-		final int score = this.getLorann().getScore() + element.collectTreasure() ;
-		this.getLorann().setScore(score) ;
-		System.out.println("score : " + this.getLorann().getScore());
-		this.dropElement(this.getLorann().getX(), this.getLorann().getY());
-	}
-	
-	private void resolveObtainNewLife(){
-		System.out.print("Lifes : " + this.getLorann().getLife() + " | new ");
-		final int life = this.getLorann().getLife() + 1 ;
-		this.getLorann().setLife(life) ;
-		System.out.println("Lifes : " + this.getLorann().getLife());
-		this.dropElement(this.getLorann().getX(), this.getLorann().getY());
-	}
-	
-	private void resolveLorannDie(){
-		
-	}
-	
-	private void resolveUnlocksGate(){
-		this.dropElement(this.getLorann().getX(), this.getLorann().getY());
-		searchGate() ;
-	//	afficherWorld() ;
-		System.out.println(this.getElementXY(2, 3).getSprite().getImage());
-		this.worldHasChanged();
-	}
-		
-	private void afficherWorld(){
-		for (int y=0 ; y<12 ; y++){
-			for (int x=0 ; x<20 ; x++){
-				System.out.print(this.getElementXY(x, y).getSprite()) ;
-			}
-			System.out.println() ;
-		}
-		System.out.println(this.getElementXY(2, 3).getSprite().getTest());
-	}
+	}	
 }

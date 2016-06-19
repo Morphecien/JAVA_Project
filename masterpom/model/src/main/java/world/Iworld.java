@@ -17,7 +17,7 @@ public interface Iworld {
 	public Lorann getLorann() ;
 	public void worldHasChanged() ;
 	public void addMobile(MobileElement mobile, int x, int y) ;
-	public void addMobile(Lorann lorann, int x, int y) ;
+	public void delMobile(final int indexArrayList);
 	public void addObserver(Observer o) ;
 	public void dropElement(final int x, final int y);
 	public void dropElement(final MotionlessElement element, final int x, final int y);

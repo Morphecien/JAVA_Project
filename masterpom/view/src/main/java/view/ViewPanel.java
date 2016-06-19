@@ -55,7 +55,7 @@ class ViewPanel extends JPanel implements Observer {
 	}
 
 	public void update(final Observable arg0, final Object arg1) {
-		System.out.print("Tu fais chier !! Bon, j'enlève tout... ") ;
+		System.out.print("\t\t\t\t\t\t\t\t\t\t\t\tTu fais chier !! Bon, j'enlève tout... ") ;
 		this.removeAll();
 		prepareAllJLabels() ;
 	//	prepareALabel() ;
@@ -82,12 +82,12 @@ class ViewPanel extends JPanel implements Observer {
 					allLabels[y][x].setIcon(new ImageIcon(mobileSprites[y][x])) ;
 		//			System.out.print("8");
 				}
-				if(mapSprites[y][x] == mapSprites[0][0] ){
+		/*		if(mapSprites[y][x] == mapSprites[0][0] ){
 					
 				}
 				else{
 		//			System.out.print(" ") ;
-				}
+				}*/
 				gbl.setConstraints(allLabels[y][x], gbc);
 				this.add(allLabels[y][x]) ;
 			}

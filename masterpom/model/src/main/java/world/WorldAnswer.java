@@ -3,12 +3,13 @@ package world;
 import elementsMotionless.*;
 
 public class WorldAnswer {
-	private World world ;
+	private Iworld world ;
+	
 	public WorldAnswer(World world){
 		this.world = world ;
 	}
 	
-	public World getWorld(){
+	public Iworld getWorld(){
 		return this.world ;
 	}
 	
@@ -32,6 +33,10 @@ public class WorldAnswer {
 				System.out.println("GATE --> OPEN !!!! (:");
 				this.resolveUnlocksGate();
 				break;
+			case EXIT:
+				System.out.println("LEVEL --> END !!!! (:");
+				this.resolveEndLevel();
+				break;
 			case NOPE:
 			default:
 				break;
@@ -39,10 +44,10 @@ public class WorldAnswer {
 		this.getWorld().worldHasChanged() ;
 	}
 	private void resolveCollectTreasure(Itreasures element){
-	//	System.out.print("score : " + this.getWorld().getLorann().getScore() + " | new ");
+		System.out.print("score : " + this.getWorld().getLorann().getScore() + " | new ");
 		final int score = this.getWorld().getLorann().getScore() + element.collectTreasure() ;
 		this.getWorld().getLorann().setScore(score) ;
-		System.out.println("score : " + this.getWorld().getLorann().getScore());
+		System.out.println("Score : " + this.getWorld().getLorann().getScore());
 		this.getWorld().dropElement(this.getWorld().getLorann().getX(), this.getWorld().getLorann().getY());
 	}
 	
@@ -61,6 +66,10 @@ public class WorldAnswer {
 	private void resolveUnlocksGate(){
 		this.getWorld().dropElement(this.getWorld().getLorann().getX(), this.getWorld().getLorann().getY());
 		this.getWorld().searchGate() ;
+	}
+	
+	private void resolveEndLevel(){
+		
 	}
 		
 /*	private void afficherWorld(){
