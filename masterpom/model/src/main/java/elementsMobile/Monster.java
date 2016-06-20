@@ -7,23 +7,11 @@ import elementsAll.ISprite;
 import elementsAll.Permeability;
 
 public abstract class Monster extends MobileAuto {
-	private IBehavior IA_behavior ;
-
 	public Monster(ISprite sprite, final String monsterSymbol, final int delayAction) {
 		super(sprite, monsterSymbol, delayAction);
 		this.initialize();
 	}
 	
-	public IBehavior getIA_behavior() {
-		return IA_behavior;
-	}
-
-	public void setIA_behavior(IBehavior IA_behavior) {
-		this.IA_behavior = IA_behavior;
-	}
-	
-	public abstract void initIA() ;
-
 	protected void chooseRandomDirection(){
 		Random rand = new Random() ;
 		final int randMoov = rand.nextInt(9);

@@ -11,6 +11,7 @@ import elementsAll.Permeability;
 
 public abstract class MobileAuto extends MobileElement implements Runnable, ActionListener{
 	private Movement direction ;
+	private IBehavior IA_behavior ;
 
 	public MobileAuto(ISprite sprite, Permeability permea, String fileSymbol) {
 		super(sprite, permea, fileSymbol);
@@ -27,6 +28,16 @@ public abstract class MobileAuto extends MobileElement implements Runnable, Acti
 		super(sprite, fileSymbol);
 		setMoveTimer(new Timer(delay, this));
 		run();
+	}
+	
+	public abstract void initIA() ;
+	
+	public IBehavior getIA_behavior() {
+		return IA_behavior;
+	}
+
+	public void setIA_behavior(IBehavior IA_behavior) {
+		this.IA_behavior = IA_behavior;
 	}
 	
 	public Movement getDirection() {

@@ -5,10 +5,12 @@ public class IA_Bounce extends Behaviors{
 		super(mobile) ;
 	}
 	
-	
-	
 	public void autoMovement() {
-		
+		this.movement();
+		if (this.getMobile().isEndMove() == false){
+			this.inverseDirection(this.getMobile().getDirection());
+			this.movement();
+		}
 	}
 
 }

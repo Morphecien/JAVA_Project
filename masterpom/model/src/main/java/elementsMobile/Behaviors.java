@@ -77,32 +77,54 @@ public abstract class Behaviors implements IBehavior{
 	
 	public void movement(){
 		switch(this.getMobile().getDirection()){
-			case UP : 			getMobile().moveUp();
-								getMobile().isMobileAction(0, -1) ;
+			case UP : 			this.getMobile().moveUp();
+								this.getMobile().isMobileAction(0, -1) ;
 										break ;
-			case UP_LEFT : 		getMobile().moveUpLeft();
-								getMobile().isMobileAction(-1, -1) ;
+			case UP_LEFT : 		this.getMobile().moveUpLeft();
+								this.getMobile().isMobileAction(-1, -1) ;
 										break ;
-			case LEFT : 		getMobile().moveLeft();
-								getMobile().isMobileAction(-1, 0) ;
+			case LEFT : 		this.getMobile().moveLeft();
+								this.getMobile().isMobileAction(-1, 0) ;
 										break ;
-			case DOWN_LEFT : 	getMobile().moveDownLeft();
-								getMobile().isMobileAction(-1, 1) ;
+			case DOWN_LEFT : 	this.getMobile().moveDownLeft();
+								this.getMobile().isMobileAction(-1, 1) ;
 										break ;
-			case DOWN : 		getMobile().moveDown();
-								getMobile().isMobileAction(0, 1) ;
+			case DOWN : 		this.getMobile().moveDown();
+								this.getMobile().isMobileAction(0, 1) ;
 										break ;
-			case DOWN_RIGHT : 	getMobile().moveDownRight();
-								getMobile().isMobileAction(1, 1) ;
+			case DOWN_RIGHT : 	this.getMobile().moveDownRight();
+								this.getMobile().isMobileAction(1, 1) ;
 										break ;
-			case RIGHT : 		getMobile().moveRight();
-								getMobile().isMobileAction(1, 0) ;
+			case RIGHT : 		this.getMobile().moveRight();
+								this.getMobile().isMobileAction(1, 0) ;
 										break ;
-			case UP_RIGHT : 	getMobile().moveUpRight();
-								getMobile().isMobileAction(1, -1) ;
+			case UP_RIGHT : 	this.getMobile().moveUpRight();
+								this.getMobile().isMobileAction(1, -1) ;
 										break ;
-			case NOPE : 	//	System.out.println("C'est bien dommage d'en arriver là : NOPE (Le mobile " + this.getFileSymbol() + " ne connait pas sa direction de déplacement)");
+			case NOPE : 				break ;
+			default : 					break ;
+		}
+	}
+	
+	public void inverseDirection(Movement direction){
+		switch(direction){
+			case UP : 			this.getMobile().setDirection(Movement.DOWN) ;
 										break ;
+			case UP_LEFT : 		this.getMobile().setDirection(Movement.DOWN_RIGHT) ;
+										break ;
+			case LEFT : 		this.getMobile().setDirection(Movement.RIGHT) ;
+										break ;
+			case DOWN_LEFT : 	this.getMobile().setDirection(Movement.UP_RIGHT) ;
+										break ;
+			case DOWN : 		this.getMobile().setDirection(Movement.UP) ;
+										break ;
+			case DOWN_RIGHT : 	this.getMobile().setDirection(Movement.UP_LEFT) ;
+										break ;
+			case RIGHT : 		this.getMobile().setDirection(Movement.LEFT) ;
+										break ;
+			case UP_RIGHT : 	this.getMobile().setDirection(Movement.DOWN_LEFT) ;
+										break ;
+			case NOPE : 				break ;
 			default : 					break ;
 		}
 	}

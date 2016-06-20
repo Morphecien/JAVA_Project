@@ -15,7 +15,7 @@ public class MagicBall extends MobileAuto{
 		super(new Sprite("X", "fireball_5.png"), Permeability.PENETRABLE, "Magicball");
 		prepareSprites() ;
 		this.initialize() ;
-		
+		this.initIA(); ;
 	}
 	
 	private void prepareSprites(){
@@ -54,91 +54,24 @@ public class MagicBall extends MobileAuto{
 		this.spriteNumber = spriteNumber;
 	}
 
-	@Override
+/*	@Override
 	public void movement(){
 		super.movement() ;
-		this.changeSprite();
+	}*/
+	public void initIA(){
+		this.setIA_behavior(new IA_Bounce(this));
 	}
 	
-	public void chooseDirection(){
-		final int xLorann = this.getWorld().getLorann().getX();
-		final int yLorann = this.getWorld().getLorann().getY();
-		final int xMagicBall = this.getX();
-		final int yMagicBall = this.getY();
-		final int xGap = Math.abs(xMagicBall - xLorann);
-		final int yGap = Math.abs(yMagicBall - yLorann);
-		
-		if (yLorann < yMagicBall){			// UP
-			if (xLorann < xMagicBall){			// LEFT
-				if (xGap > yGap*2){					// Choose LEFT
-					this.setDirection(Movement.LEFT) ;
-				}
-				else if (yGap > xGap*2){			// Choose UP
-					this.setDirection(Movement.UP) ;
-				}
-				else{								// Choose UP_LEFT
-					this.setDirection(Movement.UP_LEFT) ;
-				}
-			}
-			else if (xLorann > xMagicBall){		// RIGHT
-				if (xGap > yGap*2){					// Choose RIGHT
-					this.setDirection(Movement.RIGHT) ;
-				}
-				else if (yGap > xGap*2){			// Choose UP
-					this.setDirection(Movement.UP) ;
-				}
-				else{								// Choose UP_RIGHT
-					this.setDirection(Movement.UP_RIGHT) ;
-				}
-			}
-			else{								// X don't change
-				this.setDirection(Movement.UP) ;
-			}
-		}
-		else if (yLorann > yMagicBall){		// DOWN
-			if (xLorann < xMagicBall){			// LEFT
-				if (xGap > yGap*2){					// Choose LEFT
-					this.setDirection(Movement.LEFT) ;
-				}
-				else if (yGap > xGap*2){			// Choose DOWN
-					this.setDirection(Movement.DOWN) ;
-				}
-				else{								// Choose DOWN_LEFT
-					this.setDirection(Movement.DOWN_LEFT) ;
-				}
-			}
-			else if (xLorann > xMagicBall){		// RIGHT
-				if (xGap > yGap*2){					// Choose RIGHT
-					this.setDirection(Movement.RIGHT) ;
-				}
-				else if (yGap > xGap*2){			// Choose DOWN
-					this.setDirection(Movement.DOWN) ;
-				}
-				else{								// Choose DOWN_RIGHT
-					this.setDirection(Movement.DOWN_RIGHT) ;
-				}
-			}
-			else{								// X don't change
-				this.setDirection(Movement.DOWN) ;
-			}
-		}
-		else {								// Y don't change
-			if (xLorann < xMagicBall){			// LEFT
-				this.setDirection(Movement.LEFT) ;
-			}
-			else if (xLorann > xMagicBall){		// RIGHT
-				this.setDirection(Movement.RIGHT) ;
-			}
-			else{								// X don't change
-				this.setDirection(Movement.NOPE) ;
-				System.out.println("C'est pas normal : NOPE sur le choose direction (Magic Ball) de Lorann");
-			}
-		}
+	public void choosePlayerDirection(){
+		this.setIA_behavior(new IA_ChoosePlayerDirection(this));
+		this.autoMovement();
+		this.setIA_behavior(new IA_Bounce(this)) ;
 	}
 
 	@Override
 	public synchronized void autoMovement() {
-		this.movement();
+		this.getIA_behavior().autoMovement();
+		this.changeSprite();
 	}
 	
 	@Override
@@ -189,12 +122,12 @@ public class MagicBall extends MobileAuto{
 				System.out.println("The Magic-ball was pick-up by Lorann : " + mobile.getFileSymbol());
 				this.reinitialize() ;
 			}
-			else{
+		/*	else{
 				this.inverseDirection(this.getDirection());
 				int getSprite = this.getSpriteNumber() ;
 				this.autoMovement();
 				this.setSpriteNumber(getSprite) ;
-			}
+			}*/
 		}
 	}
 }

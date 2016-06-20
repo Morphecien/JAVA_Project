@@ -234,7 +234,7 @@ public class Lorann extends MobileElement implements Runnable, ActionListener{
 			}
 		}
 		else{
-			this.getMagicBall().chooseDirection();
+			this.getMagicBall().choosePlayerDirection();
 		}
 	}
 

@@ -86,9 +86,6 @@ public class World extends Observable implements Iworld{
 	
 	private void addElement(final MotionlessElement element, final int x, final int y){
 		this.elements[x][y] = element ;
-		if (element != null){
-			element.setWorld(this) ;
-		}
 		this.setChanged();
 	}
 	

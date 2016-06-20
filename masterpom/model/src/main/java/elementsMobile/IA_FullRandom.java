@@ -1,18 +1,8 @@
 package elementsMobile;
 
 public class IA_FullRandom extends Behaviors{
-	private Monster monster ;
-	public IA_FullRandom(Monster mobile){
+	public IA_FullRandom(MobileAuto mobile){
 		super((MobileAuto) mobile) ;
-		this.setMonster(mobile);
-	}
-
-	public Monster getMonster() {
-		return monster;
-	}
-
-	public void setMonster(Monster monster) {
-		this.monster = monster;
 	}
 
 	public void autoMovement() {
