@@ -15,7 +15,7 @@ public class MagicBall extends MobileAuto{
 		super(new Sprite("X", "fireball_5.png"), Permeability.PENETRABLE, "Magicball");
 		prepareSprites() ;
 		this.initialize() ;
-		this.initIA(); ;
+		this.initIA();
 	}
 	
 	private void prepareSprites(){
