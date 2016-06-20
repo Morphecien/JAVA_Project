@@ -91,9 +91,18 @@ public abstract class Monster extends MobileAuto {
 				this.getWorld().lorannDie();
 			}
 			else if (indexKillByMagicBall != -1){
-				MobileElement mobile = this.getWorld().getMobiles().get(indexKillByMagicBall) ;					// Kill Lorann
-				System.out.println("A mobile was died : " + mobile.getFileSymbol());
-				this.getWorld().delMobile(indexKillByMagicBall);;
+				int indexThisMobile = -1 ;
+				for (int k = 0 ; k < size ; k++){
+					MobileElement mobile = this.getWorld().getMobiles().get(k) ;
+					if (mobile.getFileSymbol() == this.getFileSymbol()){				// Kill Lorann
+						indexThisMobile = k ;
+					}
+				}
+				if (indexThisMobile !=-1){
+					MobileElement mobile = this.getWorld().getMobiles().get(indexKillPlayer) ;
+					System.out.println("A mobile was died : " + mobile.getFileSymbol());
+					this.getWorld().delMobile(indexKillPlayer);
+				}
 			}
 		}
 	}

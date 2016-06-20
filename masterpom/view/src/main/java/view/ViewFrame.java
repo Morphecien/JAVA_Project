@@ -91,7 +91,7 @@ class ViewFrame extends JFrame implements KeyListener, Runnable, ActionListener 
 	}
 
 	public void printMessage(final String message) {
-		JOptionPane.showMessageDialog(null, message);
+		JOptionPane.showMessageDialog(null, "Coucou c'est moi (:");
 	}
 
 	public void keyTyped(final KeyEvent e) {

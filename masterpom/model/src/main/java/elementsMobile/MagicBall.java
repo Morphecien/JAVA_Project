@@ -135,7 +135,7 @@ public class MagicBall extends MobileAuto{
 			}
 		}
 	}
-	
+
 	@Override
 	public synchronized void autoMovement() {
 		this.movement();

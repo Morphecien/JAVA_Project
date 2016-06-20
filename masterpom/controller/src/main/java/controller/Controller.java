@@ -7,23 +7,23 @@ import contract.Movement;
 
 public class Controller implements IController, Runnable {
 
-//	private IView		view;
+	private IView		view;
 
 	private IModel	model;
 
 	public Controller(final IView view, final IModel model) {
-//		this.setView(view);
+		this.setView(view);
 		this.setModel(model);
 		this.run() ;
 	}
 
 	public void control() {
-	//	this.view.printMessage("Appuyer sur les touches 'E', 'F', 'D' ou 'I', pour afficher Hello world dans la langue d votre choix.");
+	//	this.view.printMessage("yo");
 	}
 
-/*	private void setView(final IView view) {
+	private void setView(final IView view) {
 		this.view = view;
-	}*/
+	}
 
 	private void setModel(final IModel model) {
 		this.model = model;

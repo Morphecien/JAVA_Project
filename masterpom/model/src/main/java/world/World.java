@@ -20,14 +20,25 @@ public class World extends Observable implements Iworld{
 	private final int height = 12;
 	private Lorann lorann ;
 	private MainDAO mainDAO ;
+	private int level ;
+	private final static int MAXLEVEL = 101 ;
 	
 	public World(final int fileNumber){
 		this.mobiles = new ArrayList<MobileElement>() ;
 		this.mainDAO = new MainDAO() ;
 		this.elements = new MotionlessElement[this.getWidth()][this.getHeight()];
-		this.loadFile(fileNumber) ;
+		this.setLevel(fileNumber);
+		this.loadFile() ;
 	}
 	
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
 	public int getWidth() {
 		return this.width;
 	}
@@ -117,9 +128,9 @@ public class World extends Observable implements Iworld{
 		
 	}
 	
-	private void loadFile(final int fileNumber){
+	private void loadFile(){
 		int z = 0 ;
-		Map mappe = mainDAO.loadMap(fileNumber);
+		Map mappe = mainDAO.loadMap(this.getLevel());
 		for (int y = 0 ; y<this.getHeight() ; y++){
 			for (int x = 0 ; x<this.getWidth() ; x++){
 				this.addElement(MotionlessDetermineElement.getFromFileSymbol(mappe.getMap()[y][x]), x, y);
@@ -166,7 +177,26 @@ public class World extends Observable implements Iworld{
 			}
 		}
 		this.delMobile(indexKillPlayer);
+		this.getLorann().setLife(this.getLorann().getLife() -1);
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		this.loadFile();
+	}
+	
+	public void mobileStarts(){
 		
-		
+	}
+	
+	public void endLevel(){
+		if (this.getLevel() < MAXLEVEL){
+			this.setLevel(getLevel()+1);
+			this.loadFile();
+		}
+		else{
+			System.out.println("");
+		}
 	}
 }
