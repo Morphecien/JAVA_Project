@@ -155,8 +155,10 @@ public class MagicBall extends MobileAuto{
 	
 	@Override
 	public void reinitialize(){
+		if (this.isActive()){
+			this.deleteObject();
+		}
 		this.initialize();
-		this.deleteObject();
 	}
 
 	@Override

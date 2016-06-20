@@ -167,6 +167,8 @@ public class World extends Observable implements Iworld{
 	}
 	
 	public void lorannDie(){
+		this.getLorann().getMagicBall().reinitialize();
+		this.getLorann().setLife(this.getLorann().getLife() -1);
 		final int size = this.getMobiles().size() ;
 		int indexKillPlayer = -1 ;
 		for (int k = 0 ; k < size ; k++){
@@ -176,11 +178,9 @@ public class World extends Observable implements Iworld{
 				indexKillPlayer = k ;
 			}
 		}
-		this.getLorann().getMagicBall().reinitialize();
 		this.delMobile(indexKillPlayer);
-		this.getLorann().setLife(this.getLorann().getLife() -1);
 		try {
-			Thread.sleep(4000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
