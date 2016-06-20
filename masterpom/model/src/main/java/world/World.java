@@ -176,6 +176,7 @@ public class World extends Observable implements Iworld{
 				indexKillPlayer = k ;
 			}
 		}
+		this.getLorann().getMagicBall().reinitialize();
 		this.delMobile(indexKillPlayer);
 		this.getLorann().setLife(this.getLorann().getLife() -1);
 		try {

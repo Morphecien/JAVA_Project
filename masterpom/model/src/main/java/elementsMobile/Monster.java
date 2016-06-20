@@ -99,9 +99,9 @@ public abstract class Monster extends MobileAuto {
 					}
 				}
 				if (indexThisMobile !=-1){
-					MobileElement mobile = this.getWorld().getMobiles().get(indexKillPlayer) ;
+					MobileElement mobile = this.getWorld().getMobiles().get(indexThisMobile) ;
 					System.out.println("A mobile was died : " + mobile.getFileSymbol());
-					this.getWorld().delMobile(indexKillPlayer);
+					this.getWorld().delMobile(indexThisMobile);
 				}
 			}
 		}
