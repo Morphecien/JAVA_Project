@@ -9,19 +9,12 @@ public class Cargyv extends Monster {
 		
 	}
 
-	public void movement() {
-		
+	public void initIA(){
+		this.setIA_behavior(new IA_FullRandom(this));
 	}
 
 	@Override
 	public synchronized void autoMovement() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void initIA() {
-		// TODO Auto-generated method stub
-		
+		this.getIA_behavior().autoMovement();
 	}
 }

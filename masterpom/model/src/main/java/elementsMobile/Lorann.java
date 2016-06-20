@@ -251,14 +251,14 @@ public class Lorann extends MobileElement implements Runnable, ActionListener{
 				for (int k = 0 ; k < size ; k++){
 					MobileElement mobile = this.getWorld().getMobiles().get(k) ;
 					if (((mobile.getX() == (this.getX() + xDirection)) && (mobile.getY() == (this.getY() + yDirection))) && (mobile.getFileSymbol() != "Magicball")){
-						System.out.println("Lorann was died by " + mobile.getFileSymbol());
+						System.out.println("Lorann was died (Lorann event) by " + mobile.getFileSymbol());
 						lorannDie = true ;
 					}
 				}
 			//	System.out.println("x : " + );
 				if (lorannDie){this.getWorld().lorannDie();}
 				else if (this.getWorld().getElementXY(this.getX() + xDirection, this.getY() + yDirection).getElementActionOnHeroes() == MotionlessDetermineElement.GRAVE.getElementActionOnHeroes()){
-					System.out.println("Lorann was died by a " + this.getWorld().getElementXY(this.getX() + xDirection, this.getY() + yDirection).getFileSymbol());
+					System.out.println("Lorann was died (Lorann event) by a " + this.getWorld().getElementXY(this.getX() + xDirection, this.getY() + yDirection).getFileSymbol());
 					this.getWorld().lorannDie() ;
 				}
 				else if (this.getWorld().getElementXY(this.getX() + xDirection, this.getY() + yDirection).getElementActionOnHeroes() == MotionlessDetermineElement.BLOC.getElementActionOnHeroes()){
@@ -270,7 +270,7 @@ public class Lorann extends MobileElement implements Runnable, ActionListener{
 				for (int k = 0 ; k < size ; k++){
 					MobileElement mobile = this.getWorld().getMobiles().get(k) ;
 					if (((mobile.getX() == (this.getX())) && (mobile.getY() == (this.getY()))) && (mobile.getFileSymbol() == "Magicball")){
-						System.out.println("Lorann pick up the Magic Ball : " + mobile.getFileSymbol());
+						System.out.println("Lorann pick up the Magic Ball (Lorann event) : " + mobile.getFileSymbol());
 						this.getMagicBall().reinitialize() ;
 					}
 				}

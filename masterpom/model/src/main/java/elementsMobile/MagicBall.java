@@ -113,21 +113,15 @@ public class MagicBall extends MobileAuto{
 			}
 			if (indexKill !=-1){
 				MobileElement mobile = this.getWorld().getMobiles().get(indexKill) ;					// Kill Monster
-				System.out.println("A mobile was died : " + mobile.getFileSymbol());
+				System.out.println("A mobile was died (Magic-ball event) : " + mobile.getFileSymbol());
 				this.deleteObject(mobile);
 				this.reinitialize() ;
 			}
 			else if (indexPickUpPlayer != -1){
 				MobileElement mobile = this.getWorld().getMobiles().get(indexPickUpPlayer) ;			// Pick up by Lorann
-				System.out.println("The Magic-ball was pick-up by Lorann : " + mobile.getFileSymbol());
+				System.out.println("The Magic-ball was pick-up by Lorann (Magic-ball event) : " + mobile.getFileSymbol());
 				this.reinitialize() ;
 			}
-		/*	else{
-				this.inverseDirection(this.getDirection());
-				int getSprite = this.getSpriteNumber() ;
-				this.autoMovement();
-				this.setSpriteNumber(getSprite) ;
-			}*/
 		}
 	}
 }

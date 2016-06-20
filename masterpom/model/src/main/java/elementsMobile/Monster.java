@@ -75,7 +75,7 @@ public abstract class Monster extends MobileAuto {
 			}
 			if (indexKillPlayer !=-1){
 				MobileElement mobile = this.getWorld().getMobiles().get(indexKillPlayer) ;					// Kill Lorann
-				System.out.println("A mobile was died : " + mobile.getFileSymbol());
+				System.out.println("A mobile was died (Monster event) : " + mobile.getFileSymbol());
 				this.getWorld().lorannDie();
 			}
 			else if (indexKillByMagicBall != -1){
@@ -88,7 +88,7 @@ public abstract class Monster extends MobileAuto {
 				}
 				if (indexThisMobile !=-1){
 					MobileElement mobile = this.getWorld().getMobiles().get(indexThisMobile) ;
-					System.out.println("A mobile was died : " + mobile.getFileSymbol());
+					System.out.println("A mobile was died (Monster event) : " + mobile.getFileSymbol());
 					this.getWorld().delMobile(indexThisMobile);
 					this.getWorld().getLorann().getMagicBall().reinitialize();
 				}
