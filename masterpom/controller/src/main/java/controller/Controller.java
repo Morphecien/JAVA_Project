@@ -4,35 +4,55 @@ import contract.IController;
 import contract.IModel;
 import contract.IView;
 import contract.Movement;
-
+/**
+ * 
+ * @author Asus
+ *
+ */
 public class Controller implements IController, Runnable {
 
 	private IView		view;
 
 	private IModel	model;
-
+/**
+ * 
+ * @param view
+ * @param model
+ */
 	public Controller(final IView view, final IModel model) {
 		this.setView(view);
 		this.setModel(model);
 		this.run() ;
 	}
-
+/**
+ * 
+ */
 	public void control() {
 	//	this.view.printMessage("yo");
 	}
-
+/**
+ * 
+ * @param view
+ */
 	private void setView(final IView view) {
 		this.view = view;
 	}
-
+/**
+ * 
+ * @param model
+ */
 	private void setModel(final IModel model) {
 		this.model = model;
 	}
-	
+	/**
+	 * 
+	 */
 	public void run(){
 		
 	}
-
+/**
+ * 
+ */
 	public void movementLorann(final Movement movementOrder) {
 		switch (movementOrder) {
 			case UP:

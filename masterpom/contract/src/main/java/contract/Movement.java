@@ -1,5 +1,9 @@
 package contract;
-
+/**
+ * 
+ * @author Asus
+ *
+ */
 public enum Movement {
 	UP,
 	UP_LEFT,

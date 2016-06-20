@@ -12,7 +12,11 @@ import elementsMobile.MobileElement;
 import elementsMobile.Monster;
 import elementsMotionless.MotionlessDetermineElement;
 import elementsMotionless.MotionlessElement;
-
+/**
+ * 
+ * @author Asus
+ *
+ */
 public class World extends Observable implements Iworld{
 	private MotionlessElement[][] elements ;
 	private final ArrayList<MobileElement> mobiles ;
@@ -22,7 +26,10 @@ public class World extends Observable implements Iworld{
 	private MainDAO mainDAO ;
 	private int level ;
 	private final static int MAXLEVEL = 101 ;
-	
+	/**
+	 * 
+	 * @param fileNumber
+	 */
 	public World(final int fileNumber){
 		this.mobiles = new ArrayList<MobileElement>() ;
 		this.mainDAO = new MainDAO() ;
@@ -30,65 +37,101 @@ public class World extends Observable implements Iworld{
 		this.setLevel(fileNumber);
 		this.loadFile() ;
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getLevel() {
 		return level;
 	}
-
+/**
+ * 
+ * @param level
+ */
 	public void setLevel(int level) {
 		this.level = level;
 	}
-
+/**
+ * 
+ */
 	public int getWidth() {
 		return this.width;
 	}
-
+/**
+ * 
+ */
 	public int getHeight() {
 		return this.height;
 	}
-	
+	/**
+	 * 
+	 */
 	public Element[][] getElements(){
 		return this.elements ;
 	}
-	
+	/**
+	 * 
+	 */
 	public ArrayList<MobileElement> getMobiles(){
 		return this.mobiles ;
 	}
-	
+	/**
+	 * 
+	 */
 	public MotionlessElement getElementXY(final int x, final int y){
 		if ((x < 0) || (y < 0) || (x >= this.getWidth()) || (y >= this.getHeight())){
 			return null ;
 		}
 		return this.elements[x][y] ;
 	}
-	
+	/**
+	 * 
+	 */
 	public Lorann getLorann(){
 		return this.lorann ;
 	}
-	
+	/**
+	 * 
+	 * @param lorann
+	 */
 	public void setLorann(final Lorann lorann){
 		this.lorann = lorann;
 		this.setChanged();
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public Observable getObservable() {
 		return this;
 	}
-	
+/**
+ * 
+ */
 	public void dropElement(final int x, final int y){
 		this.addElement(MotionlessDetermineElement.getFromFileSymbol(" "), x, y);
 		this.setChanged();
 	}
-	
+	/**
+	 * 
+	 */
 	public void dropElement(final MotionlessElement element, final int x, final int y){
 		this.addElement(element, x, y);
 		this.setChanged();
 	}
-	
+	/**
+	 * 
+	 * @param element
+	 * @param x
+	 * @param y
+	 */
 	private void addElement(final MotionlessElement element, final int x, final int y){
 		this.elements[x][y] = element ;
 		this.setChanged();
 	}
-	
+	/**
+	 * 
+	 */
 	public void searchGate(){
 		for (int y = 0 ; y<this.getHeight() ; y++){
 			for (int x = 0 ; x<this.getWidth() ; x++){
@@ -104,7 +147,9 @@ public class World extends Observable implements Iworld{
 		this.setChanged();
 	//	this.notifyObservers();
 	}
-
+/**
+ * 
+ */
 	public void addMobile(final MobileElement mobile, final int x, final int y) {
 		this.getMobiles().add(mobile);
 		mobile.setWorld(this, x, y);
@@ -118,13 +163,17 @@ public class World extends Observable implements Iworld{
 		this.setChanged();
 	//	this.notifyObservers();
 	}
-	
+	/**
+	 * 
+	 */
 	public void delMobile(final int indexArrayList){
 		this.getMobiles().get(indexArrayList).setActive(false);
 		this.getMobiles().remove(indexArrayList) ;
 		
 	}
-	
+	/**
+	 * 
+	 */
 	private void loadFile(){
 		int z = 0 ;
 		Map mappe = mainDAO.loadMap(this.getLevel());
@@ -152,17 +201,23 @@ public class World extends Observable implements Iworld{
 		System.out.println();
 		this.setChanged() ;
 	}
-	
+	/**
+	 * 
+	 */
 	public void worldHasChanged() {
 		this.setChanged();
 		this.notifyObservers();
 	}
-	
+	/**
+	 * 
+	 */
 	public void notifyObservers() {
 	//	System.out.println("\t\t\t\t\t\t\t\t\t\t\t\tCoucou, je notifie ;)");
 		super.notifyObservers();
 	}
-	
+	/**
+	 * 
+	 */
 	public void lorannDie(){
 		this.getLorann().getMagicBall().reinitialize();
 		this.getLorann().setLife(this.getLorann().getLife() -1);
@@ -183,11 +238,15 @@ public class World extends Observable implements Iworld{
 		}
 		this.loadFile();
 	}
-	
+	/**
+	 * 
+	 */
 	public void mobileStarts(){
 		
 	}
-	
+	/**
+	 * 
+	 */
 	public void endLevel(){
 		if (this.getLevel() < MAXLEVEL){
 			this.setLevel(getLevel()+1);

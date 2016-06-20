@@ -2,7 +2,11 @@ package contract;
 
 import java.awt.Image;
 import java.util.Observable;
-
+/**
+ * 
+ * @author Asus
+ *
+ */
 public interface IModel {
 
 	public String getMessage();

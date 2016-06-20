@@ -9,14 +9,27 @@ import contract.IModel;
 import contract.IView;
 import contract.Movement;
 
+/**
+ * 
+ * @author Asus
+ *
+ */
 public class View implements IView, Runnable {
 	private final ViewFrame viewFrame;
-
+/**
+ * 
+ * @param model
+ */
 	public View(final IModel model) {
 		this.viewFrame = new ViewFrame(model);
 		SwingUtilities.invokeLater(this);
 	}
-
+/**
+ * 
+ * @param keyCode1
+ * @param keyCode2
+ * @return
+ */
 	protected static Movement keyCodeToControllerMovement(final int keyCode1, final int keyCode2) {
 		
 		switch (keyCode1) {
@@ -38,6 +51,7 @@ public class View implements IView, Runnable {
 					case KeyEvent.VK_DOWN : return Movement.DOWN_LEFT;
 					default : return Movement.LEFT;
 				}
+				
 			case KeyEvent.VK_RIGHT:
 				switch(keyCode2){
 					case KeyEvent.VK_UP : return Movement.UP_RIGHT;
@@ -50,15 +64,22 @@ public class View implements IView, Runnable {
 				return Movement.NOPE;
 		}
 	}
-
+/**
+ * 
+ */
 	public void printMessage(final String message) {
 		this.viewFrame.printMessage(message);
 	}
-
+/**
+ * 
+ */
 	public void run() {
 		this.viewFrame.setVisible(true);
 	}
-
+/**
+ * 
+ * @param controller
+ */
 	public void setController(final IController controller) {
 		this.viewFrame.setController(controller);
 	}

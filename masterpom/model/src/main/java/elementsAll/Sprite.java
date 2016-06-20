@@ -5,7 +5,11 @@ import java.io.IOException;
 import java.io.StringWriter;
 
 import javax.imageio.ImageIO;
-
+/**
+ * 
+ * @author Asus
+ *
+ */
 public class Sprite extends StringWriter implements ISprite{
 	private Image image ;
 	private String c ;
@@ -20,11 +24,15 @@ public class Sprite extends StringWriter implements ISprite{
 			e.printStackTrace();
 		}
 	}
-
+/**
+ * 
+ */
 	public Image getImage() {
 		return this.image;
 	}
-
+/**
+ * 
+ */
 	public void getSymbol(){
 		System.out.print(c);
 	}

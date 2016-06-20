@@ -2,17 +2,29 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-
+/**
+ * 
+ * @author Asus
+ *
+ */
 public class DAOCreateAllMap {
 	private final Connection connection;
 	private final MapProperties mapProperties ;
 	DAOCreateAMap oneMap ;
-	
+	/**
+	 * 
+	 * @param connection
+	 * @throws SQLException
+	 */
 	public DAOCreateAllMap(Connection connection) throws SQLException {
 		this.connection = connection ;
 		this.mapProperties = new MapProperties() ;
 	}
-	
+	/**
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
 	boolean createAll() throws SQLException{
 		boolean allStatement = true ;
 		boolean oneStatement = false ;
@@ -30,7 +42,12 @@ public class DAOCreateAllMap {
 		}
 		return allStatement;
 	}
-	
+	/**
+	 * 
+	 * @param levelNumber
+	 * @return
+	 * @throws SQLException
+	 */
 	private boolean createOne(int levelNumber) throws SQLException{
 		String accessFile = "" ;
 		accessFile = this.mapProperties.getAccess() + accessLevel(levelNumber) + this.mapProperties.getTerminaison() ;
@@ -45,7 +62,11 @@ public class DAOCreateAllMap {
 			return false ;
 		}
 	}
-	
+	/**
+	 * 
+	 * @param numberLevel
+	 * @return
+	 */
 	private String accessLevel(int numberLevel){
 		if (numberLevel < 10){
 			return "00" + numberLevel ;

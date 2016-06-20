@@ -11,7 +11,11 @@ import java.util.Observer;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+/**
+ * 
+ * @author Asus
+ *
+ */
 class ViewPanel extends JPanel implements Observer {
 	private ViewFrame					viewFrame;
 	private static final long	serialVersionUID	= -998294702363713521L;
@@ -23,7 +27,10 @@ class ViewPanel extends JPanel implements Observer {
 	private GridBagLayout gbl;
 	JLabel[][] allLabels = new JLabel[12][20] ;
 	private static Dimension MAPDIMENSION = new Dimension(692, 428);
-
+/**
+ * 
+ * @param viewFrame
+ */
 	public ViewPanel(final ViewFrame viewFrame) {
 		this.setViewFrame(viewFrame);
 		viewFrame.getModel().getObservable().addObserver(this);
@@ -38,22 +45,32 @@ class ViewPanel extends JPanel implements Observer {
 		this.mapSprites = this.getViewFrame().getModel().getWorldSprites() ;
 		prepareAllJLabels() ;
 	}
-
+/**
+ * 
+ */
 	private void initGBC(){
 		gbc.gridx = 0 ;
 		gbc.gridy = 0 ;
 		gbc.gridheight = 1 ;
 		gbc.gridwidth = 1 ;
 	}
-
+/**
+ * 
+ * @return
+ */
 	private ViewFrame getViewFrame() {
 		return this.viewFrame;
 	}
-
+/**
+ * 
+ * @param viewFrame
+ */
 	private void setViewFrame(final ViewFrame viewFrame) {
 		this.viewFrame = viewFrame;
 	}
-
+/**
+ * 
+ */
 	public void update(final Observable arg0, final Object arg1) {
 	//	System.out.print("\t\t\t\t\t\t\t\t\t\t\t\tTu fais chier !! Bon, j'enlève tout... ") ;
 		this.removeAll();
@@ -66,7 +83,9 @@ class ViewPanel extends JPanel implements Observer {
 		JLabel lab = new JLabel() ;
 		System.out.println(mapSprites[3][2]);
 	}*/
-	
+	/**
+	 * 
+	 */
 	private void prepareAllJLabels(){
 		JLabel[][] allLabels = new JLabel[mapHeight][mapWidth] ;
 		this.mapSprites = this.getViewFrame().getModel().getWorldSprites() ;
@@ -99,7 +118,9 @@ class ViewPanel extends JPanel implements Observer {
 		this.repaint();
 	//	System.out.println("Et je repaint ;)");
 	}
-	
+	/**
+	 * 
+	 */
 	@Override
 	protected void paintComponent(final Graphics graphics) {
 		

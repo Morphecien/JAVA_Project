@@ -4,20 +4,34 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+/**
+ * 
+ * @author Asus
+ *
+ */
 public class DAOCreateAllLevel {
 	private final Connection connection;
 	private final MapProperties mapProperties ;
-	
+	/**
+	 * 
+	 * @param connection
+	 * @throws SQLException
+	 */
 	public DAOCreateAllLevel(Connection connection) throws SQLException {
 		this.connection = connection ;
 		this.mapProperties = new MapProperties() ;
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	private Connection getConnection(){
 		return this.connection ;
 	}
-
+/**
+ * 
+ * @return
+ */
 	boolean insertAllLevel(){
 		try {
 			String sqlSelect = "{CALL selectLevel (?)}" ;

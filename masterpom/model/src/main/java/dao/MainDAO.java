@@ -1,14 +1,22 @@
 package dao;
 
 import java.sql.SQLException;
-
+/**
+ * 
+ * @author Asus
+ *
+ */
 public class MainDAO{
 	DAOMap daoMap;
-	
+	/**
+	 * 
+	 */
 	public MainDAO() {
 		createMaps() ;
 	}
-	
+	/**
+	 * 
+	 */
 	private void createMaps(){
 		try {
 			this.daoMap = new DAOMap(DBConnection.getInstance().getConnection());
@@ -17,13 +25,20 @@ public class MainDAO{
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * 
+	 * @param level
+	 * @return
+	 */
 	public Map loadMap(int level){
 		Map mappe = this.daoMap.find(level);
 		viewMapConsole(mappe) ;
 		return mappe ;
 	}
-	
+	/**
+	 * 
+	 * @param mappe
+	 */
 	private void viewMapConsole(Map mappe){
 		for (int loop = 0 ; loop<12 ; loop++){
 			for (int liip = 0 ; liip<20 ; liip++){
