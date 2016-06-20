@@ -103,7 +103,7 @@ public class World extends Observable implements Iworld{
 		if (mobile.getFileSymbol() == "Player"){
 			this.setLorann((Lorann) mobile ) ;
 		}
-		else if (mobile.getFileSymbol() != "Magic-Ball"){
+		else if (mobile.getFileSymbol() != "Magicball"){
 			((Monster) mobile).initIA();
 		}
 		mobile.setActive(true);
@@ -153,5 +153,20 @@ public class World extends Observable implements Iworld{
 	public void notifyObservers() {
 	//	System.out.println("\t\t\t\t\t\t\t\t\t\t\t\tCoucou, je notifie ;)");
 		super.notifyObservers();
-	}	
+	}
+	
+	public void lorannDie(){
+		final int size = this.getMobiles().size() ;
+		int indexKillPlayer = -1 ;
+		for (int k = 0 ; k < size ; k++){
+			MobileElement mobile = this.getMobiles().get(k) ;
+			mobile.setActive(false) ;
+			if (mobile.getFileSymbol() == "Player"){
+				indexKillPlayer = k ;
+			}
+		}
+		this.delMobile(indexKillPlayer);
+		
+		
+	}
 }

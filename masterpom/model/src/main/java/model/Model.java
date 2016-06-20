@@ -19,7 +19,7 @@ public class Model extends Observable implements IModel {
 	
 	public Model() {
 		this.message = "" ;
-		startLevel(1) ;
+		startLevel(2) ;
 		worldAnswer = new WorldAnswer(world) ;
 	}
 

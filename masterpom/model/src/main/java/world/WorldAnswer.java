@@ -25,10 +25,6 @@ public class WorldAnswer {
 				System.out.println("NEW LIFE !!!! (:");
 				this.resolveObtainNewLife();
 				break;
-			case DIE:
-				System.out.println("DIE !!!! ):");
-				this.resolveLorannDie();
-				break;
 			case UNLOCKS_GATE:
 				System.out.println("GATE --> OPEN !!!! (:");
 				this.resolveUnlocksGate();
@@ -57,10 +53,6 @@ public class WorldAnswer {
 		this.getWorld().getLorann().setLife(life) ;
 		System.out.println("Lifes : " + this.getWorld().getLorann().getLife());
 		this.getWorld().dropElement(this.getWorld().getLorann().getX(), this.getWorld().getLorann().getY());
-	}
-	
-	private void resolveLorannDie(){
-		
 	}
 	
 	private void resolveUnlocksGate(){

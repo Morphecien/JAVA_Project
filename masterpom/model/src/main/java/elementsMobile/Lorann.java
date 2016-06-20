@@ -63,7 +63,7 @@ public class Lorann extends MobileElement implements Runnable, ActionListener{
 		else{
 			this.setSpriteNumber(0) ;
 		}
-		this.setSprite(this.getSprites().get(getSpriteNumber()));
+		this.setSprite(this.getSprites().get(this.getSpriteNumber()));
 	}
 	
 	private void changeSprite(final int idSprite){
@@ -113,7 +113,7 @@ public class Lorann extends MobileElement implements Runnable, ActionListener{
 	
 	@Override
 	protected void movePossible(final int x, final int y){
-		if (((x>=0) && (x < this.getWorld().getWidth())) && ((y>=0) && (y < this.getWorld().getHeight()))){
+		if ((((x>=0) && (x < this.getWorld().getWidth())) && ((y>=0) && (y < this.getWorld().getHeight()))) && (this.isActive())){
 			Permeability permeabilityMotionless = this.getWorld().getElementXY(x, y).getPermeabilityLorann() ;
 			Permeability permeabilityMobile = Permeability.PENETRABLE;
 			int size = this.getWorld().getMobiles().size() ;
@@ -127,7 +127,7 @@ public class Lorann extends MobileElement implements Runnable, ActionListener{
 					permeabilityMobile = mobile2.getPermeabilityLorann() ;
 				}
 			}
-			System.out.println(this.getFileSymbol() + " : " + permeabilityMotionless + " | " + permeabilityMobile);
+	//		System.out.println(this.getFileSymbol() + " : " + permeabilityMotionless + " | " + permeabilityMobile);
 			if ((permeabilityMotionless != Permeability.BLOCKING) && (permeabilityMobile != Permeability.BLOCKING)){
 				setEndMove(true) ;
 			}
@@ -216,14 +216,14 @@ public class Lorann extends MobileElement implements Runnable, ActionListener{
 		if (this.getMagicBall().isActive() == false){
 			boolean possible = false ;
 			switch(this.getLastMoov()){
-				case UP : 			if (this.getWorld().getElementXY(this.getX(), this.getY() -1) == (MotionlessElement) MotionlessDetermineElement.NOTHING){ possible = true ;} break ;
-				case UP_LEFT : 		if (this.getWorld().getElementXY(this.getX()-1, this.getY() -1) == (MotionlessElement) MotionlessDetermineElement.NOTHING){ possible = true ;} break ;
-				case LEFT : 		if (this.getWorld().getElementXY(this.getX()-1, this.getY()) == (MotionlessElement) MotionlessDetermineElement.NOTHING){ possible = true ;} break ;
-				case DOWN_LEFT : 	if (this.getWorld().getElementXY(this.getX()-1, this.getY() +1) == (MotionlessElement) MotionlessDetermineElement.NOTHING){ possible = true ;} break ;
-				case DOWN : 		if (this.getWorld().getElementXY(this.getX(), this.getY() +1) == (MotionlessElement) MotionlessDetermineElement.NOTHING){ possible = true ;} break ;
-				case DOWN_RIGHT : 	if (this.getWorld().getElementXY(this.getX()+1, this.getY() +1) == (MotionlessElement) MotionlessDetermineElement.NOTHING){ possible = true ;} break ;
-				case RIGHT : 		if (this.getWorld().getElementXY(this.getX()+1, this.getY()) == (MotionlessElement) MotionlessDetermineElement.NOTHING){ possible = true ;} break ;
-				case UP_RIGHT : 	if (this.getWorld().getElementXY(this.getX()+1, this.getY() -1) == (MotionlessElement) MotionlessDetermineElement.NOTHING){ possible = true ;} break ;
+				case UP : 			if (this.getWorld().getElementXY(this.getX(), this.getY() +1) == (MotionlessElement) MotionlessDetermineElement.NOTHING){ possible = true ;} break ;
+				case UP_LEFT : 		if (this.getWorld().getElementXY(this.getX()+1, this.getY() +1) == (MotionlessElement) MotionlessDetermineElement.NOTHING){ possible = true ;} break ;
+				case LEFT : 		if (this.getWorld().getElementXY(this.getX()+1, this.getY()) == (MotionlessElement) MotionlessDetermineElement.NOTHING){ possible = true ;} break ;
+				case DOWN_LEFT : 	if (this.getWorld().getElementXY(this.getX()+1, this.getY() -1) == (MotionlessElement) MotionlessDetermineElement.NOTHING){ possible = true ;} break ;
+				case DOWN : 		if (this.getWorld().getElementXY(this.getX(), this.getY() -1) == (MotionlessElement) MotionlessDetermineElement.NOTHING){ possible = true ;} break ;
+				case DOWN_RIGHT : 	if (this.getWorld().getElementXY(this.getX()-1, this.getY() -1) == (MotionlessElement) MotionlessDetermineElement.NOTHING){ possible = true ;} break ;
+				case RIGHT : 		if (this.getWorld().getElementXY(this.getX()-1, this.getY()) == (MotionlessElement) MotionlessDetermineElement.NOTHING){ possible = true ;} break ;
+				case UP_RIGHT : 	if (this.getWorld().getElementXY(this.getX()-1, this.getY() +1) == (MotionlessElement) MotionlessDetermineElement.NOTHING){ possible = true ;} break ;
 				case NOPE : 	//	System.out.println("C'est bien dommage d'en arriver là : NOPE (Le mobile " + this.getFileSymbol() + " ne connait pas sa direction de déplacement)");
 									break ;
 				default : 					break ;
@@ -245,15 +245,25 @@ public class Lorann extends MobileElement implements Runnable, ActionListener{
 	@Override
 	protected void isMobileAction(final int xDirection, final int yDirection) {			// Lorann Die and Pick up Magic Ball
 		int size = this.getWorld().getMobiles().size() ;
-		if (this.isEndMove() == false){
+		if ((this.isEndMove() == false) && (this.isActive() == true)){
+			boolean lorannDie = false ;
 			for (int k = 0 ; k < size ; k++){
 				MobileElement mobile = this.getWorld().getMobiles().get(k) ;
 				if (((mobile.getX() == (this.getX() + xDirection)) && (mobile.getY() == (this.getY() + yDirection))) && (mobile.getFileSymbol() != "Magicball")){
 					System.out.println("Lorann was died by " + mobile.getFileSymbol());
+					lorannDie = true ;
 				}
 			}
+			if (lorannDie){this.getWorld().lorannDie();}
+			else if (this.getWorld().getElementXY(this.getX() + xDirection, this.getY() + yDirection).getElementActionOnHeroes() == MotionlessDetermineElement.GRAVE.getElementActionOnHeroes()){
+				System.out.println("Lorann was died by a " + this.getWorld().getElementXY(this.getX() + xDirection, this.getY() + yDirection).getFileSymbol());
+				this.getWorld().lorannDie() ;
+			}
+			else if (this.getWorld().getElementXY(this.getX() + xDirection, this.getY() + yDirection).getElementActionOnHeroes() == MotionlessDetermineElement.BLOC.getElementActionOnHeroes()){
+				System.out.println("Lorann push a " + this.getWorld().getElementXY(this.getX() + xDirection, this.getY() + yDirection).getFileSymbol());
+			}
 		}
-		else{
+		else if (this.isActive()){
 			for (int k = 0 ; k < size ; k++){
 				MobileElement mobile = this.getWorld().getMobiles().get(k) ;
 				if (((mobile.getX() == (this.getX())) && (mobile.getY() == (this.getY()))) && (mobile.getFileSymbol() == "Magicball")){

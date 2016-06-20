@@ -145,14 +145,6 @@ public abstract class MobileElement extends Element implements Runnable, ActionL
 	
 	protected abstract void isMobileAction(final int xDirection, final int yDirection) ;
 	
-	public void lorannDie(){
-		final int size = this.getWorld().getMobiles().size() ;
-		for (int k = 0 ; k < size ; k++){
-			MobileElement mobile = this.getWorld().getMobiles().get(k) ;
-			mobile.setActive(false) ;
-		}
-	}
-	
 	protected Timer getMoveTimer(){
 		return this.timer ;
 	}

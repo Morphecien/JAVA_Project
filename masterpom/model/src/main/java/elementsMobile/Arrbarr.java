@@ -14,7 +14,7 @@ public class Arrbarr extends Monster {
 	}
 
 	@Override
-	public void autoMovement() {
+	public synchronized void autoMovement() {
 		// TODO Auto-generated method stub
 		
 	}

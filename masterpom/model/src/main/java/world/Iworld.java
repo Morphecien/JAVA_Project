@@ -23,4 +23,5 @@ public interface Iworld {
 	public void dropElement(final MotionlessElement element, final int x, final int y);
 	public void searchGate();
 	public void notifyObservers();
+	public void lorannDie();
 }

@@ -110,7 +110,7 @@ class ViewFrame extends JFrame implements KeyListener, Runnable, ActionListener 
 			
 		}
 		
-		System.out.println("J'ai trouvé ça : " + this.getFirstKeyCode() + ", ça : " + this.getSecondKeyCode() + ", et ça : " + this.getThirdKeyCode()) ;
+	//	System.out.println("J'ai trouvé ça : " + this.getFirstKeyCode() + ", ça : " + this.getSecondKeyCode() + ", et ça : " + this.getThirdKeyCode()) ;
 	}
 
 	public void keyReleased(final KeyEvent e) {

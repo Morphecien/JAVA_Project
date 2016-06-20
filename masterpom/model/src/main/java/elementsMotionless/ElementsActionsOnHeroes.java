@@ -5,6 +5,7 @@ public enum ElementsActionsOnHeroes {
 	COLLECT,
 	NEWLIFE,
 	DIE,
+	PUSH,
 	UNLOCKS_GATE,
 	EXIT ;
 }

@@ -44,7 +44,7 @@ public class View implements IView, Runnable {
 					case KeyEvent.VK_DOWN : return Movement.DOWN_RIGHT;
 					default : return Movement.RIGHT;
 				}
-			case KeyEvent.VK_SPACE: System.out.println("Lancement de la bouboule");
+			case KeyEvent.VK_SPACE:
 				return Movement.SPACE ;
 			default:
 				return Movement.NOPE;

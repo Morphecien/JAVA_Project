@@ -48,10 +48,6 @@ public abstract class Behaviors implements IBehavior{
 	}
 	
 	protected boolean randomMovePossible(){
-		System.out.println("world : " + this.getWorld());
-		System.out.println("x : " + this.getMobile().getX());
-		System.out.println("y : " + this.getMobile().getY());
-		System.out.println("element : " + this.getWorld().getElementXY(this.getMobile().getX(), this.getMobile().getY()-1));
 		if (this.getWorld().getElementXY(this.getMobile().getX(), this.getMobile().getY()-1).getPermeabilityOther() == Permeability.PENETRABLE){
 			return true ;
 		}
