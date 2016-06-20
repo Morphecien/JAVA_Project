@@ -82,27 +82,12 @@ public class IA_ChoosePlayerDirection extends Behaviors{
 			}
 		}
 		this.movement();
-		System.out.println("New Magic-ball direction : " + this.getMobile().getDirection());
 		if (this.getMobile().isEndMove() == false){
 			this.inverseDirection(this.getMobile().getDirection());
 			this.movement();
-			System.out.println("Inverse Magic-ball direction : " + this.getMobile().getDirection());
-			try {
-				Thread.sleep(3000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			if (this.getMobile().isEndMove() == false){
 				this.getMobile().setDirection(lastDirection);
 				this.movement();
-				System.out.println("Last Magic-ball direction : " + this.getMobile().getDirection());
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 			}
 		}
 	}
