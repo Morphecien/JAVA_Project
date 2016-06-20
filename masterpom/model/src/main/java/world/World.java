@@ -9,6 +9,7 @@ import elementsAll.Element;
 import elementsMobile.Lorann;
 import elementsMobile.MobileDetermineElement;
 import elementsMobile.MobileElement;
+import elementsMobile.Monster;
 import elementsMotionless.MotionlessDetermineElement;
 import elementsMotionless.MotionlessElement;
 
@@ -26,7 +27,7 @@ public class World extends Observable implements Iworld{
 		this.elements = new MotionlessElement[this.getWidth()][this.getHeight()];
 		this.loadFile(fileNumber) ;
 	}
-
+	
 	public int getWidth() {
 		return this.width;
 	}
@@ -102,12 +103,18 @@ public class World extends Observable implements Iworld{
 		if (mobile.getFileSymbol() == "Player"){
 			this.setLorann((Lorann) mobile ) ;
 		}
+		else if (mobile.getFileSymbol() != "Magic-Ball"){
+			((Monster) mobile).initIA();
+		}
+		mobile.setActive(true);
 		this.setChanged();
 	//	this.notifyObservers();
 	}
 	
 	public void delMobile(final int indexArrayList){
+		this.getMobiles().get(indexArrayList).setActive(false);
 		this.getMobiles().remove(indexArrayList) ;
+		
 	}
 	
 	private void loadFile(final int fileNumber){
@@ -144,7 +151,7 @@ public class World extends Observable implements Iworld{
 	}
 	
 	public void notifyObservers() {
-		System.out.println("\t\t\t\t\t\t\t\t\t\t\t\tCoucou, je notifie ;)");
+	//	System.out.println("\t\t\t\t\t\t\t\t\t\t\t\tCoucou, je notifie ;)");
 		super.notifyObservers();
 	}	
 }

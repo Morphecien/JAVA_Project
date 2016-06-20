@@ -6,7 +6,12 @@ public abstract class MotionlessElement extends Element implements IElementsActi
 	private final String fileSymbol;
 	
 	public MotionlessElement(final ISprite sprite, final Permeability permeability, final String fileSymbol) {
-		super(sprite, permeability);
+		super(sprite, permeability, Permeability.BLOCKING);
+		this.fileSymbol = fileSymbol ;
+	}
+	
+	public MotionlessElement(final ISprite sprite, final Permeability permeabilityLorann, Permeability permeabilityOther, final String fileSymbol) {
+		super(sprite, permeabilityLorann, permeabilityOther);
 		this.fileSymbol = fileSymbol ;
 	}
 	

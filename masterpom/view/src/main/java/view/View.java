@@ -10,7 +10,6 @@ import contract.IView;
 import contract.Movement;
 
 public class View implements IView, Runnable {
-
 	private final ViewFrame viewFrame;
 
 	public View(final IModel model) {
@@ -18,17 +17,34 @@ public class View implements IView, Runnable {
 		SwingUtilities.invokeLater(this);
 	}
 
-	protected static Movement keyCodeToControllerOrder(final int keyCode) {
-		switch (keyCode) {
+	protected static Movement keyCodeToControllerMovement(final int keyCode1, final int keyCode2) {
+		
+		switch (keyCode1) {
 			case KeyEvent.VK_UP:
-				return Movement.UP;
+				switch(keyCode2){
+					case KeyEvent.VK_LEFT : return Movement.UP_LEFT;
+					case KeyEvent.VK_RIGHT : return Movement.UP_RIGHT;
+					default : return Movement.UP;
+				}
 			case KeyEvent.VK_DOWN:
-				return Movement.DOWN;
+				switch(keyCode2){
+					case KeyEvent.VK_LEFT : return Movement.DOWN_LEFT;
+					case KeyEvent.VK_RIGHT : return Movement.DOWN_RIGHT;
+					default : return Movement.DOWN;
+				}
 			case KeyEvent.VK_LEFT:
-				return Movement.LEFT;
+				switch(keyCode2){
+					case KeyEvent.VK_UP : return Movement.UP_LEFT;
+					case KeyEvent.VK_DOWN : return Movement.DOWN_LEFT;
+					default : return Movement.LEFT;
+				}
 			case KeyEvent.VK_RIGHT:
-				return Movement.RIGHT;
-			case KeyEvent.VK_SPACE:
+				switch(keyCode2){
+					case KeyEvent.VK_UP : return Movement.UP_RIGHT;
+					case KeyEvent.VK_DOWN : return Movement.DOWN_RIGHT;
+					default : return Movement.RIGHT;
+				}
+			case KeyEvent.VK_SPACE: System.out.println("Lancement de la bouboule");
 				return Movement.SPACE ;
 			default:
 				return Movement.NOPE;

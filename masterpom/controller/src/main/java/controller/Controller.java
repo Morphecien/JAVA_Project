@@ -5,7 +5,7 @@ import contract.IModel;
 import contract.IView;
 import contract.Movement;
 
-public class Controller implements IController {
+public class Controller implements IController, Runnable {
 
 //	private IView		view;
 
@@ -14,6 +14,7 @@ public class Controller implements IController {
 	public Controller(final IView view, final IModel model) {
 //		this.setView(view);
 		this.setModel(model);
+		this.run() ;
 	}
 
 	public void control() {
@@ -26,6 +27,10 @@ public class Controller implements IController {
 
 	private void setModel(final IModel model) {
 		this.model = model;
+	}
+	
+	public void run(){
+		
 	}
 
 	public void movementLorann(final Movement movementOrder) {

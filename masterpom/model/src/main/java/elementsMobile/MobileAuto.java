@@ -1,27 +1,32 @@
 package elementsMobile;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Timer;
+
 import contract.Movement;
 import elementsAll.ISprite;
 import elementsAll.Permeability;
 
-public abstract class MobileAuto extends MobileElement{
-	private boolean active ;
+public abstract class MobileAuto extends MobileElement implements Runnable, ActionListener{
 	private Movement direction ;
 
 	public MobileAuto(ISprite sprite, Permeability permea, String fileSymbol) {
 		super(sprite, permea, fileSymbol);
-	}
-	
-	public MobileAuto(ISprite sprite, String fileSymbol) {
-		super(sprite, fileSymbol);
-	}
-	
-	public boolean isActive() {
-		return active;
+		setMoveTimer(new Timer(250, this));
+		run();
 	}
 
-	public void setActive(boolean active) {
-		this.active = active;
+	public MobileAuto(ISprite sprite, String fileSymbol) {
+		super(sprite, fileSymbol);
+		setMoveTimer(new Timer(250, this));
+		run();
+	}
+	public MobileAuto(ISprite sprite, String fileSymbol, final int delay) {
+		super(sprite, fileSymbol);
+		setMoveTimer(new Timer(delay, this));
+		run();
 	}
 	
 	public Movement getDirection() {
@@ -32,41 +37,62 @@ public abstract class MobileAuto extends MobileElement{
 		this.direction = direction;
 	}
 	
+	@Override
+	protected void movePossible(final int x, final int y){
+		if (((x>=0) && (x < this.getWorld().getWidth())) && ((y>=0) && (y < this.getWorld().getHeight()))){
+			Permeability permeabilityMotionless = this.getWorld().getElementXY(x, y).getPermeabilityOther() ;
+			Permeability permeabilityMobile = Permeability.PENETRABLE;
+			int size = this.getWorld().getMobiles().size() ;
+			int i = 0 ;
+			int j = 0 ;
+			for (int k = 0 ; k < size ; k++){
+				MobileElement mobile2 = this.getWorld().getMobiles().get(k) ;
+				i = mobile2.getX() ;
+				j = mobile2.getY() ;
+				if ((i == x) && (j == y)){
+					permeabilityMobile = mobile2.getPermeabilityOther() ;
+				}
+			}
+		//	System.out.println(this.getFileSymbol() + " : " + permeabilityMotionless + " | " + permeabilityMobile);
+			if ((permeabilityMotionless != Permeability.BLOCKING) && (permeabilityMobile != Permeability.BLOCKING)){
+				setEndMove(true) ;
+			}
+			else{
+				setEndMove(false) ;
+			}
+		}
+		else{
+			setEndMove(false) ;
+		}
+	}
+	
 	public void movement(){
 		switch(this.getDirection()){
 			case UP : 			super.moveUp();
-								this.isMobileDie(0, -1);
-								this.isMobileKill(0, -1) ;
+								this.isMobileAction(0, -1) ;
 										break ;
 			case UP_LEFT : 		super.moveUpLeft();
-								this.isMobileDie(-1, -1) ;
-								this.isMobileKill(-1, -1) ;
+								this.isMobileAction(-1, -1) ;
 										break ;
 			case LEFT : 		super.moveLeft();
-								this.isMobileDie(-1, 0) ;
-								this.isMobileKill(-1, 0) ;
+								this.isMobileAction(-1, 0) ;
 										break ;
 			case DOWN_LEFT : 	super.moveDownLeft();
-								this.isMobileDie(-1, 1) ;
-								this.isMobileKill(-1, 1) ;
+								this.isMobileAction(-1, 1) ;
 										break ;
 			case DOWN : 		super.moveDown();
-								this.isMobileDie(0, 1) ;
-								this.isMobileKill(0, 1) ;
+								this.isMobileAction(0, 1) ;
 										break ;
 			case DOWN_RIGHT : 	super.moveDownRight();
-								this.isMobileDie(1, 1) ;
-								this.isMobileKill(1, 1) ;
+								this.isMobileAction(1, 1) ;
 										break ;
 			case RIGHT : 		super.moveRight();
-								this.isMobileDie(1, 0) ;
-								this.isMobileKill(1, 0) ;
+								this.isMobileAction(1, 0) ;
 										break ;
 			case UP_RIGHT : 	super.moveUpRight();
-								this.isMobileDie(1, -1) ;
-								this.isMobileKill(1, -1) ;
+								this.isMobileAction(1, -1) ;
 										break ;
-			case NOPE : 		System.out.println("C'est bien dommage d'en arriver là : NOPE (Le mobile " + this.getFileSymbol() + " ne connait pas sa direction de déplacement");
+			case NOPE : 	//	System.out.println("C'est bien dommage d'en arriver là : NOPE (Le mobile " + this.getFileSymbol() + " ne connait pas sa direction de déplacement)");
 										break ;
 			default : 					break ;
 		}
@@ -90,7 +116,7 @@ public abstract class MobileAuto extends MobileElement{
 										break ;
 			case UP_RIGHT : 	this.setDirection(Movement.DOWN_LEFT) ;
 										break ;
-			case NOPE : 		System.out.println("Ah merde, c'est balot, le mobile " + this.getFileSymbol() + " voudrait changer de direction... mais NOPE, ça veut pas ^^");
+			case NOPE : 		System.out.println("Ah ben merde, c'est balot, le mobile " + this.getFileSymbol() + " voudrait changer de direction... mais NOPE, ça veut pas ^^");
 								System.out.println("Du coup on va le supprimer !");
 						//		this.reinitialize();
 								
@@ -110,6 +136,7 @@ public abstract class MobileAuto extends MobileElement{
 	}
 
 	public void reinitialize(){
+		this.getMoveTimer().stop();
 		this.initialize();
 		this.deleteObject();
 	}
@@ -135,4 +162,20 @@ public abstract class MobileAuto extends MobileElement{
 	}
 
 	public abstract void autoMovement() ;
+
+	public void run() 
+	{
+		this.getMoveTimer().start();
+	}
+
+	public void actionPerformed(ActionEvent e) 
+	{
+		if (this.isActive()){
+			this.autoMovement();
+	//		System.out.println("File symbol : " + this.getFileSymbol());
+			this.getWorld().worldHasChanged();
+		}
+	}
+	
+
 }

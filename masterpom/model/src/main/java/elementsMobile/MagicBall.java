@@ -80,7 +80,7 @@ public class MagicBall extends MobileAuto{
 					this.setDirection(Movement.UP_LEFT) ;
 				}
 			}
-			else if (xLorann < xMagicBall){		// RIGHT
+			else if (xLorann > xMagicBall){		// RIGHT
 				if (xGap > yGap*2){					// Choose RIGHT
 					this.setDirection(Movement.RIGHT) ;
 				}
@@ -107,7 +107,7 @@ public class MagicBall extends MobileAuto{
 					this.setDirection(Movement.DOWN_LEFT) ;
 				}
 			}
-			else if (xLorann < xMagicBall){		// RIGHT
+			else if (xLorann > xMagicBall){		// RIGHT
 				if (xGap > yGap*2){					// Choose RIGHT
 					this.setDirection(Movement.RIGHT) ;
 				}
@@ -126,7 +126,7 @@ public class MagicBall extends MobileAuto{
 			if (xLorann < xMagicBall){			// LEFT
 				this.setDirection(Movement.LEFT) ;
 			}
-			else if (xLorann < xMagicBall){		// RIGHT
+			else if (xLorann > xMagicBall){		// RIGHT
 				this.setDirection(Movement.RIGHT) ;
 			}
 			else{								// X don't change
@@ -150,8 +150,7 @@ public class MagicBall extends MobileAuto{
 	@Override
 	protected void initialize(){
 		super.initialize() ;
-	//	this.setSpriteNumber(this.getSprites().size());
-		this.setSpriteNumber(5);
+		this.setSpriteNumber(this.getSprites().size());
 	}
 	
 	@Override
@@ -159,14 +158,9 @@ public class MagicBall extends MobileAuto{
 		this.initialize();
 		this.deleteObject();
 	}
-	
-	@Override
-	protected void isMobileDie(final int xDirection, final int yDirection) {
-		// Not implemented : it's impossible to kill the magic-ball
-	}
 
 	@Override
-	protected void isMobileKill(int xDirection, int yDirection) {	// Monsters die
+	protected void isMobileAction(int xDirection, int yDirection) {	// Monsters die
 		if (this.isEndMove() == false){
 			final int size = this.getWorld().getMobiles().size() ;
 			int indexKill = -1 ;
@@ -174,26 +168,23 @@ public class MagicBall extends MobileAuto{
 			for (int k = 0 ; k < size ; k++){
 				MobileElement mobile = this.getWorld().getMobiles().get(k) ;
 				if ((mobile.getX() == (this.getX() + xDirection)) && (mobile.getY() == (this.getY() + yDirection))){
-					if (mobile.getFileSymbol() != "Player"){
+					if (mobile.getFileSymbol() != "Player"){		// Kill Monster
 						indexKill = k ;
 					}
 					else{
-						indexPickUpPlayer = k;
+						indexPickUpPlayer = k;						// Pick up by Lorann
 					}
-				}
-				else{
-					
 				}
 			}
 			if (indexKill !=-1){
-				MobileElement mobile = this.getWorld().getMobiles().get(indexKill) ;
+				MobileElement mobile = this.getWorld().getMobiles().get(indexKill) ;					// Kill Monster
 				System.out.println("A mobile was died : " + mobile.getFileSymbol());
 				this.deleteObject(mobile);
 				this.reinitialize() ;
 			}
 			else if (indexPickUpPlayer != -1){
-				MobileElement mobile = this.getWorld().getMobiles().get(indexPickUpPlayer) ;
-				System.out.println("The Magic ball was pick-up by Lorann : " + mobile.getFileSymbol());
+				MobileElement mobile = this.getWorld().getMobiles().get(indexPickUpPlayer) ;			// Pick up by Lorann
+				System.out.println("The Magic-ball was pick-up by Lorann : " + mobile.getFileSymbol());
 				this.reinitialize() ;
 			}
 			else{

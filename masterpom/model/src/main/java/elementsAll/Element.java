@@ -7,10 +7,12 @@ import world.Iworld;
 public class Element {
 	private ISprite sprite;
 	private Iworld world ;
-	private Permeability	permeability;
-	public Element(final ISprite sprite, final Permeability permeability) {
+	private Permeability	permeabilityLorann;
+	private Permeability	permeabilityOther;
+	public Element(final ISprite sprite, final Permeability permeabilityLorann, final Permeability permeabilityOther) {
 		this.setSprite(sprite);
-		this.setPermeability(permeability);
+		this.setPermeabilityLorann(permeabilityLorann);
+		this.setPermeabilityOther(permeabilityOther);
 	}
 	
 	public ISprite getSprite() {
@@ -22,15 +24,23 @@ public class Element {
 	}
 
 
-	public Permeability getPermeability() {
-		return this.permeability;
+	public Permeability getPermeabilityLorann() {
+		return this.permeabilityLorann;
 	}
 
-	private void setPermeability(final Permeability permeability) {
-		this.permeability = permeability;
+	private void setPermeabilityLorann(final Permeability permeability) {
+		this.permeabilityLorann = permeability;
 	}
 	
-	protected Iworld getWorld() {
+	public Permeability getPermeabilityOther() {
+		return this.permeabilityOther;
+	}
+
+	private void setPermeabilityOther(final Permeability permeability) {
+		this.permeabilityOther = permeability;
+	}
+	
+	public Iworld getWorld() {
 		return this.world;
 	}
 

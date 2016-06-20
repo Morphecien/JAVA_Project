@@ -1,17 +1,24 @@
 package elementsMobile;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import contract.Movement;
-import elementsAll.Sprite;
+import javax.swing.Timer;
 
-public class Lorann extends MobileElement {
+import contract.Movement;
+import elementsAll.Permeability;
+import elementsAll.Sprite;
+import elementsMotionless.MotionlessDetermineElement;
+import elementsMotionless.MotionlessElement;
+
+public class Lorann extends MobileElement implements Runnable, ActionListener{
 	private int score ;
 	private int life ;
 	private MagicBall magicBall;
 	private Movement lastMoov ;
 	private final ArrayList<Sprite> sprites = new ArrayList<Sprite>();
-	private final String spriteSymbol = "X" ;
+	private final String spriteSymbol = "@" ;
 	private int spriteNumber ;
 	
 	public Lorann() {
@@ -21,6 +28,19 @@ public class Lorann extends MobileElement {
 		this.life = 11 ;
 		this.magicBall = new MagicBall() ;
 		this.lastMoov = Movement.NOPE ;
+		setMoveTimer(new Timer(150, this));
+		this.run() ;
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		this.changeSprite() ;
+		this.getWorld().worldHasChanged();
+		
+	}
+
+	public void run() {
+		this.getMoveTimer().setInitialDelay(500);
+		this.getMoveTimer().start();
 	}
 	
 	private void prepareSprites(){
@@ -92,11 +112,41 @@ public class Lorann extends MobileElement {
 	}
 	
 	@Override
+	protected void movePossible(final int x, final int y){
+		if (((x>=0) && (x < this.getWorld().getWidth())) && ((y>=0) && (y < this.getWorld().getHeight()))){
+			Permeability permeabilityMotionless = this.getWorld().getElementXY(x, y).getPermeabilityLorann() ;
+			Permeability permeabilityMobile = Permeability.PENETRABLE;
+			int size = this.getWorld().getMobiles().size() ;
+			int i = 0 ;
+			int j = 0 ;
+			for (int k = 0 ; k < size ; k++){
+				MobileElement mobile2 = this.getWorld().getMobiles().get(k) ;
+				i = mobile2.getX() ;
+				j = mobile2.getY() ;
+				if ((i == x) && (j == y)){
+					permeabilityMobile = mobile2.getPermeabilityLorann() ;
+				}
+			}
+			System.out.println(this.getFileSymbol() + " : " + permeabilityMotionless + " | " + permeabilityMobile);
+			if ((permeabilityMotionless != Permeability.BLOCKING) && (permeabilityMobile != Permeability.BLOCKING)){
+				setEndMove(true) ;
+			}
+			else{
+				setEndMove(false) ;
+			}
+		}
+		else{
+			setEndMove(false) ;
+		}
+	}
+	
+	@Override
 	public void moveUp() {
 		this.setLastMoov(Movement.UP);
 		super.moveUp();
 		this.changeSprite(7);
-		this.isMobileDie(0, -1) ;
+		this.getMoveTimer().restart();
+		this.isMobileAction(0, -1) ;
 	}
 	
 	@Override
@@ -104,7 +154,8 @@ public class Lorann extends MobileElement {
 		this.setLastMoov(Movement.UP_LEFT);
 		super.moveUpLeft();
 		this.changeSprite(6);
-		this.isMobileDie(-1, -1) ;
+		this.getMoveTimer().restart();
+		this.isMobileAction(-1, -1) ;
 	}
 
 	@Override
@@ -112,7 +163,8 @@ public class Lorann extends MobileElement {
 		this.setLastMoov(Movement.LEFT);
 		super.moveLeft();
 		this.changeSprite(5);
-		this.isMobileDie(-1, 0) ;
+		this.getMoveTimer().restart();
+		this.isMobileAction(-1, 0) ;
 	}
 	
 	@Override
@@ -120,7 +172,8 @@ public class Lorann extends MobileElement {
 		this.setLastMoov(Movement.DOWN_LEFT);
 		super.moveDownLeft();
 		this.changeSprite(4);
-		this.isMobileDie(-1, 1) ;
+		this.getMoveTimer().restart();
+		this.isMobileAction(-1, 1) ;
 	}
 
 	@Override
@@ -128,7 +181,8 @@ public class Lorann extends MobileElement {
 		this.setLastMoov(Movement.DOWN);
 		super.moveDown();
 		this.changeSprite(3);
-		this.isMobileDie(0, 1) ;
+		this.getMoveTimer().restart();
+		this.isMobileAction(0, 1) ;
 	}
 	
 	@Override
@@ -136,7 +190,8 @@ public class Lorann extends MobileElement {
 		this.setLastMoov(Movement.DOWN_RIGHT);
 		super.moveDownRight();
 		this.changeSprite(2);
-		this.isMobileDie(1, 1) ;
+		this.getMoveTimer().restart();
+		this.isMobileAction(1, 1) ;
 	}
 
 	@Override
@@ -144,7 +199,8 @@ public class Lorann extends MobileElement {
 		this.setLastMoov(Movement.RIGHT);
 		super.moveRight();
 		this.changeSprite(1);
-		this.isMobileDie(1, 0) ;
+		this.getMoveTimer().restart();
+		this.isMobileAction(1, 0) ;
 	}
 	
 	@Override
@@ -152,18 +208,33 @@ public class Lorann extends MobileElement {
 		this.setLastMoov(Movement.UP_RIGHT);
 		super.moveUpRight();
 		this.changeSprite(0);
-		this.isMobileDie(1, -1) ;
+		this.getMoveTimer().restart();
+		this.isMobileAction(1, -1) ;
 	}
 	
 	public void shootBall(){
 		if (this.getMagicBall().isActive() == false){
-			this.getWorld().addMobile(this.getMagicBall(), this.getX(), this.getY());
-			this.getMagicBall().activate(this.getLastMoov()) ;
+			boolean possible = false ;
+			switch(this.getLastMoov()){
+				case UP : 			if (this.getWorld().getElementXY(this.getX(), this.getY() -1) == (MotionlessElement) MotionlessDetermineElement.NOTHING){ possible = true ;} break ;
+				case UP_LEFT : 		if (this.getWorld().getElementXY(this.getX()-1, this.getY() -1) == (MotionlessElement) MotionlessDetermineElement.NOTHING){ possible = true ;} break ;
+				case LEFT : 		if (this.getWorld().getElementXY(this.getX()-1, this.getY()) == (MotionlessElement) MotionlessDetermineElement.NOTHING){ possible = true ;} break ;
+				case DOWN_LEFT : 	if (this.getWorld().getElementXY(this.getX()-1, this.getY() +1) == (MotionlessElement) MotionlessDetermineElement.NOTHING){ possible = true ;} break ;
+				case DOWN : 		if (this.getWorld().getElementXY(this.getX(), this.getY() +1) == (MotionlessElement) MotionlessDetermineElement.NOTHING){ possible = true ;} break ;
+				case DOWN_RIGHT : 	if (this.getWorld().getElementXY(this.getX()+1, this.getY() +1) == (MotionlessElement) MotionlessDetermineElement.NOTHING){ possible = true ;} break ;
+				case RIGHT : 		if (this.getWorld().getElementXY(this.getX()+1, this.getY()) == (MotionlessElement) MotionlessDetermineElement.NOTHING){ possible = true ;} break ;
+				case UP_RIGHT : 	if (this.getWorld().getElementXY(this.getX()+1, this.getY() -1) == (MotionlessElement) MotionlessDetermineElement.NOTHING){ possible = true ;} break ;
+				case NOPE : 	//	System.out.println("C'est bien dommage d'en arriver là : NOPE (Le mobile " + this.getFileSymbol() + " ne connait pas sa direction de déplacement)");
+									break ;
+				default : 					break ;
+			}
+			if (possible){
+				this.getWorld().addMobile(this.getMagicBall(), this.getX(), this.getY());
+				this.getMagicBall().activate(this.getLastMoov()) ;
+			}
 		}
 		else{
-	//		this.getMagicBall().autoMovement();
 			this.getMagicBall().chooseDirection();
-			this.getMagicBall().autoMovement();
 		}
 	}
 
@@ -172,7 +243,7 @@ public class Lorann extends MobileElement {
 	}
 	
 	@Override
-	protected void isMobileDie(final int xDirection, final int yDirection) {			// Lorann Die and Pick up Magic Ball
+	protected void isMobileAction(final int xDirection, final int yDirection) {			// Lorann Die and Pick up Magic Ball
 		int size = this.getWorld().getMobiles().size() ;
 		if (this.isEndMove() == false){
 			for (int k = 0 ; k < size ; k++){
@@ -191,10 +262,5 @@ public class Lorann extends MobileElement {
 				}
 			}
 		}
-	}
-
-	@Override
-	protected void isMobileKill(int xDirection, int yDirection) {
-		// Not implemented : Lorann not kill
 	}
 }

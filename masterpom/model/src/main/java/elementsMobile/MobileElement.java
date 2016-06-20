@@ -1,26 +1,39 @@
 package elementsMobile;
 
 import java.awt.Point;
+import java.awt.event.ActionListener;
+
+import javax.swing.Timer;
 
 import elementsAll.Element;
 import elementsAll.ISprite;
 import elementsAll.Permeability;
 import world.Iworld;
 
-public abstract class MobileElement extends Element{
+public abstract class MobileElement extends Element implements Runnable, ActionListener{
 	private final Point position ;
 	private final String fileSymbol ;
 	private boolean endMove;
+	private Timer timer ;
+	private boolean active ;
+	
+	public boolean isActive() {
+		return active;
+	}
 
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+	
 	public MobileElement(ISprite sprite, final String fileSymbol) {
-		super(sprite, Permeability.BLOCKING);
+		super(sprite, Permeability.BLOCKING, Permeability.BLOCKING);
 		this.position = new Point() ;
 		this.fileSymbol = fileSymbol ;
 		this.endMove = true ;
 	}
 	
 	public MobileElement(ISprite sprite, Permeability permea, final String fileSymbol) {
-		super(sprite, permea);
+		super(sprite, permea, Permeability.BLOCKING);
 		this.position = new Point() ;
 		this.fileSymbol = fileSymbol ;
 		this.endMove = true ;
@@ -68,27 +81,7 @@ public abstract class MobileElement extends Element{
 		this.setY(y);
 	}
 	
-	private void movePossible(final int x, final int y){
-		Permeability permeabilityMotionless = this.getWorld().getElementXY(x, y).getPermeability() ;
-		Permeability permeabilityMobile = Permeability.PENETRABLE;
-		int size = this.getWorld().getMobiles().size() ;
-		int i = 0 ;
-		int j = 0 ;
-		for (int k = 0 ; k < size ; k++){
-			MobileElement mobile2 = this.getWorld().getMobiles().get(k) ;
-			i = mobile2.getX() ;
-			j = mobile2.getY() ;
-			if ((i == x) && (j == y)){
-				permeabilityMobile = mobile2.getPermeability() ;
-			}
-		}
-		if ((permeabilityMotionless != Permeability.BLOCKING) && (permeabilityMobile != Permeability.BLOCKING)){
-			setEndMove(true) ;
-		}
-		else{
-			setEndMove(false) ;
-		}
-	}
+	protected abstract void movePossible(final int x, final int y);
 	
 	public void moveUp() {
 		this.movePossible(this.getX(), this.getY() - 1) ;
@@ -150,6 +143,21 @@ public abstract class MobileElement extends Element{
 		}
 	}
 	
-	protected abstract void isMobileDie(final int xDirection, final int yDirection) ;
-	protected abstract void isMobileKill(final int xDirection, final int yDirection) ;
+	protected abstract void isMobileAction(final int xDirection, final int yDirection) ;
+	
+	public void lorannDie(){
+		final int size = this.getWorld().getMobiles().size() ;
+		for (int k = 0 ; k < size ; k++){
+			MobileElement mobile = this.getWorld().getMobiles().get(k) ;
+			mobile.setActive(false) ;
+		}
+	}
+	
+	protected Timer getMoveTimer(){
+		return this.timer ;
+	}
+	
+	protected void setMoveTimer(Timer timer){
+		this.timer = timer ;
+	}
 }

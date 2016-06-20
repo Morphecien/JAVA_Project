@@ -55,7 +55,7 @@ class ViewPanel extends JPanel implements Observer {
 	}
 
 	public void update(final Observable arg0, final Object arg1) {
-		System.out.print("\t\t\t\t\t\t\t\t\t\t\t\tTu fais chier !! Bon, j'enlève tout... ") ;
+	//	System.out.print("\t\t\t\t\t\t\t\t\t\t\t\tTu fais chier !! Bon, j'enlève tout... ") ;
 		this.removeAll();
 		prepareAllJLabels() ;
 	//	prepareALabel() ;
@@ -97,7 +97,7 @@ class ViewPanel extends JPanel implements Observer {
 		this.getViewFrame().pack();
 		this.setVisible(true);
 		this.repaint();
-		System.out.println("Et je repaint ;)");
+	//	System.out.println("Et je repaint ;)");
 	}
 	
 	@Override
