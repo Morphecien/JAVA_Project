@@ -1,9 +1,5 @@
 package elementsMotionless;
-/**
- * 
- * @author Asus
- *
- */
+
 public enum Type_elements {
 	HBONE,
 	VBONE,

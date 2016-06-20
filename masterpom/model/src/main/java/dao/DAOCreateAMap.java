@@ -6,42 +6,31 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-/**
- * 
- * @author Asus
- *
- */
+
 class DAOCreateAMap{
 	private final Connection connection;
 	private boolean creationValidation ;
-	/**
-	 * 
-	 * @param connection
-	 * @param level
-	 * @throws SQLException
-	 */
+	
 	public DAOCreateAMap(final Connection connection, final String level) throws SQLException {
 		this.connection = connection ;
 		
 		this.creationValidation = createMap(level) ;
 	}
+	
 	/**
 	 * 
 	 * @return
 	 */
-	public boolean getCreationValidation() {
+	boolean getCreationValidation() {
 		return this.creationValidation;
 	}
-/**
- * 
- * @return
- */
+	
 	private Connection getConnection(){
 		return this.connection ;
 	}
 	/**
 	 * 
-	 * @author Asus
+	 * @author Samuel DUCANGE
 	 *
 	 */
 	private static abstract class QueryDAOInsert {
@@ -58,13 +47,7 @@ class DAOCreateAMap{
 			return "{CALL select_ID_Sprite(?)}" ;
 		}
 	}
-	/**
-	 * 
-	 * @param level
-	 * @param posX
-	 * @param posY
-	 * @param spriteRecup
-	 */
+	
 	private void insertCase(int level, int posX, int posY, char spriteRecup){
 			String element = determineSprite(spriteRecup) ;
 			if (element != "none"){
@@ -72,23 +55,20 @@ class DAOCreateAMap{
 				this.insertCaseMap(QueryDAOInsert.getQueryInsertCaseMap(), level, posX, posY, ID_Sprite);
 			}
 	}
-		/**
-		 * 
-		 * @param file
-		 * @return
-		 */
+		
 		private int determineLevel(String file){
 //			System.out.println(file);
 			int ID_Level = (int) recupIntQueryWithOneParameter(QueryDAOInsert.getQuerySelectIDLevel(), file) ;
 //			System.out.println(ID_Level);
 			return ID_Level ;
 		}
-/**
- * 
- * @param file
- * @return
- */
-		public boolean createMap(String file){
+		
+		/**
+		 * 
+		 * @param file
+		 * @return
+		 */
+		private boolean createMap(String file){
 			InputStream fr = null ;
 			boolean mapExist = false ;
 			try {
@@ -117,11 +97,7 @@ class DAOCreateAMap{
 				}
 			}
 		}
-		/**
-		 * 
-		 * @param level
-		 * @return
-		 */
+		
 		private boolean searchMap(int level){
 			try {
 				final CallableStatement call = this.getConnection().prepareCall(QueryDAOInsert.getQuerySelectMapExist());
@@ -136,12 +112,7 @@ class DAOCreateAMap{
 			}
 			return false ;
 		}
-		/**
-		 * 
-		 * @param fr
-		 * @param level
-		 * @return
-		 */
+		
 		private boolean generateMap(InputStream fr, int level){
 			int i = 0 ;
 			try {
@@ -175,11 +146,7 @@ class DAOCreateAMap{
 			}
 			return false ;
 		}
-		/**
-		 * 
-		 * @param element
-		 * @return
-		 */
+		
 		private String determineSprite(char element){
 			switch(element){
 				case 'I' : return "V-bone";				// Bone
@@ -203,12 +170,7 @@ class DAOCreateAMap{
 			}
 			return null ;
 		}
-		/**
-		 * 
-		 * @param sql
-		 * @param param
-		 * @return
-		 */
+		
 		private int recupIntQueryWithOneParameter(final String sql, final String param){
 			int integer = 0 ;
 			try {
@@ -225,15 +187,7 @@ class DAOCreateAMap{
 			}
 			return -1;
 		}
-		/**
-		 * 
-		 * @param sql
-		 * @param id_level
-		 * @param posX
-		 * @param posY
-		 * @param id_sprite
-		 * @return
-		 */
+		
 		private boolean insertCaseMap(final String sql, final int id_level, final int posX, final int posY, final int id_sprite){
 			try {
 				final CallableStatement call = this.getConnection().prepareCall(sql);

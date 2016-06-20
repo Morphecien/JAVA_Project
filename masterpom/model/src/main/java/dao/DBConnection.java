@@ -45,12 +45,13 @@ final class DBConnection {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			this.connection = DriverManager.getConnection(dbProperties.getUrl(), dbProperties.getLogin(), dbProperties.getPassword());
+			return true;
 		} catch (final ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (final SQLException e) {
 			e.printStackTrace();
 		}
-		return true;
+		return false;
 	}
 
 	/**

@@ -7,11 +7,7 @@ import elementsAll.Element;
 import elementsMobile.Lorann;
 import elementsMobile.MobileElement;
 import elementsMotionless.MotionlessElement;
-/**
- * 
- * @author Asus
- *
- */
+
 public interface Iworld {
 	public int getWidth() ;
 	public int getHeight() ;

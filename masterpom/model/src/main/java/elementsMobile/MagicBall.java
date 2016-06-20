@@ -64,7 +64,7 @@ public class MagicBall extends MobileAuto{
 	
 	public void choosePlayerDirection(){
 		this.setIA_behavior(new IA_ChoosePlayerDirection(this));
-		this.autoMovement();
+	//	this.autoMovement();
 		this.setIA_behavior(new IA_Bounce(this)) ;
 	}
 

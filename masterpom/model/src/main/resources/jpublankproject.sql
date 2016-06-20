@@ -56,8 +56,6 @@ DELIMITER ;
 DROP Table IF EXISTS Map;
 DROP Table IF EXISTS Score;
 DROP Table IF EXISTS Level;
-DROP Table IF EXISTS Player;
-DROP Table IF EXISTS Sprite;
 
 #------------------------------------------------------------
 # Table: Level
@@ -93,34 +91,8 @@ CREATE TABLE IF NOT EXISTS Map(
         PRIMARY KEY (coordX ,coordY ,ID_level )
 )ENGINE=InnoDB;
 
-
-#------------------------------------------------------------
-# Table: Score
-#------------------------------------------------------------
-
-CREATE TABLE IF NOT EXISTS Score(
-        ID_Score  int (11) Auto_increment  NOT NULL ,
-        score     Int NOT NULL ,
-        ID_level  Int NOT NULL ,
-        ID_player Int NOT NULL ,
-        PRIMARY KEY (ID_Score ,ID_level ,ID_player )
-)ENGINE=InnoDB;
-
-
-#------------------------------------------------------------
-# Table: Player
-#------------------------------------------------------------
-
-CREATE TABLE IF NOT EXISTS Player(
-        ID_player int (11) Auto_increment  NOT NULL ,
-        player    Varchar (25) NOT NULL ,
-        PRIMARY KEY (ID_player )
-)ENGINE=InnoDB;
-
 ALTER TABLE Map ADD CONSTRAINT FK_Map_ID_level FOREIGN KEY (ID_level) REFERENCES Level(ID_level);
 ALTER TABLE Map ADD CONSTRAINT FK_Map_ID_sprite FOREIGN KEY (ID_sprite) REFERENCES Sprite(ID_sprite);
-ALTER TABLE Score ADD CONSTRAINT FK_Score_ID_level FOREIGN KEY (ID_level) REFERENCES Level(ID_level);
-ALTER TABLE Score ADD CONSTRAINT FK_Score_ID_player FOREIGN KEY (ID_player) REFERENCES Player(ID_player);
 
 #------------------------------------------------------------
 # INSERT VALUES
