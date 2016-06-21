@@ -166,6 +166,7 @@ public class World extends Observable implements Iworld{
 	public void lorannDie(){
 		this.getLorann().getMagicBall().reinitialize();
 		this.getLorann().setLife(this.getLorann().getLife() -1);
+		this.getLorann().setScore(0);
 		final int size = this.getMobiles().size() ;
 		int indexKillPlayer = -1 ;
 		for (int k = 0 ; k < size ; k++){
