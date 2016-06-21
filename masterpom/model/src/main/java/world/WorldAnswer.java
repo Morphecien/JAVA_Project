@@ -61,7 +61,7 @@ public class WorldAnswer {
 	}
 	
 	private void resolveEndLevel(){
-		
+		this.getWorld().endLevel();
 	}
 		
 /*	private void afficherWorld(){

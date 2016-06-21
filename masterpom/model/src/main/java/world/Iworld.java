@@ -24,4 +24,5 @@ public interface Iworld {
 	public void searchGate();
 	public void notifyObservers();
 	public void lorannDie();
+	public void endLevel();
 }

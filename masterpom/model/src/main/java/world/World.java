@@ -194,7 +194,8 @@ public class World extends Observable implements Iworld{
 			this.loadFile();
 		}
 		else{
-			System.out.println("");
+			this.setLevel(1);
+			this.loadFile();
 		}
 	}
 }
