@@ -1,5 +1,11 @@
 package elementsMotionless;
 
+/**
+ * The enumeration ElementsActionsOnHeroes
+ * 
+ * @author Samuel DUCANGE
+ *
+ */
 public enum ElementsActionsOnHeroes {
 	NOPE,
 	COLLECT,

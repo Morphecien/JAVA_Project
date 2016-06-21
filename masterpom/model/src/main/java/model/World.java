@@ -13,6 +13,12 @@ import elementsMobile.Monster;
 import elementsMotionless.MotionlessDetermineElement;
 import elementsMotionless.MotionlessElement;
 
+/**
+ * The class World
+ * 
+ * @author Samuel DUCANGE
+ *
+ */
 public class World extends Observable implements Iworld{
 	private MotionlessElement[][] elements ;
 	private final ArrayList<MobileElement> mobiles ;
@@ -23,6 +29,11 @@ public class World extends Observable implements Iworld{
 	private int level ;
 	private final static int MAXLEVEL = 101 ;
 	
+	/**
+	 * The constructor of World
+	 * @param fileNumber
+	 * 			the fileNumber
+	 */
 	public World(final int fileNumber){
 		this.mobiles = new ArrayList<MobileElement>() ;
 		this.mainDAO = new MainDAO() ;
@@ -31,30 +42,59 @@ public class World extends Observable implements Iworld{
 		this.loadFile() ;
 	}
 	
+	/**
+	 * Get the level
+	 * @return level
+	 */
 	public int getLevel() {
-		return level;
+		return this.level;
 	}
 
+	/**
+	 * Set the level
+	 * @param level
+	 * 			the level
+	 */
 	public void setLevel(int level) {
 		this.level = level;
 	}
 
+	/**
+	 * Get the width
+	 * @return width
+	 */
 	public int getWidth() {
 		return this.width;
 	}
 
+	/**
+	 * Get the height
+	 * @return height
+	 */
 	public int getHeight() {
 		return this.height;
 	}
 	
+	/**
+	 * Get all MotionLess Elements
+	 * @return elements (Element[][])
+	 */
 	public Element[][] getElements(){
 		return this.elements ;
 	}
 	
+	/**
+	 * Get all Mobile Elements
+	 * @return mobiles (ArrayList)
+	 */
 	public ArrayList<MobileElement> getMobiles(){
 		return this.mobiles ;
 	}
 	
+	/**
+	 * Get the Element in X-Y coord in the world
+	 * return element[x][y] (MotionlessElement)
+	 */
 	public MotionlessElement getElementXY(final int x, final int y){
 		if ((x < 0) || (y < 0) || (x >= this.getWidth()) || (y >= this.getHeight())){
 			return null ;
@@ -62,33 +102,75 @@ public class World extends Observable implements Iworld{
 		return this.elements[x][y] ;
 	}
 	
+	/**
+	 * Get the Hero lorann
+	 * @return lorann
+	 */
 	public Lorann getLorann(){
 		return this.lorann ;
 	}
 	
+	/**
+	 * Set lorann
+	 * @param lorann
+	 * 			the hero
+	 */
 	public void setLorann(final Lorann lorann){
 		this.lorann = lorann;
 		this.setChanged();
 	}
+	
+	/**
+	 * Get the Observable
+	 * @return this
+	 */
 	public Observable getObservable() {
 		return this;
 	}
 	
+	/**
+	 * Drop an element and replace him with a MotionlessElement : NOTHING
+	 * @param x
+	 * 			the coord X
+	 * @param y
+	 * 			the coord Y
+	 */
 	public void dropElement(final int x, final int y){
 		this.addElement(MotionlessDetermineElement.getFromFileSymbol(" "), x, y);
 		this.setChanged();
 	}
 	
+	/**
+	 * Drop an element and replace him with a new Element
+	 * @param element
+	 * 			the element
+	 * @param x
+	 * 			the coord X
+	 * @param y
+	 * 			the coord Y
+	 */
 	public void dropElement(final MotionlessElement element, final int x, final int y){
 		this.addElement(element, x, y);
 		this.setChanged();
 	}
 	
+	/**
+	 * Add (or change) an element
+	 * @param element
+	 * 			the element
+	 * @param x
+	 * 			the coord X
+	 * @param y
+	 * 			the coord Y
+	 */
 	private void addElement(final MotionlessElement element, final int x, final int y){
 		this.elements[x][y] = element ;
 		this.setChanged();
 	}
 	
+	/**
+	 * Method which replace all the Bloc by Nothing and the Gate Close by a Gate Open
+	 */
 	public void searchGate(){
 		for (int y = 0 ; y<this.getHeight() ; y++){
 			for (int x = 0 ; x<this.getWidth() ; x++){
@@ -102,9 +184,17 @@ public class World extends Observable implements Iworld{
 			}
 		}
 		this.setChanged();
-	//	this.notifyObservers();
 	}
 
+	/**
+	 * Add a new Mobile (Lorann, Monster, or Magic-ball) in coord x,y
+	 * @param mobile
+	 * 			the mobile
+	 * @param x
+	 * 			the coord X
+	 * @param y
+	 * 			the coord Y
+	 */
 	public void addMobile(final MobileElement mobile, final int x, final int y) {
 		this.getMobiles().add(mobile);
 		mobile.setWorld(this, x, y);
@@ -116,15 +206,21 @@ public class World extends Observable implements Iworld{
 		}
 		mobile.setActive(true);
 		this.setChanged();
-	//	this.notifyObservers();
 	}
 	
+	/**
+	 * Drop a mobile in the array list of mobiles
+	 * @param indexArrayList
+	 * 			the indexArrayList
+	 */
 	public void delMobile(final int indexArrayList){
 		this.getMobiles().get(indexArrayList).setActive(false);
 		this.getMobiles().remove(indexArrayList) ;
-		
 	}
 	
+	/**
+	 * Create the map according the level
+	 */
 	private void loadFile(){
 		int z = 0 ;
 		Map mappe = mainDAO.loadMap(this.getLevel());
@@ -153,16 +249,24 @@ public class World extends Observable implements Iworld{
 		this.setChanged() ;
 	}
 	
+	/**
+	 * Notify the view
+	 */
 	public void worldHasChanged() {
 		this.setChanged();
 		this.notifyObservers();
 	}
 	
+	/**
+	 * Notify Observers
+	 */
 	public void notifyObservers() {
-	//	System.out.println("\t\t\t\t\t\t\t\t\t\t\t\tCoucou, je notifie ;)");
 		super.notifyObservers();
 	}
 	
+	/**
+	 * Method execute when Lorann was died and reinitialize the level
+	 */
 	public void lorannDie(){
 		this.getLorann().getMagicBall().reinitialize();
 		this.getLorann().setLife(this.getLorann().getLife() -1);
@@ -185,10 +289,9 @@ public class World extends Observable implements Iworld{
 		this.loadFile();
 	}
 	
-	public void mobileStarts(){
-		
-	}
-	
+	/**
+	 * End of the current level, start the next level (or the first level if the last level was 101)
+	 */
 	public void endLevel(){
 		if (this.getLevel() < MAXLEVEL){
 			this.setLevel(getLevel()+1);

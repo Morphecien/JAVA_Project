@@ -10,6 +10,7 @@ import contract.IView;
 import contract.Movement;
 
 /**
+ * The class View
  * 
  * @author Asus
  *
@@ -17,18 +18,24 @@ import contract.Movement;
 public class View implements IView, Runnable {
 	private final ViewFrame viewFrame;
 /**
+ * Constructor of View
  * 
  * @param model
+ * 			the Imodel
  */
 	public View(final IModel model) {
 		this.viewFrame = new ViewFrame(model, "Lorann");
 		SwingUtilities.invokeLater(this);
 	}
 /**
+ * Choose a movement according to Key Code
  * 
  * @param keyCode1
+ * 			the First key code
  * @param keyCode2
- * @return
+ * 			the Second key code
+ * @return Movement
+ * 			the associated Movement
  */
 	protected static Movement keyCodeToControllerMovement(final int keyCode1, final int keyCode2) {
 		
@@ -65,20 +72,21 @@ public class View implements IView, Runnable {
 		}
 	}
 /**
- * 
+ * Print a message in a new small frame
  */
 	public void printMessage(final String message) {
 		this.viewFrame.printMessage(message);
 	}
 /**
- * 
+ * Run()
  */
 	public void run() {
 		this.viewFrame.setVisible(true);
 	}
 /**
- * 
+ * Set the controller
  * @param controller
+ * 			the IController
  */
 	public void setController(final IController controller) {
 		this.viewFrame.setController(controller);

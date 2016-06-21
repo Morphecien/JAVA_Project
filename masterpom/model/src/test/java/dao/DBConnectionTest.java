@@ -12,7 +12,7 @@ import org.junit.Test;
 public class DBConnectionTest {
 	
 	/**
-	 * Test method for {@link dao.DBConnection#getInstance()}.
+	 * Test method for dao.DBConnection#getInstance().
 	 */
 	@Test
 	public void testGetInstance() {
@@ -20,7 +20,7 @@ public class DBConnectionTest {
 	}
 	
 	/**
-	 * Test method for {@link dao.DBConnection#getConnection()}.
+	 * Test method for dao.DBConnection#getConnection().
 	 */
 	@Test
 	public void testGetConnection() {

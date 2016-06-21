@@ -38,7 +38,7 @@ public class MainDAOTest {
 	}
 	
 	/**
-	 * Test method for {@link dao.MainDAO#MainDAO()}.
+	 * Test method for dao.MainDAO#MainDAO().
 	 */
 	@Test
 	public void testMainDAO() {
@@ -46,7 +46,7 @@ public class MainDAOTest {
 	}
 	
 	/**
-	 * Test method for {@link dao.MainDAO#loadMap()}.
+	 * Test method for dao.MainDAO#loadMap().
 	 */
 	@Test
 	public void testLoadMap() {

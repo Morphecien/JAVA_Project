@@ -14,7 +14,7 @@ import contract.Movement;
 public class ViewTest {
 	
 	/**
-	 * Test method for {@link view.View#keyCodeToControllerMovement()}.
+	 * Test method for view.View.keyCodeToControllerMovement().
 	 */
 	@Test
 	public void testKeyCodeToControllerMovement() {

@@ -38,7 +38,7 @@ public class MapTest {
 	}
 	
 	/**
-	 * Test method for {@link dao.Map#setMap()}.
+	 * Test method for dao.Map#setMap().
 	 */
 	@Test
 	public void testSetMap() {

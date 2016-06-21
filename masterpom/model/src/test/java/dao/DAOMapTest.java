@@ -66,7 +66,7 @@ public class DAOMapTest {
 	}
 
 	/**
-	 * Test method for {@link dao.DAOMap#create()}.
+	 * Test method for dao.DAOMap#create().
 	 */
 	@Test
 	public void testCreate() {
@@ -74,7 +74,7 @@ public class DAOMapTest {
 	}
 	
 	/**
-	 * Test method for {@link dao.DAOMap#update()}.
+	 * Test method for dao.DAOMap#update().
 	 */
 	@Test
 	public void testUpdate() {
@@ -82,7 +82,7 @@ public class DAOMapTest {
 	}
 	
 	/**
-	 * Test method for {@link dao.DAOMap#delete()}.
+	 * Test method for dao.DAOMap#delete().
 	 */
 	@Test
 	public void testDelete() {
@@ -90,7 +90,7 @@ public class DAOMapTest {
 	}
 	
 	/**
-	 * Test method for {@link dao.DAOMap#find(java.util.int)}}.
+	 * Test method for dao.DAOMap#find(java.util.int).
 	 */
 	@Test
 	public void testFind() {

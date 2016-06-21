@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -12,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 /**
+ * The class ViewPanel
  * 
  * @author Asus
  *
@@ -28,8 +28,10 @@ class ViewPanel extends JPanel implements Observer {
 	JLabel[][] allLabels = new JLabel[12][20] ;
 	private static Dimension MAPDIMENSION = new Dimension(692, 428);
 /**
+ * Constructor of the ViewPanel
  * 
  * @param viewFrame
+ * 			the viewFrame
  */
 	public ViewPanel(final ViewFrame viewFrame) {
 		this.setViewFrame(viewFrame);
@@ -46,7 +48,7 @@ class ViewPanel extends JPanel implements Observer {
 		prepareAllJLabels() ;
 	}
 /**
- * 
+ * Prepare the constraints for the GridBagLayout
  */
 	private void initGBC(){
 		gbc.gridx = 0 ;
@@ -55,37 +57,32 @@ class ViewPanel extends JPanel implements Observer {
 		gbc.gridwidth = 1 ;
 	}
 /**
- * 
- * @return
+ * Get the ViewFrame
+ * @return viewFrame
+ * 			the viewFrame
  */
 	private ViewFrame getViewFrame() {
 		return this.viewFrame;
 	}
 /**
- * 
+ * Set the ViewFrame
  * @param viewFrame
+ * 			the viewFrame
  */
 	private void setViewFrame(final ViewFrame viewFrame) {
 		this.viewFrame = viewFrame;
 	}
 /**
- * 
+ * Update() notifyObservver of Model
  */
 	public void update(final Observable arg0, final Object arg1) {
-	//	System.out.print("\t\t\t\t\t\t\t\t\t\t\t\tTu fais chier !! Bon, j'enlève tout... ") ;
 		this.removeAll();
 		prepareAllJLabels() ;
-	//	prepareALabel() ;
-	//	this.repaint();
 	}
 	
-/*	private void prepareALabel(){
-		JLabel lab = new JLabel() ;
-		System.out.println(mapSprites[3][2]);
-	}*/
-	/**
-	 * 
-	 */
+/**
+ * Method which prepare all JLabels
+ */
 	private void prepareAllJLabels(){
 		JLabel[][] allLabels = new JLabel[mapHeight][mapWidth] ;
 		this.mapSprites = this.getViewFrame().getModel().getWorldSprites() ;
@@ -118,12 +115,4 @@ class ViewPanel extends JPanel implements Observer {
 		this.repaint();
 	//	System.out.println("Et je repaint ;)");
 	}
-	/**
-	 * 
-	 */
-	@Override
-	protected void paintComponent(final Graphics graphics) {
-		
-	}
-	
 }

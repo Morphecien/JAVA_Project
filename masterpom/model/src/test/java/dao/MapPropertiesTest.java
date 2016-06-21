@@ -38,7 +38,7 @@ public class MapPropertiesTest {
 	}
 	
 	/**
-	 * Test method for {@link dao.MapProperties#getAccess()}.
+	 * Test method for dao.MapProperties#getAccess().
 	 */
 	@Test
 	public void testGetAccess() {
@@ -46,7 +46,7 @@ public class MapPropertiesTest {
 	}
 	
 	/**
-	 * Test method for {@link dao.MapProperties#getTerminaison()}.
+	 * Test method for dao.MapProperties#getTerminaison().
 	 */
 	@Test
 	public void testGetTerminaison() {
@@ -54,7 +54,7 @@ public class MapPropertiesTest {
 	}
 	
 	/**
-	 * Test method for {@link dao.MapProperties#getNberLevel()}.
+	 * Test method for dao.MapProperties#getNberLevel().
 	 */
 	@Test
 	public void testGetNberLevel() {

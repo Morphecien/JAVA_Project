@@ -18,6 +18,7 @@ import javax.swing.Timer;
 import contract.IController;
 import contract.IModel;
 /**
+ * The class ViewFrame
  * 
  * @author Asus
  *
@@ -34,9 +35,12 @@ class ViewFrame extends JFrame implements KeyListener, Runnable, ActionListener 
 	private int thirdKeyCode = 0;
 	private int vkSpace_counter = 0 ;
 /**
+ * Constructor of the ViewFrame
  * 
  * @param model
+ * 			the Imodel
  * @throws HeadlessException
+ * 			the HeadlessException
  */
 	public ViewFrame(final IModel model) throws HeadlessException {
 		this.buildViewFrame(model);
@@ -44,9 +48,12 @@ class ViewFrame extends JFrame implements KeyListener, Runnable, ActionListener 
 		this.run() ;
 	}
 /**
+ * Constructor of the ViewFrame
  * 
  * @param model
+ * 			the Imodel
  * @param gc
+ * 			the GraphicsConfiguration
  */
 	public ViewFrame(final IModel model, final GraphicsConfiguration gc) {
 		super(gc);
@@ -55,10 +62,14 @@ class ViewFrame extends JFrame implements KeyListener, Runnable, ActionListener 
 		this.run() ;
 	}
 /**
+ * Constructor of the ViewFrame
  * 
  * @param model
+ * 			the IModel
  * @param title
+ * 			the Title
  * @throws HeadlessException
+ * 			the HeadlessException
  */
 	public ViewFrame(final IModel model, final String title) throws HeadlessException {
 		super(title);
@@ -67,10 +78,14 @@ class ViewFrame extends JFrame implements KeyListener, Runnable, ActionListener 
 		this.run() ;
 	}
 /**
+ * Constructor of the ViewFrame
  * 
  * @param model
+ * 			the IModel
  * @param title
+ * 			the Title
  * @param gc
+ * 			the GraphicsConfiguration
  */
 	public ViewFrame(final IModel model, final String title, final GraphicsConfiguration gc) {
 		super(title, gc);
@@ -78,43 +93,53 @@ class ViewFrame extends JFrame implements KeyListener, Runnable, ActionListener 
 		this.setTimeEvent(new Timer(100, this));
 		this.run() ;
 	}
-	/**
-	 * 
-	 */
+/**
+* Run() for the timer
+*/
 	public synchronized void run(){
 		this.getTimeEvent().start();
 	}
 /**
+ * Get the Controller
  * 
- * @return
+ * @return Controller 
+ * 			the IController
  */
 	private IController getController() {
 		return this.controller;
 	}
 /**
+ * Set the Controller
  * 
  * @param controller
+ * 			the Controller
  */
 	protected void setController(final IController controller) {
 		this.controller = controller;
 	}
 /**
+ * Get the model
  * 
- * @return
+ * @return IModel
+ * 			the model
  */
 	protected IModel getModel() {
 		return this.model;
 	}
 /**
+ * Set the model
  * 
  * @param model
+ * 			the IModel
  */
 	private void setModel(final IModel model) {
 		this.model = model;
 	}
 /**
+ * Create the Frame
  * 
  * @param model
+ * 			the IModel
  */
 	private void buildViewFrame(final IModel model) {
 		this.setModel(model);
@@ -129,20 +154,22 @@ class ViewFrame extends JFrame implements KeyListener, Runnable, ActionListener 
 		this.setLocationRelativeTo(null);
 	}
 /**
+ * Create a small Frame with the message
  * 
  * @param message
+ * 			the message
  */
 	public void printMessage(final String message) {
 		JOptionPane.showMessageDialog(null, "Coucou c'est moi (:");
 	}
 /**
- * 
+ * The method keyTyped() (KeyListener)
  */
 	public void keyTyped(final KeyEvent e) {
 
 	}
 /**
- * 
+ * The method keyPressed() (KeyListener)
  */
 	public void keyPressed(final KeyEvent e) {
 		this.getTreeSet().add(e.getExtendedKeyCode());
@@ -159,7 +186,7 @@ class ViewFrame extends JFrame implements KeyListener, Runnable, ActionListener 
 	//	System.out.println("I find this : " + this.getFirstKeyCode() + ", this : " + this.getSecondKeyCode() + ", and this : " + this.getThirdKeyCode()) ;
 	}
 /**
- * 
+ * The method keyReleased() (KeyListener)
  */
 	public void keyReleased(final KeyEvent e) {
 		this.treeSet.remove(e.getExtendedKeyCode());
@@ -167,36 +194,46 @@ class ViewFrame extends JFrame implements KeyListener, Runnable, ActionListener 
 		this.setSecondKeyCode(0) ;
 		this.setThirdKeyCode(0) ;
 	}
-	/**
-	 * 
-	 * @return
-	 */
+/**
+ * Get the Treeset which contain the KeyCodes
+ * 
+ * @return treeset
+ * 			the TreeSet
+ */
 	public TreeSet<Integer> getTreeSet() {
 		return this.treeSet;
 	}
 /**
+ * Set the Treeset which contain the KeyCodes
  * 
  * @param treeSet
+ * 			the TreeSet
  */
 	public void setTreeSet(TreeSet<Integer> treeSet) {
 		this.treeSet = treeSet;
 	}
 /**
+ * Get the Timer for execute the Event
  * 
- * @return
+ * @return timeEvent
+ * 			the timer
  */
 	public Timer getTimeEvent() {
 		return timeEvent;
 	}
 /**
+ * Set the Timer
  * 
  * @param timeEvent
+ * 			the Timer
  */
 	public void setTimeEvent(Timer timeEvent) {
 		this.timeEvent = timeEvent;
 	}
 /**
- * 
+ * Choose an action
+ * @param e
+ * 			the ActionEvent
  */
 	public void actionPerformed(ActionEvent e) {
 		boolean shootMagicBall = false;
@@ -234,57 +271,73 @@ class ViewFrame extends JFrame implements KeyListener, Runnable, ActionListener 
 		}
 	}
 /**
+ * Get the counter for VK_Space
  * 
- * @return
+ * @return vkSpace_counter
+ * 			the vkSpace_counter
  */
 	public int getVkSpace_counter() {
 		return vkSpace_counter;
 	}
 /**
+ * Set the vk_space counter
  * 
  * @param vkSpace_counter
+ * 			the vkSpace_counter
  */
 	public void setVkSpace_counter(int vkSpace_counter) {
 		this.vkSpace_counter = vkSpace_counter;
 	}
 /**
+ * Get the first keycode
  * 
- * @return
+ * @return firstKeyCode
+ * 			the firstKeyCode
  */
 	public int getFirstKeyCode() {
 		return firstKeyCode;
 	}
 /**
+ * Set the first keycode
  * 
  * @param firstKeyCode
+ * 			the firstKeyCode
  */
 	public void setFirstKeyCode(int firstKeyCode) {
 		this.firstKeyCode = firstKeyCode;
 	}
 /**
+ * Get the second keycode
  * 
- * @return
+ * @return secondKeyCode
+ * 			the secondKeyCode
  */
 	public int getSecondKeyCode() {
 		return secondKeyCode;
 	}
 /**
+ * Set the second keycode
  * 
  * @param secondKeyCode
+ * 			the secondKeyCode
  */
 	public void setSecondKeyCode(int secondKeyCode) {
 		this.secondKeyCode = secondKeyCode;
 	}
 /**
+ * Get the third keycode
  * 
- * @return
+ * @return thirdKeyCode
+ * 			the thirdKeyCode
  */
 	public int getThirdKeyCode() {
 		return thirdKeyCode;
 	}
 /**
+ * Set the third keycode
  * 
  * @param thirdKeyCode
+ * 			the thirdKeyCode
  */
 	public void setThirdKeyCode(int thirdKeyCode) {
 		this.thirdKeyCode = thirdKeyCode;

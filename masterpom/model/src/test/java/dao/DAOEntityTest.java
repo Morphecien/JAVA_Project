@@ -40,7 +40,7 @@ public class DAOEntityTest {
 	}
 	
 	/**
-	 * Test method for {@link dao.DAOEntity#getConnection()}.
+	 * Test method for dao.DAOEntity#getConnection().
 	 */
 	@Test
 	public void testGetConnection() {

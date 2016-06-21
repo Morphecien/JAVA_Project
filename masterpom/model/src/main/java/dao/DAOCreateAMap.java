@@ -17,10 +17,6 @@ class DAOCreateAMap{
 		this.creationValidation = createMap(level) ;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 */
 	boolean getCreationValidation() {
 		return this.creationValidation;
 	}
@@ -28,11 +24,7 @@ class DAOCreateAMap{
 	private Connection getConnection(){
 		return this.connection ;
 	}
-	/**
-	 * 
-	 * @author Samuel DUCANGE
-	 *
-	 */
+
 	private static abstract class QueryDAOInsert {
 		public static String getQueryInsertCaseMap(){
 			return "{CALL insertMap(?, ?, ?, ?)}" ;
@@ -63,11 +55,6 @@ class DAOCreateAMap{
 			return ID_Level ;
 		}
 		
-		/**
-		 * 
-		 * @param file
-		 * @return
-		 */
 		private boolean createMap(String file){
 			InputStream fr = null ;
 			boolean mapExist = false ;

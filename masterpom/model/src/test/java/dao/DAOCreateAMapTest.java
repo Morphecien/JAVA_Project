@@ -1,7 +1,6 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -75,10 +74,10 @@ public class DAOCreateAMapTest {
 	}
 
 	/**
-	 * Test method for {@link dao.DAOCreateAMap#createMap()}.
+	 * Test method for dao.DAOCreateAMap#createMap().
 	 */
 	@Test
-	public void testCreateMap() throws SQLException {
+	public void testCreateMap(){
 		Assert.assertEquals("The insertAllLevel method has encountered a problem.", true, daoOneMap.getCreationValidation());
 	}
 

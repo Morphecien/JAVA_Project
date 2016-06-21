@@ -66,7 +66,7 @@ public class DAOCreateAllLevelTest {
 	}
 
 	/**
-	 * Test method for {@link dao.DAOCreateAllLevel#insertAllLevel()}.
+	 * Test method for dao.DAOCreateAllLevel#insertAllLevel().
 	 */
 	@Test
 	public void testInsertAllLevel() {

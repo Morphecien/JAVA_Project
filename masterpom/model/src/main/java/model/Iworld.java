@@ -8,6 +8,12 @@ import elementsMobile.Lorann;
 import elementsMobile.MobileElement;
 import elementsMotionless.MotionlessElement;
 
+/**
+ * The interface Iworld
+ * 
+ * @author Samuel DUCANGE
+ *
+ */
 public interface Iworld {
 	public int getWidth() ;
 	public int getHeight() ;

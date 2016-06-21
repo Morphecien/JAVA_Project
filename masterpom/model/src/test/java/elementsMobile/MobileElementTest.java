@@ -11,7 +11,7 @@ import org.junit.Test;
 import model.World;
 
 /**
- * Test class for {@link elementsMobile.MobileElement}.
+ * Test class for elementsMobile.MobileElement.
  * 
  * @author Samuel DUCANGE
  *
@@ -65,10 +65,10 @@ public class MobileElementTest {
 	}
 
 	/**
-	 * Test method for {@link elementsMobile.MobileElement#setX()}.
+	 * Test method for elementsMobile.MobileElement#setX().
 	 */
 	@Test(expected=IllegalArgumentException.class)
-	public void testSetX() throws Exception {
+	public void testSetX() {
 		mobileElement.setX(5);
 		assertEquals("The Yposition was not correctly change by the setter (or raise by the getter).", 5, mobileElement.getX()) ;
 		mobileElement.setX(-1);
@@ -76,10 +76,10 @@ public class MobileElementTest {
 	}
 
 	/**
-	 * Test method for {@link elementsMobile.MobileElement#setY()}.
+	 * Test method for elementsMobile.MobileElement#setY().
 	 */
 	@Test(expected=IllegalArgumentException.class)
-	public void testSetY() throws Exception {
+	public void testSetY(){
 		mobileElement.setY(5);
 		assertEquals("The Yposition was not correctly change by the setter (or raise by the getter).", 5, mobileElement.getY()) ;
 		mobileElement.setY(-1);

@@ -40,8 +40,6 @@ abstract class DAOEntity<E extends Entity> {
 	/**
 	 * Creates the.
 	 *
-	 * @param entity
-	 *          the entity
 	 * @return true, if successful
 	 */
 	public abstract boolean create();

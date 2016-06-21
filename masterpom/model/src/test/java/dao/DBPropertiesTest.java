@@ -38,7 +38,7 @@ public class DBPropertiesTest {
 	}
 	
 	/**
-	 * Test method for {@link dao.DBProperties#DBProperties()}.
+	 * Test method for dao.DBProperties#DBProperties().
 	 */
 	@Test
 	public void testDBProperties(){
@@ -46,7 +46,7 @@ public class DBPropertiesTest {
 	}
 	
 	/**
-	 * Test method for {@link dao.DBProperties#getURL()}.
+	 * Test method for dao.DBProperties#getURL().
 	 */
 	@Test
 	public void testGetURL() {
@@ -54,7 +54,7 @@ public class DBPropertiesTest {
 	}
 	
 	/**
-	 * Test method for {@link dao.DBProperties#getLogin()}.
+	 * Test method for dao.DBProperties#getLogin().
 	 */
 	@Test
 	public void testGetLogin() {
@@ -62,7 +62,7 @@ public class DBPropertiesTest {
 	}
 	
 	/**
-	 * Test method for {@link dao.DBProperties#getPassword()}.
+	 * Test method for dao.DBProperties#getPassword().
 	 */
 	@Test
 	public void testGetPassword() {

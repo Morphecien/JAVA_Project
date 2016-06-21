@@ -8,11 +8,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import contract.IModel;
-import contract.IView;
 import contract.Movement;
 import model.Model;
-import view.View ;
-
+import view.View;
 /**
  * Test class for {@link controller.Controller}.
  * 
@@ -24,7 +22,7 @@ public class ControllerTest {
 	/** The model */
 	private static IModel model ;
 	/** The view */
-	private static IView view ;
+	private static View view ;
 	/** The Controller */
 	private Controller controller ;
 	/**
@@ -35,7 +33,7 @@ public class ControllerTest {
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		model = new Model(1) ;
+		model = new Model() ;
 		view = new View(model) ;
 	}
 
@@ -47,8 +45,8 @@ public class ControllerTest {
 	 */
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		model = null ;
 		view = null ;
+		model = null ;
 	}
 
 	/**
@@ -60,6 +58,7 @@ public class ControllerTest {
 	@Before
 	public void setUp() throws Exception {
 		controller = new Controller(view, model) ;
+		view.setController(controller) ;
 	}
 
 	/**
@@ -74,7 +73,7 @@ public class ControllerTest {
 	}
 
 	/**
-	 * Test method for {@link controler.Controller#movementLorann()}.
+	 * Test method for controler.Controller#movementLorann().
 	 */
 	@Test
 	public void testMovementLorann() {
@@ -119,9 +118,7 @@ public class ControllerTest {
 		Assert.assertEquals("X-move (UP_RIGHT) error", (lastX+1), model.getXLorannPosition()) ;
 		Assert.assertEquals("X-move (UP_RIGHT) error", (lastY-1), model.getYLorannPosition()) ;
 		lastX = model.getXLorannPosition() ;
-		lastY = model.getYLorannPosition() ;
+		lastY = model.getYLorannPosition() ;		
+		
 	}
-
-
-
 }

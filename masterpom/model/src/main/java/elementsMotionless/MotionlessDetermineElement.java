@@ -1,7 +1,15 @@
 package elementsMotionless;
 
+/**
+ * The abstract class MotionlessDetermineElement
+ * 
+ * @author Samuel DUCANGE
+ *
+ */
 public abstract class MotionlessDetermineElement {
-
+	/**
+	 * Instanciate all motionlessElements
+	 */
 	public static final MotionlessElement	VBONE			= new VBone() ;
 	public static final MotionlessElement	HBONE			= new HBone() ;
 	public static final MotionlessElement	BONE			= new Bone() ;
@@ -19,7 +27,13 @@ public abstract class MotionlessDetermineElement {
 		
 	private static MotionlessElement motionlessElements[] = {VBONE, HBONE, BONE, GATECLOSE, GATEOPEN, CRYSTALBALL, BLOC, GRAVE, PURSE, FLACON, CANDLESTICK, CHALICE, IDOL};
 
-	
+	/**
+	 * Search a motionlessElement and return the reference (one instance max per element)
+	 * 
+	 * @param fileSymbol
+	 * 			the DataBase symbol
+	 * @return motionlessElement
+	 */
 	public static MotionlessElement getFromFileSymbol(final String fileSymbol) {
 		for (MotionlessElement motionlessElement  : motionlessElements) {
 			if (motionlessElement.getFileSymbol().equals(fileSymbol)) {

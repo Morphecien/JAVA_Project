@@ -67,10 +67,14 @@ public class DAOCreateAllMapTest {
 	}
 
 	/**
-	 * Test method for {@link dao.DAOCreateAllMap#createAll()}.
+	 * Test method for dao.DAOCreateAllMap#createAll().
 	 */
 	@Test
-	public void testCreateAll() throws SQLException {
-		Assert.assertEquals("The insertAllLevel method has encountered a problem.", true, daoAllMap.createAll());
+	public void testCreateAll() {
+		try {
+			Assert.assertEquals("The insertAllLevel method has encountered a problem.", true, daoAllMap.createAll());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
