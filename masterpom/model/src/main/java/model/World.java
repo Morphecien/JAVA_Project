@@ -36,10 +36,19 @@ public class World extends Observable implements Iworld{
 	 */
 	public World(final int fileNumber){
 		this.mobiles = new ArrayList<MobileElement>() ;
-		this.mainDAO = new MainDAO() ;
 		this.elements = new MotionlessElement[this.getWidth()][this.getHeight()];
+		this.mainDAO = new MainDAO() ;
 		this.setLevel(fileNumber);
 		this.loadFile() ;
+	}
+	
+	private void init_World(){
+		for (int y = 0 ; y<this.getHeight() ; y++){
+			for (int x = 0 ; x<this.getWidth() ; x++){
+				this.elements[x][y] = MotionlessDetermineElement.NOTHING ;
+			}
+		}
+		this.getMobiles().removeAll(this.getMobiles()) ;
 	}
 	
 	/**
@@ -117,7 +126,6 @@ public class World extends Observable implements Iworld{
 	 */
 	public void setLorann(final Lorann lorann){
 		this.lorann = lorann;
-		this.setChanged();
 	}
 	
 	/**
@@ -137,7 +145,7 @@ public class World extends Observable implements Iworld{
 	 */
 	public void dropElement(final int x, final int y){
 		this.addElement(MotionlessDetermineElement.getFromFileSymbol(" "), x, y);
-		this.setChanged();
+		this.worldHasChanged();
 	}
 	
 	/**
@@ -151,7 +159,7 @@ public class World extends Observable implements Iworld{
 	 */
 	public void dropElement(final MotionlessElement element, final int x, final int y){
 		this.addElement(element, x, y);
-		this.setChanged();
+		this.worldHasChanged();
 	}
 	
 	/**
@@ -165,8 +173,7 @@ public class World extends Observable implements Iworld{
 	 */
 	private void addElement(final MotionlessElement element, final int x, final int y){
 		this.elements[x][y] = element ;
-		this.setChanged();
-	}
+		this.worldHasChanged();	}
 	
 	/**
 	 * Method which replace all the Bloc by Nothing and the Gate Close by a Gate Open
@@ -183,7 +190,7 @@ public class World extends Observable implements Iworld{
 				}
 			}
 		}
-		this.setChanged();
+		this.worldHasChanged();
 	}
 
 	/**
@@ -205,7 +212,7 @@ public class World extends Observable implements Iworld{
 			((Monster) mobile).initIA();
 		}
 		mobile.setActive(true);
-		this.setChanged();
+		this.worldHasChanged();
 	}
 	
 	/**
@@ -216,12 +223,14 @@ public class World extends Observable implements Iworld{
 	public void delMobile(final int indexArrayList){
 		this.getMobiles().get(indexArrayList).setActive(false);
 		this.getMobiles().remove(indexArrayList) ;
+		this.worldHasChanged();
 	}
 	
 	/**
 	 * Create the map according the level
 	 */
 	private void loadFile(){
+		this.init_World();
 		int z = 0 ;
 		Map mappe = mainDAO.loadMap(this.getLevel());
 		for (int y = 0 ; y<this.getHeight() ; y++){
@@ -246,7 +255,7 @@ public class World extends Observable implements Iworld{
 			System.out.println();
 		}
 		System.out.println();
-		this.setChanged() ;
+		this.worldHasChanged() ;
 	}
 	
 	/**
@@ -282,7 +291,7 @@ public class World extends Observable implements Iworld{
 		}
 		this.delMobile(indexKillPlayer);
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
