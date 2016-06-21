@@ -67,11 +67,17 @@ public abstract class MobileElement extends Element implements Runnable, ActionL
 		if ((x>=0) && (x < this.getWorld().getWidth())){
 			this.getPosition().x = x ;
 		}
+		else {
+			throw new IllegalArgumentException("The x param is illegal (<0 or >this.getWorld().getWidth");
+		}
 	}
 	
 	protected void setY(final int y){
 		if ((y>=0) && (y < this.getWorld().getHeight())){
 			this.getPosition().y = y ;
+		}
+		else {
+			throw new IllegalArgumentException("The x param is illegal (<0 or >this.getWorld().getWidth");
 		}
 	}
 	

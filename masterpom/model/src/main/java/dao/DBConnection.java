@@ -15,7 +15,7 @@ final class DBConnection {
 
 	/** The connection. */
 	private Connection					connection;
-
+	
 	/**
 	 * Instantiates a new DB connection.
 	 */
@@ -51,7 +51,7 @@ final class DBConnection {
 		} catch (final SQLException e) {
 			e.printStackTrace();
 		}
-		return false;
+		throw new IllegalArgumentException("The connection was not established");
 	}
 
 	/**

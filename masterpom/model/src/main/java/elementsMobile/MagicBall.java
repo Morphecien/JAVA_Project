@@ -10,6 +10,46 @@ public class MagicBall extends MobileAuto{
 	private final ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 	private final String spriteSymbol = "X" ;
 	private int spriteNumber ;
+	final private Sprite GreenSprite = new Sprite(this.getSpriteSymbol(), "fireball_1.png") ;
+	final private Sprite CyanSprite = new Sprite(this.getSpriteSymbol(), "fireball_2.png") ;
+	final private Sprite PurpleSprite = new Sprite(this.getSpriteSymbol(), "fireball_3.png") ;
+	final private Sprite RedSprite = new Sprite(this.getSpriteSymbol(), "fireball_4.png") ;
+	final private Sprite YellowSprite = new Sprite(this.getSpriteSymbol(), "fireball_5.png") ;
+
+	/**
+	 * @return the greenSprite
+	 */
+	public Sprite getGreenSprite() {
+		return GreenSprite;
+	}
+
+	/**
+	 * @return the cyanSprite
+	 */
+	public Sprite getCyanSprite() {
+		return CyanSprite;
+	}
+
+	/**
+	 * @return the purpleSprite
+	 */
+	public Sprite getPurpleSprite() {
+		return PurpleSprite;
+	}
+
+	/**
+	 * @return the redSprite
+	 */
+	public Sprite getRedSprite() {
+		return RedSprite;
+	}
+
+	/**
+	 * @return the yellowSprite
+	 */
+	public Sprite getYellowSprite() {
+		return YellowSprite;
+	}
 
 	public MagicBall() {
 		super(new Sprite("X", "fireball_5.png"), Permeability.PENETRABLE, "Magicball");
@@ -19,11 +59,11 @@ public class MagicBall extends MobileAuto{
 	}
 	
 	private void prepareSprites(){
-		this.getSprites().add(new Sprite(this.getSpriteSymbol(), "fireball_1.png")) ;
-		this.getSprites().add(new Sprite(this.getSpriteSymbol(), "fireball_2.png")) ;
-		this.getSprites().add(new Sprite(this.getSpriteSymbol(), "fireball_3.png")) ;
-		this.getSprites().add(new Sprite(this.getSpriteSymbol(), "fireball_4.png")) ;
-		this.getSprites().add(new Sprite(this.getSpriteSymbol(), "fireball_5.png")) ;
+		this.getSprites().add(this.getGreenSprite()) ;
+		this.getSprites().add(this.getCyanSprite()) ;
+		this.getSprites().add(this.getPurpleSprite()) ;
+		this.getSprites().add(this.getRedSprite()) ;
+		this.getSprites().add(this.getYellowSprite()) ;
 	}
 	
 	private void changeSprite(){

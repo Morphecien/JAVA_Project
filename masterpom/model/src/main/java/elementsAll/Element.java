@@ -55,5 +55,4 @@ public class Element {
 	public Image getImage() {
 		return this.getSprite().getImage();
 	}
-
 }

@@ -146,6 +146,7 @@ class ViewFrame extends JFrame implements KeyListener, Runnable, ActionListener 
  */
 	public void keyPressed(final KeyEvent e) {
 		this.getTreeSet().add(e.getExtendedKeyCode());
+		System.out.println("keyCode simple : ");
 		Iterator<Integer> iteratorKeyCode = this.getTreeSet().iterator() ;
 		this.setFirstKeyCode(iteratorKeyCode.next()) ;
 		if(iteratorKeyCode.hasNext()){
@@ -156,7 +157,7 @@ class ViewFrame extends JFrame implements KeyListener, Runnable, ActionListener 
 			
 		}
 		
-	//	System.out.println("J'ai trouvé ça : " + this.getFirstKeyCode() + ", ça : " + this.getSecondKeyCode() + ", et ça : " + this.getThirdKeyCode()) ;
+		System.out.println("I find this : " + this.getFirstKeyCode() + ", this : " + this.getSecondKeyCode() + ", and this : " + this.getThirdKeyCode()) ;
 	}
 /**
  * 

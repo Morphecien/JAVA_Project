@@ -21,7 +21,7 @@ public class View implements IView, Runnable {
  * @param model
  */
 	public View(final IModel model) {
-		this.viewFrame = new ViewFrame(model);
+		this.viewFrame = new ViewFrame(model, "Lorann");
 		SwingUtilities.invokeLater(this);
 	}
 /**
