@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import world.World;
+import model.World;
 
 /**
  * Test class for {@link elementsMobile.MobileElement}.

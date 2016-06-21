@@ -11,7 +11,7 @@ import contract.Movement;
  */
 public class Controller implements IController, Runnable {
 
-	private IView		view;
+//	private IView		view;
 
 	private IModel	model;
 /**
@@ -20,7 +20,7 @@ public class Controller implements IController, Runnable {
  * @param model
  */
 	public Controller(final IView view, final IModel model) {
-		this.setView(view);
+//		this.setView(view);
 		this.setModel(model);
 		this.run() ;
 	}
@@ -34,9 +34,9 @@ public class Controller implements IController, Runnable {
  * 
  * @param view
  */
-	private void setView(final IView view) {
+/*	private void setView(final IView view) {
 		this.view = view;
-	}
+	}*/
 /**
  * 
  * @param model

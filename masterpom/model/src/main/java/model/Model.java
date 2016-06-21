@@ -6,9 +6,6 @@ import java.util.Observable;
 import contract.IModel;
 import elementsAll.Element;
 import elementsMobile.MobileElement;
-import world.Iworld;
-import world.World;
-import world.WorldAnswer;
 
 public class Model extends Observable implements IModel {
 	private final WorldAnswer worldAnswer ;
@@ -19,7 +16,12 @@ public class Model extends Observable implements IModel {
 	
 	public Model() {
 		this.message = "" ;
-		startLevel(101) ;
+		startLevel(1) ;
+		worldAnswer = new WorldAnswer(world) ;
+	}
+	public Model(final int level) {
+		this.message = "" ;
+		startLevel(level) ;
 		worldAnswer = new WorldAnswer(world) ;
 	}
 
@@ -78,6 +80,13 @@ public class Model extends Observable implements IModel {
 	
 	public void setMessage(final String txt){
 		this.message = txt ;
+	}
+	
+	public int getXLorannPosition(){
+		return (int)this.getWorld().getLorann().getPosition().getX() ;
+	}
+	public int getYLorannPosition(){
+		return (int)this.getWorld().getLorann().getPosition().getY() ;
 	}
 
 	public void loadMessage(final String key) {

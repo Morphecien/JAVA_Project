@@ -2,7 +2,7 @@ package elementsAll;
 
 import java.awt.Image;
 
-import world.Iworld;
+import model.Iworld;
 
 /**
  * @author Samuel DUCANGE

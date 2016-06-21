@@ -4,7 +4,7 @@ import java.util.Random;
 
 import contract.Movement;
 import elementsAll.Permeability;
-import world.Iworld;
+import model.Iworld;
 
 public abstract class Behaviors implements IBehavior{
 	private MobileAuto mobile ;

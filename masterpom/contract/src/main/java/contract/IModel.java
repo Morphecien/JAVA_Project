@@ -26,4 +26,6 @@ public interface IModel {
 	public void LorannMoveUP_RIGHT() ;
 	public void getWorldAnswer() ;
 	public void LorannMagicBall() ;
+	public int getXLorannPosition() ;
+	public int getYLorannPosition() ;
 }

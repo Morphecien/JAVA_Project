@@ -8,7 +8,7 @@ import javax.swing.Timer;
 import elementsAll.Element;
 import elementsAll.ISprite;
 import elementsAll.Permeability;
-import world.Iworld;
+import model.Iworld;
 
 public abstract class MobileElement extends Element implements Runnable, ActionListener{
 	private final Point position ;
