@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -37,6 +38,7 @@ class ViewPanel extends JPanel implements Observer {
 		this.setViewFrame(viewFrame);
 		viewFrame.getModel().getObservable().addObserver(this);
 		mapSprites = new Image[12][20] ;
+		mobileSprites = new Image[12][20] ;
 		mapHeight = this.getViewFrame().getModel().getHeight() ;
 		mapWidth = this.getViewFrame().getModel().getWidth() ;
 		gbc = new GridBagConstraints();
@@ -44,7 +46,6 @@ class ViewPanel extends JPanel implements Observer {
 		this.setSize(640, 384);
 		this.setPreferredSize(MAPDIMENSION);;
 		initGBC() ;
-		this.mapSprites = this.getViewFrame().getModel().getWorldSprites() ;
 		prepareAllJLabels() ;
 	}
 /**
@@ -73,7 +74,7 @@ class ViewPanel extends JPanel implements Observer {
 		this.viewFrame = viewFrame;
 	}
 /**
- * Update() notifyObservver of Model
+ * Update() by the notifyObservver of Model
  */
 	public void update(final Observable arg0, final Object arg1) {
 		this.removeAll();
@@ -115,4 +116,11 @@ class ViewPanel extends JPanel implements Observer {
 		this.repaint();
 	//	System.out.println("Et je repaint ;)");
 	}
+	
+	@Override
+	public void paintComponent(Graphics Graphics){
+		
+	}
 }
+
+

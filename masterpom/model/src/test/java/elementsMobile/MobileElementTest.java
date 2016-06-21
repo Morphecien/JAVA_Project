@@ -1,9 +1,8 @@
 package elementsMobile;
 
-import static org.junit.Assert.*;
-
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -70,9 +69,9 @@ public class MobileElementTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void testSetX() {
 		mobileElement.setX(5);
-		assertEquals("The Yposition was not correctly change by the setter (or raise by the getter).", 5, mobileElement.getX()) ;
+		Assert.assertEquals("The Yposition was not correctly change by the setter (or raise by the getter).", 5, mobileElement.getX()) ;
 		mobileElement.setX(-1);
-		fail("The setter has not raise the exception") ;
+		Assert.fail("The setter has not raise the exception") ;
 	}
 
 	/**
@@ -81,9 +80,9 @@ public class MobileElementTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void testSetY(){
 		mobileElement.setY(5);
-		assertEquals("The Yposition was not correctly change by the setter (or raise by the getter).", 5, mobileElement.getY()) ;
+		Assert.assertEquals("The Yposition was not correctly change by the setter (or raise by the getter).", 5, mobileElement.getY()) ;
 		mobileElement.setY(-1);
-		fail("The setter has not raise the exception") ;
+		Assert.fail("The setter has not raise the exception") ;
 	}
 
 }

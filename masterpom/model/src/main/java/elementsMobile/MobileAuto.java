@@ -154,14 +154,16 @@ public abstract class MobileAuto extends MobileElement implements Runnable, Acti
 	
 	private void deleteInArrayList(MobileElement element){
 		final int size = this.getWorld().getMobiles().size() ;
-		int kMobile = 0 ;
+		int kMobile = -1 ;
 		for (int k = 0 ; k < size ; k++){
 			MobileElement mobile = this.getWorld().getMobiles().get(k) ;
 			if (mobile == element){
 				kMobile = k ;
 			}
 		}
-		this.getWorld().delMobile(kMobile);
+		if (kMobile != -1){
+			this.getWorld().delMobile(kMobile);
+		}
 	}
 	
 	protected void deleteObject(){

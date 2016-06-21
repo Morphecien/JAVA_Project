@@ -101,7 +101,8 @@ public abstract class Behaviors implements IBehavior{
 			case UP_RIGHT : 	this.getMobile().moveUpRight();
 								this.getMobile().isMobileAction(1, -1) ;
 										break ;
-			case NOPE : 				break ;
+			case NOPE : 		this.getMobile().setEndMove(true);
+										break ;
 			default : 					break ;
 		}
 	}

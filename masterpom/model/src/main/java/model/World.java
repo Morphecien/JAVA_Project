@@ -42,13 +42,16 @@ public class World extends Observable implements Iworld{
 		this.loadFile() ;
 	}
 	
-	private void init_World(){
+	private void re_init_World(){
 		for (int y = 0 ; y<this.getHeight() ; y++){
 			for (int x = 0 ; x<this.getWidth() ; x++){
 				this.elements[x][y] = MotionlessDetermineElement.NOTHING ;
 			}
 		}
 		this.getMobiles().removeAll(this.getMobiles()) ;
+		if (this.getLorann() != null){
+			this.getLorann().getMagicBall().reinitialize();
+		}
 	}
 	
 	/**
@@ -215,6 +218,15 @@ public class World extends Observable implements Iworld{
 		this.worldHasChanged();
 	}
 	
+	/*private void afficherMobiles(){
+		int size = this.getMobiles().size() ;
+		System.out.println("Affichage de l'ArrayList d'éléments mobiles, qui contient " + size + " éléments :");
+		for (int i = 0 ; i< size ; i++){
+			System.out.println("\tPosition n°" + i + " - " + this.getMobiles().get(i).getFileSymbol());
+		}
+		System.out.println() ;
+	}*/
+	
 	/**
 	 * Drop a mobile in the array list of mobiles
 	 * @param indexArrayList
@@ -230,7 +242,7 @@ public class World extends Observable implements Iworld{
 	 * Create the map according the level
 	 */
 	private void loadFile(){
-		this.init_World();
+		this.re_init_World();
 		int z = 0 ;
 		Map mappe = mainDAO.loadMap(this.getLevel());
 		for (int y = 0 ; y<this.getHeight() ; y++){
@@ -304,11 +316,10 @@ public class World extends Observable implements Iworld{
 	public void endLevel(){
 		if (this.getLevel() < MAXLEVEL){
 			this.setLevel(getLevel()+1);
-			this.loadFile();
 		}
 		else{
 			this.setLevel(1);
-			this.loadFile();
 		}
+		this.loadFile();
 	}
 }

@@ -160,7 +160,7 @@ class ViewFrame extends JFrame implements KeyListener, Runnable, ActionListener 
  * 			the message
  */
 	public void printMessage(final String message) {
-		JOptionPane.showMessageDialog(null, "Coucou c'est moi (:");
+		JOptionPane.showMessageDialog(null, message);
 	}
 /**
  * The method keyTyped() (KeyListener)
@@ -262,7 +262,7 @@ class ViewFrame extends JFrame implements KeyListener, Runnable, ActionListener 
 				this.getController().movementLorann(View.keyCodeToControllerMovement(getFirstKeyCode(),getSecondKeyCode()));
 			}
 		}
-		if ((this.getVkSpace_counter() > 0) && (shootMagicBall)){
+		if (this.getVkSpace_counter() > 0){
 			this.setVkSpace_counter(this.getVkSpace_counter()-1);
 		}
 		else if ((this.getVkSpace_counter() == 0) && (shootMagicBall)){
@@ -343,3 +343,5 @@ class ViewFrame extends JFrame implements KeyListener, Runnable, ActionListener 
 		this.thirdKeyCode = thirdKeyCode;
 	}
 }
+
+
