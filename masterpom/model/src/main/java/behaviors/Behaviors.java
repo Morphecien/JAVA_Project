@@ -59,7 +59,7 @@ public abstract class Behaviors implements IBehavior{
 	}
 
 	protected void chooseRandomDirection(){
-		if (this.getMovePossibilities().size() < 1){
+		if (this.getMovePossibilities().size() < 1){	// Si pas de mouvement enregistré
 			this.getMovePossibilities().add(CoordDeplacement.NOPE.getDirection()) ;
 		}
 		final int randMoov = this.getRand().nextInt(this.getMovePossibilities().size());
