@@ -156,7 +156,7 @@ public class MagicBall extends MobileAuto{
 			}
 			if (indexKill !=-1){
 				MobileElement mobile = this.getWorld().getMobiles().get(indexKill) ;					// Kill Monster
-				System.out.println("A mobile was died (Magic-ball event) : " + mobile.getFileSymbol());
+				System.out.println("A mobile was killed (Magic-ball event) : " + mobile.getFileSymbol());
 				this.deleteObject(mobile);
 				this.reinitialize() ;
 			}

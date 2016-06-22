@@ -2,7 +2,6 @@ package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,33 +33,7 @@ class ViewFrame extends JFrame implements KeyListener, Runnable, ActionListener 
 	private int secondKeyCode = 0;
 	private int thirdKeyCode = 0;
 	private int vkSpace_counter = 0 ;
-/**
- * Constructor of the ViewFrame
- * 
- * @param model
- * 			the Imodel
- * @throws HeadlessException
- * 			the HeadlessException
- */
-	public ViewFrame(final IModel model) throws HeadlessException {
-		this.buildViewFrame(model);
-		this.setTimeEvent(new Timer(100, this));
-		this.run() ;
-	}
-/**
- * Constructor of the ViewFrame
- * 
- * @param model
- * 			the Imodel
- * @param gc
- * 			the GraphicsConfiguration
- */
-	public ViewFrame(final IModel model, final GraphicsConfiguration gc) {
-		super(gc);
-		this.buildViewFrame(model);
-		this.setTimeEvent(new Timer(100, this));
-		this.run() ;
-	}
+
 /**
  * Constructor of the ViewFrame
  * 
@@ -77,22 +50,7 @@ class ViewFrame extends JFrame implements KeyListener, Runnable, ActionListener 
 		this.setTimeEvent(new Timer(100, this));
 		this.run() ;
 	}
-/**
- * Constructor of the ViewFrame
- * 
- * @param model
- * 			the IModel
- * @param title
- * 			the Title
- * @param gc
- * 			the GraphicsConfiguration
- */
-	public ViewFrame(final IModel model, final String title, final GraphicsConfiguration gc) {
-		super(title, gc);
-		this.buildViewFrame(model);
-		this.setTimeEvent(new Timer(100, this));
-		this.run() ;
-	}
+
 /**
 * Run() for the timer
 */
