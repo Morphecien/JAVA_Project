@@ -1,5 +1,6 @@
 package elementsMobile;
 
+import behaviors.BehaviorsInstances;
 import elementsAll.Sprite;
 
 public class Kyrackj extends Monster{
@@ -10,7 +11,7 @@ public class Kyrackj extends Monster{
 	}
 
 	public void initIA(){
-		this.setIA_behavior(new IA_FullRandom(this));
+		this.setIA_behavior(BehaviorsInstances.IA_FULL_RANDOM);
 	}
 
 	@Override

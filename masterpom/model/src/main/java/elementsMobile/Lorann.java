@@ -129,14 +129,14 @@ public class Lorann extends MobileElement implements Runnable, ActionListener{
 			}
 	//		System.out.println(this.getFileSymbol() + " : " + permeabilityMotionless + " | " + permeabilityMobile);
 			if ((permeabilityMotionless != Permeability.BLOCKING) && (permeabilityMobile != Permeability.BLOCKING)){
-				setEndMove(true) ;
+				setEndMove(TypeEndMove.TRUE) ;
 			}
 			else{
-				setEndMove(false) ;
+				setEndMove(TypeEndMove.BLOCKING) ;
 			}
 		}
 		else{
-			setEndMove(false) ;
+			setEndMove(TypeEndMove.BLOCKING) ;
 		}
 	}
 	
@@ -243,10 +243,10 @@ public class Lorann extends MobileElement implements Runnable, ActionListener{
 	}
 	
 	@Override
-	protected void isMobileAction(final int xDirection, final int yDirection) {			// Lorann Die and Pick up Magic Ball
+	public void isMobileAction(final int xDirection, final int yDirection) {			// Lorann Die and Pick up Magic Ball
 		if ((((this.getX() + xDirection)>=0) && ((this.getX() + xDirection) < this.getWorld().getWidth())) && (((this.getY() + yDirection)>=0) && ((this.getY() + yDirection) < this.getWorld().getHeight()))){
 			int size = this.getWorld().getMobiles().size() ;
-			if ((this.isEndMove() == false) && (this.isActive() == true)){
+			if ((this.getEndMove() == TypeEndMove.BLOCKING) && (this.isActive() == true)){
 				boolean lorannDie = false ;
 				for (int k = 0 ; k < size ; k++){
 					MobileElement mobile = this.getWorld().getMobiles().get(k) ;

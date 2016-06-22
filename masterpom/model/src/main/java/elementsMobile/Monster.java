@@ -1,10 +1,6 @@
 package elementsMobile;
 
-import java.util.Random;
-
-import contract.Movement;
 import elementsAll.ISprite;
-import elementsAll.Permeability;
 
 public abstract class Monster extends MobileAuto {
 	public Monster(ISprite sprite, final String monsterSymbol, final int delayAction) {
@@ -12,53 +8,9 @@ public abstract class Monster extends MobileAuto {
 		this.initialize();
 	}
 	
-	protected void chooseRandomDirection(){
-		Random rand = new Random() ;
-		final int randMoov = rand.nextInt(9);
-		switch(randMoov){
-			case 0 : 	this.setDirection(Movement.UP); 		break ;
-			case 1 : 	this.setDirection(Movement.UP_LEFT); 	break ;
-			case 2 : 	this.setDirection(Movement.LEFT); 		break ;
-			case 3 : 	this.setDirection(Movement.DOWN_LEFT); 	break ;
-			case 4 : 	this.setDirection(Movement.DOWN); 		break ;
-			case 5 : 	this.setDirection(Movement.DOWN_RIGHT); break ;
-			case 6 : 	this.setDirection(Movement.RIGHT); 		break ;
-			case 7 : 	this.setDirection(Movement.UP_RIGHT); 	break ;
-			case 8 : 	this.setDirection(Movement.NOPE); 		break ;
-		}
-	}
-	
-	protected boolean randomMovePossible(){
-		if (this.getWorld().getElementXY(this.getX(), this.getY()-1).getPermeabilityOther() == Permeability.PENETRABLE){
-			return true ;
-		}
-		else if(this.getWorld().getElementXY(this.getX()-1, this.getY()-1).getPermeabilityOther() == Permeability.PENETRABLE){
-			return true ;
-		}
-		else if(this.getWorld().getElementXY(this.getX()-1, this.getY()).getPermeabilityOther() == Permeability.PENETRABLE){
-			return true ;
-		}
-		else if(this.getWorld().getElementXY(this.getX()-1, this.getY()+1).getPermeabilityOther() == Permeability.PENETRABLE){
-			return true ;
-		}
-		else if(this.getWorld().getElementXY(this.getX(), this.getY()+1).getPermeabilityOther() == Permeability.PENETRABLE){
-			return true ;
-		}
-		else if(this.getWorld().getElementXY(this.getX()+1, this.getY()+1).getPermeabilityOther() == Permeability.PENETRABLE){
-			return true ;
-		}
-		else if(this.getWorld().getElementXY(this.getX()+1, this.getY()).getPermeabilityOther() == Permeability.PENETRABLE){
-			return true ;
-		}
-		else if(this.getWorld().getElementXY(this.getX()+1, this.getY()-1).getPermeabilityOther() == Permeability.PENETRABLE){
-			return true ;
-		}
-		return false ;
-	}
-	
 	@Override
-	protected void isMobileAction(int xDirection, int yDirection) {
-		if (this.isEndMove() == false){
+	public void isMobileAction(int xDirection, int yDirection) {
+		if (this.getEndMove() == TypeEndMove.BLOCKING){
 			final int size = this.getWorld().getMobiles().size() ;
 			int indexKillPlayer = -1 ;
 			int indexKillByMagicBall = -1 ;
@@ -82,7 +34,7 @@ public abstract class Monster extends MobileAuto {
 				int indexThisMobile = -1 ;
 				for (int k = 0 ; k < size ; k++){
 					MobileElement mobile = this.getWorld().getMobiles().get(k) ;
-					if (mobile.getFileSymbol() == this.getFileSymbol()){				// Kill Lorann
+					if (mobile.getFileSymbol() == this.getFileSymbol()){				// Kill Monster and Magic Ball
 						indexThisMobile = k ;
 					}
 				}

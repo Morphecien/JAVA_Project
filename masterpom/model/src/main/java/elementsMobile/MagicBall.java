@@ -2,6 +2,8 @@ package elementsMobile;
 
 import java.util.ArrayList;
 
+import behaviors.Behaviors;
+import behaviors.BehaviorsInstances;
 import contract.Movement;
 import elementsAll.Permeability;
 import elementsAll.Sprite;
@@ -99,13 +101,14 @@ public class MagicBall extends MobileAuto{
 		super.movement() ;
 	}*/
 	public void initIA(){
-		this.setIA_behavior(new IA_Bounce(this));
+		this.setIA_behavior(BehaviorsInstances.IA_BOUNCE);
 	}
 	
 	public void choosePlayerDirection(){
-		this.setIA_behavior(new IA_ChoosePlayerDirection(this));
+		this.setIA_behavior(BehaviorsInstances.IA_CHOOSE_PLAYER_DIRECTION_MAGICBALL);
 		this.autoMovement();
-		this.setIA_behavior(new IA_Bounce(this)) ;
+		this.setIA_behavior(BehaviorsInstances.IA_BOUNCE) ;
+		this.getMoveTimer().restart();
 	}
 
 	@Override
@@ -116,7 +119,7 @@ public class MagicBall extends MobileAuto{
 	
 	@Override
 	public void activate(Movement direction){
-		this.inverseDirection(direction);
+		this.setDirection(Behaviors.inverseDirection(direction)) ;
 		super.activate(direction);
 	}
 	
@@ -135,8 +138,8 @@ public class MagicBall extends MobileAuto{
 	}
 
 	@Override
-	protected void isMobileAction(int xDirection, int yDirection) {	// Monsters die
-		if (this.isEndMove() == false){
+	public void isMobileAction(int xDirection, int yDirection) {	// Monsters die
+		if (this.getEndMove() == TypeEndMove.BLOCKING){
 			final int size = this.getWorld().getMobiles().size() ;
 			int indexKill = -1 ;
 			int indexPickUpPlayer = -1 ;

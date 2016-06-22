@@ -13,7 +13,7 @@ import model.Iworld;
 public abstract class MobileElement extends Element implements Runnable, ActionListener{
 	private final Point position ;
 	private final String fileSymbol ;
-	private boolean endMove;
+	private TypeEndMove endMove;
 	private Timer timer ;
 	private boolean active ;
 	
@@ -29,14 +29,14 @@ public abstract class MobileElement extends Element implements Runnable, ActionL
 		super(sprite, Permeability.BLOCKING, Permeability.BLOCKING);
 		this.position = new Point() ;
 		this.fileSymbol = fileSymbol ;
-		this.endMove = true ;
+		this.endMove = TypeEndMove.TRUE ;
 	}
 	
 	public MobileElement(ISprite sprite, Permeability permea, final String fileSymbol) {
 		super(sprite, permea, Permeability.BLOCKING);
 		this.position = new Point() ;
 		this.fileSymbol = fileSymbol ;
-		this.endMove = true ;
+		this.endMove = TypeEndMove.TRUE ;
 	}
 	
 	public String getFileSymbol() {
@@ -55,11 +55,11 @@ public abstract class MobileElement extends Element implements Runnable, ActionL
 		return this.getPosition().y ;
 	}
 	
-	public boolean isEndMove() {
-		return endMove;
+	public TypeEndMove getEndMove() {
+		return this.endMove;
 	}
 
-	public void setEndMove(boolean endMove) {
+	public void setEndMove(TypeEndMove endMove) {
 		this.endMove = endMove;
 	}
 	
@@ -91,14 +91,14 @@ public abstract class MobileElement extends Element implements Runnable, ActionL
 	
 	public void moveUp() {
 		this.movePossible(this.getX(), this.getY() - 1) ;
-		if (this.isEndMove()) {
+		if (this.getEndMove() == TypeEndMove.TRUE) {
 			this.setY(this.getY() - 1);
 		}
 	}
 	
 	public void moveUpLeft() {
 		this.movePossible(this.getX() - 1, this.getY() - 1) ;
-		if (this.isEndMove()) {
+		if (this.getEndMove() == TypeEndMove.TRUE) {
 			this.setX(this.getX() - 1);
 			this.setY(this.getY() - 1);
 		}
@@ -106,14 +106,14 @@ public abstract class MobileElement extends Element implements Runnable, ActionL
 
 	public void moveLeft() {
 		this.movePossible(this.getX() - 1, this.getY()) ;
-		if (this.isEndMove()) {
+		if (this.getEndMove() == TypeEndMove.TRUE) {
 			this.setX(this.getX() - 1);
 		}
 	}
 	
 	public void moveDownLeft() {
 		this.movePossible(this.getX() - 1, this.getY() + 1) ;
-		if (this.isEndMove()) {
+		if (this.getEndMove() == TypeEndMove.TRUE) {
 			this.setX(this.getX() - 1);
 			this.setY(this.getY() + 1);
 		}
@@ -121,14 +121,14 @@ public abstract class MobileElement extends Element implements Runnable, ActionL
 
 	public void moveDown() {
 		this.movePossible(this.getX(), this.getY() + 1) ;
-		if (this.isEndMove()) {
+		if (this.getEndMove() == TypeEndMove.TRUE) {
 			this.setY(this.getY() + 1);
 		}
 	}
 	
 	public void moveDownRight() {
 		this.movePossible(this.getX() + 1, this.getY() + 1) ;
-		if (this.isEndMove()) {
+		if (this.getEndMove() == TypeEndMove.TRUE) {
 			this.setX(this.getX() + 1);
 			this.setY(this.getY() + 1);
 		}
@@ -136,20 +136,20 @@ public abstract class MobileElement extends Element implements Runnable, ActionL
 
 	public void moveRight() {
 		this.movePossible(this.getX() + 1, this.getY()) ;
-		if (this.isEndMove()) {
+		if (this.getEndMove() == TypeEndMove.TRUE) {
 			this.setX(this.getX() + 1);
 		}
 	}
 	
 	public void moveUpRight() {
 		this.movePossible(this.getX() + 1, this.getY() - 1) ;
-		if (this.isEndMove()) {
+		if (this.getEndMove() == TypeEndMove.TRUE) {
 			this.setX(this.getX() + 1);
 			this.setY(this.getY() - 1);
 		}
 	}
 	
-	protected abstract void isMobileAction(final int xDirection, final int yDirection) ;
+	public abstract void isMobileAction(final int xDirection, final int yDirection) ;
 	
 	protected Timer getMoveTimer(){
 		return this.timer ;

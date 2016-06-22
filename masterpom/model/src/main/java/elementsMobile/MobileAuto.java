@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
+import behaviors.IBehavior;
 import contract.Movement;
 import elementsAll.ISprite;
 import elementsAll.Permeability;
@@ -31,8 +32,9 @@ public abstract class MobileAuto extends MobileElement implements Runnable, Acti
 	}
 	
 	public abstract void initIA() ;
-	
+
 	public IBehavior getIA_behavior() {
+		this.IA_behavior.setMobile(this) ;
 		return IA_behavior;
 	}
 
@@ -66,14 +68,14 @@ public abstract class MobileAuto extends MobileElement implements Runnable, Acti
 			}
 		//	System.out.println(this.getFileSymbol() + " : " + permeabilityMotionless + " | " + permeabilityMobile);
 			if ((permeabilityMotionless != Permeability.BLOCKING) && (permeabilityMobile != Permeability.BLOCKING)){
-				setEndMove(true) ;
+				setEndMove(TypeEndMove.TRUE) ;
 			}
 			else{
-				setEndMove(false) ;
+				setEndMove(TypeEndMove.BLOCKING) ;
 			}
 		}
 		else{
-			setEndMove(false) ;
+			setEndMove(TypeEndMove.BLOCKING) ;
 		}
 	}
 	
@@ -104,33 +106,6 @@ public abstract class MobileAuto extends MobileElement implements Runnable, Acti
 								this.isMobileAction(1, -1) ;
 										break ;
 			case NOPE : 	//	System.out.println("C'est bien dommage d'en arriver là : NOPE (Le mobile " + this.getFileSymbol() + " ne connait pas sa direction de déplacement)");
-										break ;
-			default : 					break ;
-		}
-	}
-	
-	public void inverseDirection(Movement direction){
-		switch(direction){
-			case UP : 			this.setDirection(Movement.DOWN) ;
-										break ;
-			case UP_LEFT : 		this.setDirection(Movement.DOWN_RIGHT) ;
-										break ;
-			case LEFT : 		this.setDirection(Movement.RIGHT) ;
-										break ;
-			case DOWN_LEFT : 	this.setDirection(Movement.UP_RIGHT) ;
-										break ;
-			case DOWN : 		this.setDirection(Movement.UP) ;
-										break ;
-			case DOWN_RIGHT : 	this.setDirection(Movement.UP_LEFT) ;
-										break ;
-			case RIGHT : 		this.setDirection(Movement.LEFT) ;
-										break ;
-			case UP_RIGHT : 	this.setDirection(Movement.DOWN_LEFT) ;
-										break ;
-			case NOPE : 		System.out.println("Ah ben merde, c'est balot, le mobile " + this.getFileSymbol() + " voudrait changer de direction... mais NOPE, ça veut pas ^^");
-								System.out.println("Du coup on va le supprimer !");
-						//		this.reinitialize();
-								
 										break ;
 			default : 					break ;
 		}
