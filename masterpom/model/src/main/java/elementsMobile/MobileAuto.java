@@ -16,13 +16,13 @@ public abstract class MobileAuto extends MobileElement implements Runnable, Acti
 
 	public MobileAuto(ISprite sprite, Permeability permea, String fileSymbol) {
 		super(sprite, permea, fileSymbol);
-		setMoveTimer(new Timer(250, this));
+		setMoveTimer(new Timer(150, this));
 		run();
 	}
 
 	public MobileAuto(ISprite sprite, String fileSymbol) {
 		super(sprite, fileSymbol);
-		setMoveTimer(new Timer(250, this));
+		setMoveTimer(new Timer(150, this));
 		run();
 	}
 	public MobileAuto(ISprite sprite, String fileSymbol, final int delay) {

@@ -7,7 +7,7 @@ import elementsAll.Sprite;
 public class Maarcg extends Monster {
 	
 	public Maarcg() {
-		super(new Sprite("D", "monster_4.png"), "Monster-4", 300);
+		super(new Sprite("D", "monster_4.png"), "Monster-4", 150);
 	}
 
 	public void initIA(){
